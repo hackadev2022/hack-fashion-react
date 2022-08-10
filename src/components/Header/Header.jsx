@@ -31,10 +31,10 @@ export const Header = () => {
           />
         </div>
         <nav className="header__nav">
-          <Icon icon="fa-location-dot" />
-          <Icon icon="fa-user" />
-          <Icon icon="fa-cart-shopping" />
-          <Icon icon="fa-bars" fn={openMenu} />
+          <Icon icon="fa-solid fa-location-dot" />
+          <Icon icon="fa-solid fa-user" />
+          <Icon icon="fa-solid fa-cart-shopping" />
+          <Icon icon="fa-solid fa-bars" fn={openMenu} />
         </nav>
       </div>
       <div className="header__bottom container header__bottom--display-none">
