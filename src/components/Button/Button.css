@@ -1,0 +1,16 @@
+.button-component {
+  border: none;
+  width: 20%;
+  height: 2rem;
+  background-color: var(--color-rich-black);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.7s ease-in-out;
+  font-size: 2rem;
+}
+
+.button-component:hover {
+  background-color: var(--border-color);
+  transition: 0.7s ease-in-out;
+}
