@@ -27,13 +27,21 @@ ul {
   font-size: 62.5%;
 }
 
+#root {
+  width: 100%;
+}
+
 body {
-  font-family: var(--font-family-base);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-eggshell);
+  width: 100%;
+  font-family: "Archivo", Arial, Helvetica, sans-serif;
   color: var(--letter-color);
   font-size: 16px;
 }
 
 .container {
   max-width: var(--container-max-width);
-  padding: 0 10px;
 }
