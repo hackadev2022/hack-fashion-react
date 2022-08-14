@@ -2,9 +2,9 @@ import "./MenuNavBar.css";
 
 export const MenuNavBar = ({ menuWidth, closeMenu }) => {
   setTimeout(() => {
-    let divMenuNavBar = document.querySelector(".menu-nav-bar");
-    divMenuNavBar.style.width = menuWidth;
-  }, 10);
+     let divMenuNavBar = document.querySelector(".menu-nav-bar");
+     divMenuNavBar.style.width = menuWidth;
+  }, 1);
 
   return (
     <div className="menu-nav-bar">

@@ -1,0 +1,63 @@
+.cadastro-container{
+    width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: red;
+}
+
+.style-login-btn{
+  background-color: rgb(8, 6, 122);
+}
+
+#name{
+    border: 1px solid black;
+}
+
+.button-component{
+  color: white;
+
+}
+.header-text-container{
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+}
+
+.header-text-container .text-align-style{
+  display: flex;
+  align-items: center;
+}
+
+.cadastro-container{
+  font-size: 1.2em;
+}
+
+.cadastro-container .area-cadastro input{
+  width: 100%;
+  height: 3.5rem;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.cadastro-container .area-cadastro-endereco input{
+  width: 100%;
+  height: 3.5rem;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.cadastro-container .area-cadastro-endereco select{
+  width: 100%;
+  height: 5.5rem;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid black;
+}
+
+
+
+
+::placeholder{
+  font-size: 1.1em;
+  color: grey;
+}
