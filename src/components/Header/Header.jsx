@@ -1,14 +1,14 @@
-import {BrowserRouter as Router, Switch, Route, Link, NavLink} from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import { MenuNavBar } from "../MenuNavBar/MenuNavBar";
 import { Icon } from "../Icons/Icon";
 import { useState } from "react";
 import "./Header.css";
-import '../../assets/css/global.css'
+import "../../assets/css/global.css";
 
 export const Header = () => {
   let [menuWidth, setMenuWidth] = useState("0");
   let [search, setSearch] = useState("");
-  
+
   const openMenu = () => {
     setMenuWidth("100vw");
   };
@@ -21,24 +21,32 @@ export const Header = () => {
       <MenuNavBar menuWidth={menuWidth} closeMenu={closeMenu} />
       <div className="header__top container">
         <div className="header__imgs">
-
-            
-              <NavLink to='/' className={({ isActive }) => isActive ? 'activeBtn' : 'activeBtn'}>
-          <img
-            className="header__img-logo img-logo"
-            src="/img/logo/logo-img.png"
-            alt="logo da Hack Fashion"
-          />
-          <img
-            className="header__img-name img-name header__img--display-none"
-            src="/img/logo/logo-name.png"
-            alt="Hack Fashion"
-          /></NavLink>
-
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "activeBtn" : "activeBtn")}
+          >
+            <img
+              className="header__img-logo img-logo"
+              src="/img/logo/logo-img.png"
+              alt="logo da Hack Fashion"
+            />
+            <img
+              className="header__img-name img-name header__img--display-none"
+              src="/img/logo/logo-name.png"
+              alt="Hack Fashion"
+            />
+          </NavLink>
         </div>
         <nav className="header__nav">
           <Icon icon="fa-solid fa-location-dot" />
-          <NavLink to='/Login' className={({ isActive }) => isActive ? 'activeUser' : 'activeUser'}><Icon icon= "fa-solid fa-user teste-cor" /></NavLink>
+          <NavLink
+            to="/Login"
+            className={({ isActive }) =>
+              isActive ? "activeUser" : "activeUser"
+            }
+          >
+            <Icon icon="fa-solid fa-user teste-cor" />
+          </NavLink>
           <Icon icon="fa-solid fa-cart-shopping" />
           <Icon icon="fa-solid fa-bars" fn={openMenu} />
         </nav>
