@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
 import { Header } from "./components/Header/Header";
-import { Banner } from "./components/Banner/Banner";
-import Login from "./components/Login-teste/Login";
-import Cadastro from "./components/pag-cadastro/cadastro";
+import { Home } from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import Cadastro from "./pages/Cadastro/cadastro";
 import { Footer } from "./components/Footer/Footer";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -14,19 +14,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Banner
-                  bannerTitle="Título do banner"
-                  bannerMainInfo="10% off"
-                  bannerInfo="Não perca essa oportunidade !"
-                  bannerDirectoryImg="banners/banner_ilustrativo3.png"
-                />
-              </>
-            }
-          ></Route>
+          <Route path="/" element={<Home />}></Route>
 
           <Route path="/Login" element={<Login />}></Route>
 
