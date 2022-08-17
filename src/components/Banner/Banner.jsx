@@ -1,6 +1,8 @@
 import "./Banner.css";
 import { Button } from "../Button/Button";
-import { Icon } from "../Icons/Icon";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 export const Banner = ({
   bannerTitle,
@@ -45,7 +47,7 @@ export const Banner = ({
       <div className="banner__bottom">
         <Button txt="Comprar" />
         <div className="banner__icon">
-          <Icon icon="fa-solid fa-chevron-down" />
+          <FontAwesomeIcon icon={faChevronDown} />
         </div>
       </div>
     </section>

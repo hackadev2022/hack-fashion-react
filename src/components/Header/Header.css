@@ -1,3 +1,5 @@
+@import "../../assets/css/global.css";
+
 header {
   display: flex;
   flex-direction: column;
@@ -33,14 +35,14 @@ header {
 .header__nav {
   display: block;
 }
-.header__nav i {
+.header__nav svg {
   cursor: pointer;
   margin: 0 0.5rem;
   text-align: center;
   height: 18px;
   width: 18px;
 }
-.header__nav i:hover {
+.header__nav svg:hover {
   opacity: 0.7;
 }
 

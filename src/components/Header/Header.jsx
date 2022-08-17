@@ -1,9 +1,16 @@
 import { NavLink } from "react-router-dom";
 import { MenuNavBar } from "../MenuNavBar/MenuNavBar";
-import { Icon } from "../Icons/Icon";
 import { useState } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLocationDot,
+  faUser,
+  faCartShopping,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
+
 import "./Header.css";
-import "../../assets/css/global.css";
 
 export const Header = () => {
   let [menuWidth, setMenuWidth] = useState("0");
@@ -38,17 +45,18 @@ export const Header = () => {
           </NavLink>
         </div>
         <nav className="header__nav">
-          <Icon icon="fa-solid fa-location-dot" />
+          <FontAwesomeIcon icon={faLocationDot} />
           <NavLink
             to="/Login"
             className={({ isActive }) =>
               isActive ? "activeUser" : "activeUser"
             }
           >
-            <Icon icon="fa-solid fa-user teste-cor" />
+            <FontAwesomeIcon icon={faUser} />
           </NavLink>
-          <Icon icon="fa-solid fa-cart-shopping" />
-          <Icon icon="fa-solid fa-bars" fn={openMenu} />
+          <FontAwesomeIcon icon={faCartShopping} />
+
+          <FontAwesomeIcon icon={faBars} onClick={openMenu} />
         </nav>
       </div>
       <div className="header__bottom container header__bottom--display-none">
