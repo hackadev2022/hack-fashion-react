@@ -2,7 +2,6 @@ import '../pag-cadastro/style.css'
 import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-router-dom'
 import { Button } from '../Button/Button.jsx'
 
-
 export default function Cadastro() {
     return (
         <div>
@@ -24,11 +23,9 @@ export default function Cadastro() {
                     </div>
 
                     <div className='area-cadastro'>
-                        <h1>Dados cadastrais</h1>   
-                        <br></br>
-                        <br></br>
-                        <label for='name'>Nome do Responsável</label><br></br>
-                        <input tabIndex='1' type="text" name="name" id="name" title="Este campo é obrigátorio" placeholder="Insira seu nome completo" required=""></input>
+                        <h1>Dados cadastrais</h1>
+                        <label for='name'>Nome do Responsável</label>
+                        <input type="text" name="name" id="name" title="Este campo é obrigátorio" placeholder="Insira seu nome completo" required=""></input>
                         <br></br>
                         <br></br>
                         <label for='email'>Email</label><br></br>
@@ -59,14 +56,10 @@ export default function Cadastro() {
                         <input type="number" name="n-vendedor" id="name" title="Este campo é obrigátorio" placeholder="" required=""></input>
 
                     </div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
+
                     <div className='area-cadastro-endereco'>
                         <h1>Endereço</h1>
 
-                        <br></br>
-                        <br></br>
                         <label for='cep'>CEP</label><br></br>
                         <input type="number" name="cep" id="name" title="Este campo é obrigátorio" placeholder="Insira seu CEP" required=""></input>
                         <br></br>
@@ -125,14 +118,13 @@ export default function Cadastro() {
                             <option value="TO">Tocantins</option>
                             <option value="DF">Distrito Federal</option>
                         </select>
-                        <br></br>
-                        <br></br>
-                        <br></br>
 
                     </div>
                 </div>
             </div>
-            <Button txt={'Criar Conta'} />
+            <div className='login-create'>
+            <Link to='/LoginSucss' classes={"button-component3"}><Button txt={'Criar Conta'} /></Link>
+            </div>
             <Button classes={"button-component2"} txt={'Login'} />
         </div>
     )

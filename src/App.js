@@ -4,6 +4,7 @@ import { Header } from "./components/Header/Header";
 import { Banner } from "./components/Banner/Banner";
 import Login from './components/Login-teste/Login';
 import Cadastro from './components/pag-cadastro/cadastro'
+import TelaLogin from './components/sucesslogin/loginEfetuado'
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 
 
@@ -29,11 +30,14 @@ function App() {
           <Route path="/Login" element={<Login />}></Route>
         </Routes>
 
-        <Routes>
-          
+        <Routes>          
           <Route path="/Cadastro" element={<Cadastro />}></Route>
-
         </Routes>
+
+        <Routes>          
+          <Route path="/LoginSucss" element={<TelaLogin />}></Route>
+        </Routes>
+
       </BrowserRouter>
 
 
