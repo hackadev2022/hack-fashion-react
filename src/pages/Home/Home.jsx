@@ -1,5 +1,7 @@
+import "./Home.css";
 import { Banner } from "../../components/Banner/Banner";
 import { Produtos } from "../../components/Produtos/Produtos";
+import { produtos } from "../../assets/produtos/produtos";
 
 export const Home = () => {
   return (
@@ -10,7 +12,11 @@ export const Home = () => {
         bannerInfo="Não perca essa oportunidade !"
         bannerDirectoryImg="banners/banner_ilustrativo3.png"
       />
-      <Produtos />
+      <section className="section__produtos">
+        {produtos.map((produto) => (
+          <Produtos key={produto.id} produto={produto} />
+        ))}
+      </section>
     </>
   );
 };
