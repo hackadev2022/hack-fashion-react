@@ -51,7 +51,7 @@
   font-size: 1.8rem;
 }
 
-.banner__icon i {
+.banner__icon svg {
   font-size: 2.5rem;
   animation: slide-bottom 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s infinite
     both;

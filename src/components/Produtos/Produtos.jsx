@@ -41,11 +41,9 @@ export const Produtos = ({ produto }) => {
         <FontAwesomeIcon
           icon={faHeart}
           onClick={() => {
-            if (favoriteHeart == "") {
-              setFavoriteHeart("red");
-            } else {
-              setFavoriteHeart("");
-            }
+            favoriteHeart == ""
+              ? setFavoriteHeart("red")
+              : setFavoriteHeart("");
           }}
           style={{ color: `${favoriteHeart}` }}
         />
