@@ -1,8 +1,11 @@
 export const produtos = [
   {
     id: 1,
-    alt: "Jeans 1",
+    name: "Jeans 1",
+    type: ["Jeans", "Calça"],
+    color: ["Cinza", "Cinza claro"],
     imgDirectory: "/img/roupas_sem_fundo/jeans1.png",
+    inStock: true,
     offer: {
       isOffer: true,
       percent: 0.5,
@@ -13,8 +16,11 @@ export const produtos = [
   },
   {
     id: 2,
-    alt: "Jeans 2",
+    name: "Jeans 2",
+    type: ["Jeans", "Calça"],
+    color: ["Cinza", "Cinza claro"],
     imgDirectory: "/img/roupas_sem_fundo/jeans2.png",
+    inStock: true,
     offer: {
       isOffer: false,
       percent: 0,
@@ -25,8 +31,11 @@ export const produtos = [
   },
   {
     id: 3,
-    alt: "Jeans 3",
+    name: "Jeans 3",
+    type: ["Jeans", "Calça"],
+    color: ["Cinza", "Cinza claro"],
     imgDirectory: "/img/roupas_sem_fundo/jeans3.png",
+    inStock: true,
     offer: {
       isOffer: true,
       percent: 0.3,
@@ -37,8 +46,11 @@ export const produtos = [
   },
   {
     id: 4,
-    alt: "Shirt 1",
+    name: "Shirt 1",
+    type: ["Camiseta"],
+    color: ["Preto"],
     imgDirectory: "/img/roupas_sem_fundo/shirt1.png",
+    inStock: true,
     offer: {
       isOffer: false,
       percent: 0,
@@ -49,8 +61,11 @@ export const produtos = [
   },
   {
     id: 5,
-    alt: "Shirt 2",
+    name: "Shirt 2",
+    type: ["Camiseta"],
+    color: ["Branca"],
     imgDirectory: "/img/roupas_sem_fundo/shirt2.png",
+    inStock: true,
     offer: {
       isOffer: true,
       percent: 0.5,
@@ -61,8 +76,11 @@ export const produtos = [
   },
   {
     id: 6,
-    alt: "Shirt 3",
+    name: "Shirt 3",
+    type: ["Camiseta"],
+    color: ["Cinza", "Cinza claro"],
     imgDirectory: "/img/roupas_sem_fundo/shirt3.png",
+    inStock: true,
     offer: {
       isOffer: false,
       percent: 0,
@@ -73,8 +91,11 @@ export const produtos = [
   },
   {
     id: 7,
-    alt: "Sweater 1",
+    name: "Sweater 1",
+    type: ["Camisa", "Moletom"],
+    color: ["Cinza", "Cinza claro"],
     imgDirectory: "/img/roupas_sem_fundo/sweater1.png",
+    inStock: true,
     offer: {
       isOffer: true,
       percent: 0.25,
@@ -85,8 +106,11 @@ export const produtos = [
   },
   {
     id: 8,
-    alt: "Sweater 2",
+    name: "Sweater 2",
+    type: ["Camisa", "Moletom"],
+    color: ["Beje"],
     imgDirectory: "/img/roupas_sem_fundo/sweater2.png",
+    inStock: true,
     offer: {
       isOffer: false,
       percent: 0,
@@ -97,8 +121,11 @@ export const produtos = [
   },
   {
     id: 9,
-    alt: "Sweater 3",
+    name: "Sweater 3",
+    type: ["Camisa", "Moletom"],
+    color: ["Preto"],
     imgDirectory: "/img/roupas_sem_fundo/sweater3.png",
+    inStock: true,
     offer: {
       isOffer: true,
       percent: 0.1,
@@ -109,8 +136,11 @@ export const produtos = [
   },
   {
     id: 10,
-    alt: "Sweatpants 1",
+    name: "Sweatpants 1",
+    type: ["Calça", "Moletom"],
+    color: ["verde", "verde musgo"],
     imgDirectory: "/img/roupas_sem_fundo/sweatpants1.png",
+    inStock: true,
     offer: {
       isOffer: false,
       percent: 0,
@@ -121,8 +151,11 @@ export const produtos = [
   },
   {
     id: 11,
-    alt: "Sweatpants 2",
+    name: "Sweatpants 2",
+    type: ["Calça", "Moletom"],
+    color: ["verde", "verde escuro"],
     imgDirectory: "/img/roupas_sem_fundo/sweatpants2.png",
+    inStock: true,
     offer: {
       isOffer: true,
       percent: 0.1,
@@ -133,8 +166,11 @@ export const produtos = [
   },
   {
     id: 12,
-    alt: "Sweatpants 3",
+    name: "Sweatpants 3",
+    type: ["Calça", "Moletom"],
+    color: ["Preto"],
     imgDirectory: "/img/roupas_sem_fundo/sweatpants3.png",
+    inStock: true,
     offer: {
       isOffer: false,
       percent: 0,
@@ -145,8 +181,11 @@ export const produtos = [
   },
   {
     id: 13,
-    alt: "Sweatshirt 1",
+    name: "Sweatshirt 1",
+    type: ["Jaqueta", "moletom"],
+    color: ["Marrom"],
     imgDirectory: "/img/roupas_sem_fundo/sweatshirt1.png",
+    inStock: true,
     offer: {
       isOffer: false,
       percent: 0,
@@ -157,8 +196,11 @@ export const produtos = [
   },
   {
     id: 14,
-    alt: "Sweatshirt 2",
+    name: "Sweatshirt 2",
+    type: ["Jaqueta", "moletom"],
+    color: ["Preto"],
     imgDirectory: "/img/roupas_sem_fundo/sweatshirt2.png",
+    inStock: true,
     offer: {
       isOffer: true,
       percent: 0.4,
@@ -169,8 +211,11 @@ export const produtos = [
   },
   {
     id: 15,
-    alt: "Sweatshirt 3",
+    name: "Sweatshirt 3",
+    type: ["Jaqueta", "moletom"],
+    color: ["Cinza", "Cinza claro", "Branco"],
     imgDirectory: "/img/roupas_sem_fundo/sweatshirt3.png",
+    inStock: false,
     offer: {
       isOffer: false,
       percent: 0,
