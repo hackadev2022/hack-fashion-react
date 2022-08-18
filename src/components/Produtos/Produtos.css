@@ -50,9 +50,9 @@
   width: 180px;
 }
 
-/* .produtos__info {
+.produtos__info {
   height: 102px;
-} */
+}
 .produtos__info small {
   font-size: 1.2rem;
 }

@@ -62,14 +62,10 @@ export const Produtos = ({ produto }) => {
             </div>
             <div className="produtos__bottom">
               <div className="produtos__info">
-                {!produto.offer.isOffer && (
-                  <div className="produtos__info">
-                    <b>R$ {produto.price.toFixed(2)}</b>
-                    <small>
-                      3x R$ {`${(produto.price / 3).toFixed(2)}`} sem juros
-                    </small>
-                  </div>
-                )}
+                <b>R$ {produto.price.toFixed(2)}</b>
+                <small>
+                  3x R$ {`${(produto.price / 3).toFixed(2)}`} sem juros
+                </small>
                 <p className="produtos__name">{produto.name}</p>
                 <p className="produtos__trademark">{produto.trademark}</p>
               </div>
@@ -246,6 +242,8 @@ export const Produtos = ({ produto }) => {
                     ).toFixed(2)}`}{" "}
                     sem juros
                   </small>
+                  <p className="produtos__name">{produto.name}</p>
+                  <p className="produtos__trademark">{produto.trademark}</p>
                 </>
               )}
               {!produto.offer.isOffer && (
@@ -254,10 +252,10 @@ export const Produtos = ({ produto }) => {
                   <small>
                     3x R$ {`${(produto.price / 3).toFixed(2)}`} sem juros
                   </small>
+                  <p className="produtos__name">{produto.name}</p>
+                  <p className="produtos__trademark">{produto.trademark}</p>
                 </div>
               )}
-              <p className="produtos__name">{produto.name}</p>
-              <p className="produtos__trademark">{produto.trademark}</p>
             </div>
             <div className="produtos__rating">
               <div className="produtos__stars">
