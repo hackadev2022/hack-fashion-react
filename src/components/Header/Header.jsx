@@ -25,6 +25,21 @@ export const Header = ({ searchFn }) => {
   const handleSearch = () => {
     searchFn(search);
   };
+  const handleMoletom = () => {
+    searchFn("Moletom");
+  };
+  const handleCamiseta = () => {
+    searchFn("Camiseta");
+  };
+  const handleCalça = () => {
+    searchFn("Calça");
+  };
+  const handleJeans = () => {
+    searchFn("Jeans");
+  };
+  const handleJaqueta = () => {
+    searchFn("Jaqueta");
+  };
 
   document.addEventListener("keypress", function (e) {
     if (e.key == "Enter") {
@@ -34,7 +49,17 @@ export const Header = ({ searchFn }) => {
 
   return (
     <header>
-      <MenuNavBar menuWidth={menuWidth} closeMenu={closeMenu} />
+      <MenuNavBar
+        menuWidth={menuWidth}
+        closeMenu={closeMenu}
+        handleType={{
+          handleMoletom,
+          handleCamiseta,
+          handleCalça,
+          handleJeans,
+          handleJaqueta,
+        }}
+      />
       <div className="header__top container">
         <div className="header__imgs">
           <NavLink
@@ -86,11 +111,11 @@ export const Header = ({ searchFn }) => {
         </div>
         <nav className="header__categories">
           <ul>
-            <li>Camisas moletom</li>
-            <li>Camisas</li>
-            <li>Suéter</li>
-            <li>Jeans</li>
-            <li>Calças moletom</li>
+            <li onClick={handleMoletom}>Moletom</li>
+            <li onClick={handleCamiseta}>Camiseta</li>
+            <li onClick={handleCalça}>Calça</li>
+            <li onClick={handleJeans}>Jeans</li>
+            <li onClick={handleJaqueta}>Jaqueta</li>
           </ul>
         </nav>
       </div>
