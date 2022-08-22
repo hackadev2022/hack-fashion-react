@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Button } from "../Button/Button";
-// import { produtos } from "../../assets/produtos/produtos";
 
 export const Produtos = ({ produto }) => {
   //Stars//
