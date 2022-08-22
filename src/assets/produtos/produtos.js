@@ -20,7 +20,7 @@ export const produtos = [
     type: ["Jeans", "Calça"],
     color: ["Cinza", "Cinza claro"],
     imgDirectory: "/img/roupas_sem_fundo/jeans2.png",
-    inStock: true,
+    inStock: false,
     offer: {
       isOffer: false,
       percent: 0,

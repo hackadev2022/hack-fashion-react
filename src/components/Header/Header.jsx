@@ -12,7 +12,7 @@ import {
 
 import "./Header.css";
 
-export const Header = () => {
+export const Header = ({ searchFn }) => {
   let [menuWidth, setMenuWidth] = useState("0");
   let [search, setSearch] = useState("");
 
@@ -22,6 +22,15 @@ export const Header = () => {
   const closeMenu = () => {
     setMenuWidth("0");
   };
+  const handleSearch = () => {
+    searchFn(search);
+  };
+
+  document.addEventListener("keypress", function (e) {
+    if (e.key == "Enter") {
+      document.getElementById("SearchEnter").click();
+    }
+  });
 
   return (
     <header>
@@ -69,7 +78,11 @@ export const Header = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <i
+            id="SearchEnter"
+            className="fa-solid fa-magnifying-glass"
+            onClick={handleSearch}
+          ></i>
         </div>
         <nav className="header__categories">
           <ul>
