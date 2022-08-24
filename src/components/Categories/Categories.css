@@ -1,8 +1,15 @@
-.title-categories{
+#title-categories{
     font-size: 25px;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 10px;
+}
+
+.name-categories{
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    width: 80%;
 }
 
 .swiper {
@@ -22,16 +29,8 @@
     cursor: pointer;
 }
 
-.name-categories{
-    font-weight: bold;
-    text-align: center;
-    display: block;
-    width: 80%;
-}
-
 .swiper-button-prev, .swiper-button-next{
-    color: #0d0d0d;
-    
+    color: var(--primary-color);
 }
 
 @media (max-width: 770px) {

@@ -6,20 +6,46 @@ export const ButtonProduct = () => {
 
   return (
     <>
-      <div>
-        <p className="title-prod">Tamanho:</p>
+      <div className="input-size">
+        <p className="identifier">Tamanho:</p>
+        <input
+          type="radio"
+          id="P"
+          name="size"
+          value="P"
+        />
+        <label for="P">P</label>
 
-        <button className="size-prod">P</button>
-        <button className="size-prod">M</button>
-        <button className="size-prod">G</button>
-        <button className="size-prod">GG</button>
+        <input
+          type="radio"
+          id="M"
+          name="size"
+          value="M"
+        />
+        <label for="M">M</label>
+
+        <input
+          type="radio"
+          id="G"
+          name="size"
+          value="G"
+        />
+        <label for="G">G</label>
+
+        <input
+          type="radio"
+          id="GG"
+          name="size"
+          value="GG"
+        />
+        <label for="GG">GG</label>
       </div>
 
       <div>
-        <p className="title-prod">Quantidade:</p>
+        <p className="identifier">Quantidade:</p>
 
         <button
-          className="quantity-prod"
+          className="button-quantity"
           onClick={() => {
             setProdCount(Math.max(prodCount - 1, 1));
           }}
@@ -28,10 +54,10 @@ export const ButtonProduct = () => {
           <i class="fa-solid fa-minus"></i>
         </button>
 
-        <span className="number-prod">{prodCount}</span>
+        <span className="button-number">{prodCount}</span>
 
         <button
-          className="quantity-prod"
+          className="button-quantity"
           onClick={() => {
             setProdCount(prodCount + 1);
           }}
@@ -39,6 +65,10 @@ export const ButtonProduct = () => {
           {" "}
           <i class="fa-solid fa-plus"></i>
         </button>
+      </div>
+
+      <div>
+        <button className="button-add">Adicionar ao carrinho</button>
       </div>
     </>
   );

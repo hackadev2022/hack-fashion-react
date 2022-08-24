@@ -8,7 +8,7 @@ import { Navigation } from "swiper";
 export const Categories = () => {
   return (
     <>
-      <h2 className="title-categories">Categorias</h2>
+      <h2 id="title-categories">Categorias</h2>
       <Swiper
         slidesPerView={3}
         spaceBetween={35}
