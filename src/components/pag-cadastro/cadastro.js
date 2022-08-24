@@ -123,9 +123,9 @@ export default function Cadastro() {
                 </div>
             </div>
             <div className='login-create'>
-            <Link to='/LoginSucss' classes={"button-component3"}><Button txt={'Criar Conta'} /></Link>
+                <Button classes={'CreateBtn-test'} txt={'Criar Login'} />
+                <Button classes={'LoginBtn-test'} txt={'Login'} />
             </div>
-            <Button classes={"button-component2"} txt={'Login'} />
         </div>
     )
 }
