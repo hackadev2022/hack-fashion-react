@@ -11,7 +11,7 @@ export const produtos = [
       percent: 0.5,
     },
     price: 220,
-    trademark: "Lacoste",
+    trademark: "Adidas",
     ratingStar: [31, 28, 87, 49, 13],
   },
   {
