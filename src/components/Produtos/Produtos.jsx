@@ -198,7 +198,7 @@ export const Produtos = ({ produto }) => {
               style={{ color: `${favoriteHeart}`, transition: "all 0.3s" }}
             />
             <NavLink
-              to="/Produto"
+              to={`/Produto/${produto.id}/${produto.name}`}
               className={({ isActive }) => (isActive ? "default" : "default")}
             >
               <div className="produtos__img">
