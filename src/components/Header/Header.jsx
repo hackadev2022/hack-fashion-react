@@ -88,7 +88,9 @@ export const Header = ({ searchFn }) => {
           >
             <FontAwesomeIcon icon={faUser} />
           </NavLink>
-          <FontAwesomeIcon icon={faCartShopping} />
+          <NavLink to="/Carrinho">
+            <FontAwesomeIcon icon={faCartShopping} />
+          </NavLink>
 
           <FontAwesomeIcon icon={faBars} onClick={openMenu} />
         </nav>

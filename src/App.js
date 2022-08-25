@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Home } from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Cadastro from "./pages/Cadastro/cadastro";
 import { Produto } from "./pages/Produto/Produto";
-import { ButtonProduct } from "./components/Button-product/Button-product";
 
 import { Routes, Route } from "react-router-dom";
+import { Carrinho } from "./pages/Carrinho/Carrinho";
 
 function App() {
+  let [produtosCarrinho, setProdutosCarrinho] = useState([]);
   return (
     <>
       <Routes>
@@ -18,9 +19,21 @@ function App() {
 
         <Route path="/Cadastro" element={<Cadastro />}></Route>
 
-        <Route path="/Produto/:itemID/:nome" element={<Produto />}></Route>
+        <Route
+          path="/Produto/:itemID/:nome"
+          element={
+            <Produto
+              produtosCarrinho={produtosCarrinho}
+              setProdutosCarrinho={setProdutosCarrinho}
+            />
+          }
+        ></Route>
+
+        <Route
+          path="/Carrinho"
+          element={<Carrinho produtosCarrinho={produtosCarrinho} />}
+        ></Route>
       </Routes>
-      <ButtonProduct />
     </>
   );
 }
