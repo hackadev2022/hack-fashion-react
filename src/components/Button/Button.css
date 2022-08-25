@@ -6,7 +6,7 @@
   width: fit-content;
   height: 3rem;
   padding: 2rem;
-  color: var(--letter-color);
+  color: var(--text-color-light);
   background-color: var(--bg-button);
   border-radius: 12px;
   cursor: pointer;
@@ -16,6 +16,6 @@
 }
 
 .button-component:hover {
-  background-color: var(--border-color);
+  background-color: var(--bg-button-hover);
   transition: 0.3s ease-in-out;
 }

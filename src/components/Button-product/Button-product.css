@@ -12,12 +12,13 @@
 }
 
 .input-size label {
+  color: white;
   display: inline-block;
   background-color: var(--color-shadow-blue);
   padding: 10px 15px;
   font-size: 12px;
   margin-right: 5px;
-  font-weight: bold;
+
   border-radius: 4px;
 }
 
@@ -32,6 +33,7 @@
 }
 
 .button-quantity {
+  color: white;
   border: none;
   border-radius: 5px;
   font-size: 14px;
@@ -48,6 +50,7 @@
 }
 
 .button-number {
+  color: var(--color-shadow-blue);
   font-size: 16px;
   font-weight: bold;
   padding-right: 10px;
@@ -55,6 +58,7 @@
 }
 
 .button-add {
+  color: white;
   margin-top: 40px;
   border: none;
   font-size: 15px;
