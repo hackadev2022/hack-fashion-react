@@ -3,7 +3,7 @@ import "./App.css";
 import { Home } from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Cadastro from "./pages/Cadastro/cadastro";
-import Produto from "./pages/Produto/Produto";
+import { Produto } from "./pages/Produto/Produto";
 
 import { Routes, Route } from "react-router-dom";
 

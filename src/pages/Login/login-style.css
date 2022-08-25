@@ -15,36 +15,39 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 /* Firefox */
-input[type=number] {
+.login-container input[type="number"] {
   -moz-appearance: textfield;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
   font-size: 13.5px;
 }
-::-moz-placeholder { /* Firefox 19+ */
+::-moz-placeholder {
+  /* Firefox 19+ */
   font-size: 13.5px;
 }
-:-ms-input-placeholder { /* IE 10+ */
+:-ms-input-placeholder {
+  /* IE 10+ */
   font-size: 13.5px;
 }
-:-moz-placeholder { /* Firefox 18- */
+:-moz-placeholder {
+  /* Firefox 18- */
   font-size: 13.5px;
 }
 
-
-body{
+body {
   background-color: var(--color-eggshell);
 }
 
-.login-container{
+.login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  }
+}
 
-  .in-text-pass{
+.login-container .in-text-pass {
   width: 19rem;
   height: 1.5rem;
   border: 1px solid black;
@@ -52,18 +55,17 @@ body{
   color: rgb(0, 0, 0);
   border-radius: 12px;
   background-color: whitesmoke;
-  
-  }
+}
 
-  .space{
-    margin-top: 20px;
-  }
+.login-container .space {
+  margin-top: 20px;
+}
 
-  p{
-    font-weight: 500;
-  }
+.login-container p {
+  font-weight: 500;
+}
 
-button{
+.login-container button {
   border: none;
   width: 6.5rem;
   height: 2rem;
@@ -71,16 +73,16 @@ button{
   color: white;
   border-radius: 12px;
   cursor: pointer;
-  transition: .7s ease-in-out;
+  transition: 0.7s ease-in-out;
   font-size: 1rem;
-  }
-
-button:hover{
-  background-color: var(--border-color);
-  transition: .7s ease-in-out;
 }
 
-a{
+.login-container button:hover {
+  background-color: var(--border-color);
+  transition: 0.7s ease-in-out;
+}
+
+.login-container a {
   text-decoration: none;
   background-color: rgb(16 16 107);
   color: white;
@@ -89,73 +91,78 @@ a{
   font-weight: bolder;
 }
 
-::placeholder{
+::placeholder {
   text-align: center;
   color: black;
 }
 
-.link-style{
+.login-container .link-style {
   color: black;
   border: 1px solid black;
   background-color: var(--highlight-color);
   transition: 2s cubic-bezier() ease-in;
 }
 
-.link-style:hover{
+.login-container .link-style:hover {
   border: 1px solid black;
   background-color: #000000;
   color: rgb(255, 255, 255);
   transition: 0.5s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
-@media (max-width:280px) {
-  
-  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+@media (max-width: 280px) {
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
     font-size: 12px;
   }
-  ::-moz-placeholder { /* Firefox 19+ */
+  ::-moz-placeholder {
+    /* Firefox 19+ */
     font-size: 12px;
   }
-  :-ms-input-placeholder { /* IE 10+ */
+  :-ms-input-placeholder {
+    /* IE 10+ */
     font-size: 12px;
   }
-  :-moz-placeholder { /* Firefox 18- */
+  :-moz-placeholder {
+    /* Firefox 18- */
     font-size: 12px;
   }
 
-  .loginbtn{
+  .loginbtn {
     width: 30%;
   }
 
-  ::placeholder{
+  ::placeholder {
     text-align: center;
     color: white;
   }
 }
 
-@media (max-width:769px) {
+@media (max-width: 769px) {
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    font-size: 12px;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    font-size: 12px;
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    font-size: 12px;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    font-size: 12px;
+  }
 
-  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    font-size: 12px;
-  }
-  ::-moz-placeholder { /* Firefox 19+ */
-    font-size: 12px;
-  }
-  :-ms-input-placeholder { /* IE 10+ */
-    font-size: 12px;
-  }
-  :-moz-placeholder { /* Firefox 18- */
-    font-size: 12px;
-  }
-
-  .in-text-pass{
+  .in-text-pass {
     width: 18rem;
     height: 1.5rem;
     transition: 1s cubic-bezier(0.47, 0, 0.745, 0.715);
   }
 
-  button{
+  button {
     width: 6.5rem;
   }
-
 }

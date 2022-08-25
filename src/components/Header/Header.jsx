@@ -42,7 +42,7 @@ export const Header = ({ searchFn }) => {
   };
 
   document.addEventListener("keypress", function (e) {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       document.getElementById("SearchEnter").click();
     }
   });
