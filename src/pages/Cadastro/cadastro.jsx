@@ -1,6 +1,8 @@
 import './style.css'
 import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-router-dom'
 import { Header } from '../../components/Header/Header'
+import { Button } from '../../components/Button/Button'
+
 
 
 export default function Cadastro() {
@@ -123,10 +125,11 @@ export default function Cadastro() {
 
                     </div>
                 </div>
+
             </div>
             <div className='login-create'>
-                {/* <Button classes={'CreateBtn-test'} txt={'Criar Login'} />
-                <Button classes={'LoginBtn-test'} txt={'Login'} /> */}
+                <Button classes={'CreateBtn-test'} txt={'Criar Login'} />
+                <Button classes={'LoginBtn-test'} txt={'Login'} /> 
             </div>
         </div>
     )

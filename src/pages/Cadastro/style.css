@@ -12,6 +12,10 @@
     border: 1px solid black;
 }
 
+.login-create{
+  margin-top: 3rem;
+}
+
 .cadastro-container{
   font-size: 1.2em;
 }
