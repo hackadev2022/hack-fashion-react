@@ -1,6 +1,6 @@
 export const produtos = [
   {
-    id: '1',
+    id: "1",
     name: "Jeans 1",
     type: ["Jeans", "Calça"],
     color: ["Cinza", "Cinza claro"],
@@ -15,7 +15,7 @@ export const produtos = [
     ratingStar: [31, 28, 87, 49, 13],
   },
   {
-    id: '2',
+    id: "2",
     name: "Jeans 2",
     type: ["Jeans", "Calça"],
     color: ["Cinza", "Cinza claro"],
@@ -30,7 +30,7 @@ export const produtos = [
     ratingStar: [59, 3, 1, 40, 96],
   },
   {
-    id: '3',
+    id: "3",
     name: "Jeans 3",
     type: ["Jeans", "Calça"],
     color: ["Cinza", "Cinza claro"],
@@ -45,7 +45,7 @@ export const produtos = [
     ratingStar: [57, 64, 1, 70, 40],
   },
   {
-    id: '4',
+    id: "4",
     name: "Shirt 1",
     type: ["Camiseta"],
     color: ["Preto"],
@@ -60,7 +60,7 @@ export const produtos = [
     ratingStar: [13, 3, 80, 97, 70],
   },
   {
-    id: '5',
+    id: "5",
     name: "Shirt 2",
     type: ["Camiseta"],
     color: ["Branca"],
@@ -75,7 +75,7 @@ export const produtos = [
     ratingStar: [13, 3, 26, 70, 40],
   },
   {
-    id: '6',
+    id: "6",
     name: "Shirt 3",
     type: ["Camiseta"],
     color: ["Cinza", "Cinza claro"],
@@ -90,7 +90,7 @@ export const produtos = [
     ratingStar: [13, 3, 45, 40, 720],
   },
   {
-    id: '7',
+    id: "7",
     name: "Sweater 1",
     type: ["Camisa", "Moletom"],
     color: ["Cinza", "Cinza claro"],
@@ -105,7 +105,7 @@ export const produtos = [
     ratingStar: [13, 3, 1, 420, 40],
   },
   {
-    id: '8',
+    id: "8",
     name: "Sweater 2",
     type: ["Camisa", "Moletom"],
     color: ["Beje"],
@@ -120,7 +120,7 @@ export const produtos = [
     ratingStar: [69, 3, 1, 40, 70],
   },
   {
-    id: '9',
+    id: "9",
     name: "Sweater 3",
     type: ["Camisa", "Moletom"],
     color: ["Preto"],
@@ -135,7 +135,7 @@ export const produtos = [
     ratingStar: [13, 2, 124, 70, 40],
   },
   {
-    id: '10',
+    id: "10",
     name: "Sweatpants 1",
     type: ["Calça", "Moletom"],
     color: ["verde", "verde musgo"],
@@ -150,7 +150,7 @@ export const produtos = [
     ratingStar: [13, 3, 1, 40, 2000],
   },
   {
-    id: '11',
+    id: "11",
     name: "Sweatpants 2",
     type: ["Calça", "Moletom"],
     color: ["verde", "verde escuro"],
@@ -165,7 +165,7 @@ export const produtos = [
     ratingStar: [13, 3, 1, 70, 40],
   },
   {
-    id: '12',
+    id: "12",
     name: "Sweatpants 3",
     type: ["Calça", "Moletom"],
     color: ["Preto"],
@@ -180,7 +180,7 @@ export const produtos = [
     ratingStar: [13, 30, 1, 40, 70],
   },
   {
-    id: '13',
+    id: "13",
     name: "Sweatshirt 1",
     type: ["Jaqueta", "moletom"],
     color: ["Marrom"],
@@ -195,7 +195,7 @@ export const produtos = [
     ratingStar: [13, 3, 100, 40, 70],
   },
   {
-    id: '14',
+    id: "14",
     name: "Sweatshirt 2",
     type: ["Jaqueta", "moletom"],
     color: ["Preto"],
@@ -210,7 +210,7 @@ export const produtos = [
     ratingStar: [13, 3, 1, 30, 40],
   },
   {
-    id: '15',
+    id: "15",
     name: "Sweatshirt 3",
     type: ["Jaqueta", "moletom"],
     color: ["Cinza", "Cinza claro", "Branco"],

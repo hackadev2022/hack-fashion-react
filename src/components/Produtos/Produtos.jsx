@@ -179,8 +179,9 @@ export const Produtos = ({ produto }) => {
                   <i>{totalRating()} avaliações</i>
                 </div>
               </div>
-
-              <Button txt="Comprar" classes="produtos__button" />
+              <NavLink to={`/Produto/${produto.id}/${produto.name}`}>
+                <Button txt="Comprar" classes="produtos__button" />
+              </NavLink>
             </div>
           </div>
         </>
@@ -365,7 +366,9 @@ export const Produtos = ({ produto }) => {
               </div>
             </div>
 
-            <Button txt="Comprar" classes="produtos__button" />
+            <NavLink to={`/Produto/${produto.id}/${produto.name}`}>
+              <Button txt="Comprar" classes="produtos__button" />
+            </NavLink>
           </div>
         </div>
       )}
