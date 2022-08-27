@@ -17,10 +17,12 @@ export const Carrinho = ({ produtosCarrinho }) => {
     for (let i = 0; i < produtosCarrinho.length; i++) {
       if (produtosCarrinho[i].offer.isOffer) {
         subTotalPrice +=
-          produtosCarrinho[i].price -
-          produtosCarrinho[i].price * produtosCarrinho[i].offer.percent;
+          (produtosCarrinho[i].price -
+            produtosCarrinho[i].price * produtosCarrinho[i].offer.percent) *
+          produtosCarrinho[i].quantidade;
       } else {
-        subTotalPrice += produtosCarrinho[i].price;
+        subTotalPrice +=
+          produtosCarrinho[i].price * produtosCarrinho[i].quantidade;
       }
     }
   };
@@ -37,10 +39,20 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
   const handleMinusQuant = (key) => {
     produtosCarrinho[key].quantidade--;
+    if (ignore) {
+      setIgnore(false);
+    } else {
+      setIgnore(true);
+    }
   };
 
   const handlePlusQuant = (key) => {
     produtosCarrinho[key].quantidade++;
+    if (ignore) {
+      setIgnore(false);
+    } else {
+      setIgnore(true);
+    }
   };
 
   return (
