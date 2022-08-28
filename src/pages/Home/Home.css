@@ -1,6 +1,11 @@
+@import "animate.css";
 .section__produtos {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    opacity: 0;
+    padding-top: 50px;
+    animation: fadeIn 2s forwards;
 }

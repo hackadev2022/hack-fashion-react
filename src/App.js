@@ -8,33 +8,35 @@ import { ProdutosPage } from "./pages/ProdutosPage/ProdutosPage";
 
 import { Routes, Route } from "react-router-dom";
 import { Carrinho } from "./pages/Carrinho/Carrinho";
+import Checkout from "./pages/Checkout/Checkout";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   let [produtosCarrinho, setProdutosCarrinho] = useState([]);
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/:type" element={<ProdutosPage />}></Route>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />}></Route>
+          <Route path="/:type" element={<ProdutosPage />}></Route>
+          <Route path="/Login" element={<Login />}></Route>
+          <Route path="/Cadastro" element={<Cadastro />}></Route>
+          <Route
+            path="/Produto/:itemID/:nome"
+            element={
+              <Produto
+                produtosCarrinho={produtosCarrinho}
+                setProdutosCarrinho={setProdutosCarrinho}
+              />
+            }
+          ></Route>
 
-        <Route path="/Login" element={<Login />}></Route>
-
-        <Route path="/Cadastro" element={<Cadastro />}></Route>
-
-        <Route
-          path="/Produto/:itemID/:nome"
-          element={
-            <Produto
-              produtosCarrinho={produtosCarrinho}
-              setProdutosCarrinho={setProdutosCarrinho}
-            />
-          }
-        ></Route>
-
-        <Route
-          path="/Carrinho"
-          element={<Carrinho produtosCarrinho={produtosCarrinho} />}
-        ></Route>
+          <Route
+            path="/Carrinho"
+            element={<Carrinho produtosCarrinho={produtosCarrinho} />}
+          ></Route>
+          <Route path="/Checkout" element={<Checkout />}></Route>
+        </Route>
       </Routes>
     </>
   );

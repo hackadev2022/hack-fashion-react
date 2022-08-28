@@ -16,7 +16,7 @@ export const Home = () => {
 
   return (
     <>
-      <Header setShowOffersOnly={setShowOffersOnly} />
+      {/* <Header searchFn={handleSearch} setShowOffersOnly={setShowOffersOnly} /> */}
       <Banner
         bannerTitle="Título do banner"
         bannerMainInfo="Até 50% off"
