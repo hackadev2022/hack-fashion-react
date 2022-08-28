@@ -7,8 +7,8 @@ export const produtos = [
     imgDirectory: "/img/roupas_sem_fundo/jeans1.png",
     inStock: true,
     offer: {
-      isOffer: true,
-      percent: 0.5,
+      isOffer: false,
+      percent: 0,
     },
     price: 220,
     trademark: "Adidas",
