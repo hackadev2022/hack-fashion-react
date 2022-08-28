@@ -3,10 +3,10 @@ import { Icon } from "../Icons/Icon";
 
 export const Footer = () => {
   return (
-    <footer class="container">
-      <div class="footer__top">
-        <div class="footer__top-items">
-          <div class="footer__top-item">
+    <footer className="container">
+      <div className="footer__top">
+        <div className="footer__top-items">
+          <div className="footer__top-item">
             <strong>
               Sobre a <br />
               HackFashion
@@ -17,7 +17,7 @@ export const Footer = () => {
               <li>Proteção da marca</li>
             </ul>
           </div>
-          <div class="footer__top-item">
+          <div className="footer__top-item">
             <strong>Ajuda/Suporte</strong>
             <ul>
               <li>Preço de envio </li>
@@ -28,7 +28,7 @@ export const Footer = () => {
               <li>HackFashion VIP</li>
             </ul>
           </div>
-          <div class="footer__top-item">
+          <div className="footer__top-item">
             <strong>Atendimento ao Cliente</strong>
             <ul>
               <li>Contate-Nos </li>
@@ -36,7 +36,7 @@ export const Footer = () => {
               <li>Pontos Bônus</li>
             </ul>
           </div>
-          <div class="footer__top-item">
+          <div className="footer__top-item">
             <strong>Loja</strong>
             <ul>
               <li>Jeans</li>
@@ -46,9 +46,9 @@ export const Footer = () => {
               <li>Camisas de moletom</li>
             </ul>
           </div>
-          <div class="footer__top-item">
+          <div className="footer__top-item">
             <strong>Encontre-nos em:</strong>
-            <ul class="footer__social-media">
+            <ul className="footer__social-media">
               <li>
                 <Icon icon="fa-brands fa-instagram footer__social-icon" />
               </li>
@@ -66,7 +66,7 @@ export const Footer = () => {
               </li>
             </ul>
             <strong>Pagamento</strong>
-            <ul class="footer__pagamentos">
+            <ul className="footer__pagamentos">
               <li>
                 <img src="/img/footer/boleto.png" alt="boleto" />
               </li>
@@ -89,7 +89,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div class="footer__bottom">
+      <div className="footer__bottom">
         <ul>
           <li>Mapa da página|</li>
           <li>Créditos|</li>
