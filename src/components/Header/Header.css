@@ -1,11 +1,20 @@
 @import "../../assets/css/global.css";
 
 header {
+  position: fixed;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-self: center;
   width: 100%;
+  height: 150px;
+  max-width: 1200px;
   background-color: var(--color-eggshell);
+}
+
+.header-height {
+  height: 150px;
 }
 
 .header__top {
@@ -85,6 +94,12 @@ header {
   text-transform: capitalize;
   opacity: 1;
   transition: opacity 0.3s;
+}
+#header__input-text:focus {
+  color: var(--letter-color);
+}
+#header__input-text::placeholder {
+  text-align: start;
 }
 
 .header__categories {
