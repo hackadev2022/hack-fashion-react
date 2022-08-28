@@ -1,16 +1,40 @@
 @import url("../../assets/css/global.css");
 .produto__container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-right: 10px;
     height: calc(100vh - 150px);
-    padding-top: 50px;
+    padding-top: 100px;
     background-color: var(--bg-produtos);
     width: 100%;
-}   
+}
 .produto__image-box {
-    height: 90%;
+    height: 100%;
+    margin-top: -70px;
 }
 .produto__image {
     height: 100%;
+}
+
+.produto__title {
+    font-size: 2.3rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 12px;
+}
+
+.produto__info {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 400px;
+}
+
+.produto__info:nth-child(2) {
+    font-style: italic;
+}
+
+h2#produto__offer {
+    color: red;
 }
