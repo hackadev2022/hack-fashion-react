@@ -14,19 +14,6 @@ export const ProdutosPage = () => {
       produto.trademark.includes(params.type)
   );
 
-  // const handleSearch = (search) => {
-  //   setSearchFilter(formatSearch(search));
-  // };
-
-  // const formatSearch = (e) => {
-  //   const formattedSearch = e
-  //     .toLowerCase()
-  //     .replace(/(?:^|\s)\S/g, function (a) {
-  //       return a.toUpperCase();
-  //     });
-  //   return formattedSearch;
-  // };
-
   return (
     <>
       <h1>Filtrando por : {params.type}</h1>

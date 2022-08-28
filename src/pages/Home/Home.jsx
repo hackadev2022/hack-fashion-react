@@ -2,7 +2,6 @@ import "./Home.css";
 import { Banner } from "../../components/Banner/Banner";
 import { Produtos } from "../../components/Produtos/Produtos";
 import { produtos } from "../../assets/produtos/produtos";
-import { Header } from "../../components/Header/Header";
 import { useState } from "react";
 
 export const Home = () => {

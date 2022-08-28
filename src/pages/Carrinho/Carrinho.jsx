@@ -1,4 +1,3 @@
-
 import "./Carrinho.css";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,13 +8,11 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-// import { render } from "@testing-library/react";
-
 
 export const Carrinho = ({ produtosCarrinho }) => {
-  console.log(localStorage.setItem('carrinho', JSON.stringify(produtosCarrinho)));
-
-
+  console.log(
+    localStorage.setItem("carrinho", JSON.stringify(produtosCarrinho))
+  );
 
   const [ignore, setIgnore] = useState(true);
 
@@ -45,7 +42,9 @@ export const Carrinho = ({ produtosCarrinho }) => {
   };
 
   const handleMinusQuant = (key) => {
-    produtosCarrinho[key].quantidade--;
+    if (produtosCarrinho[key].quantidade > 1) {
+      produtosCarrinho[key].quantidade--;
+    }
     if (ignore) {
       setIgnore(false);
     } else {
@@ -64,9 +63,8 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
   return (
     <>
-
       <div className="cart__return">
-        <div >
+        <div>
           <NavLink to="/">
             <FontAwesomeIcon icon={faArrowLeft} />
           </NavLink>
@@ -87,7 +85,8 @@ export const Carrinho = ({ produtosCarrinho }) => {
                       />
                     </div>
 
-                    <FontAwesomeIcon icon={faX}
+                    <FontAwesomeIcon
+                      icon={faX}
                       onClick={() => {
                         handleRemoveItem(key);
                       }}
@@ -97,7 +96,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
                   </figure>
                 </li>
                 <div>
-                  <li >
+                  <li>
                     <p className="shop-line-1">{produto.name}</p>
                     <p className="shop-line-2">Tam: {produto.tamanho}</p>
                     <button
@@ -122,10 +121,12 @@ export const Carrinho = ({ produtosCarrinho }) => {
                       <FontAwesomeIcon icon={faPlus} />
                     </button>
                   </li>
-                  <li >
+                  <li>
                     {produto.offer.isOffer && (
                       <>
-                        <p className="old-price">R${produto.price.toFixed(2)}</p>
+                        <p className="old-price">
+                          R${produto.price.toFixed(2)}
+                        </p>
                         <p className="shop-line-1">
                           R${" "}
                           {(
@@ -170,7 +171,6 @@ export const Carrinho = ({ produtosCarrinho }) => {
       <div className="cart__promotion-code">
         <input type="text" placeholder="Código de Promoção" />
         <button>Aplicar</button>
-
       </div>
     </>
   );
