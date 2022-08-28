@@ -1,4 +1,4 @@
-import { Header } from "../../components/Header/Header";
+
 import "./Carrinho.css";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -63,7 +63,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
   return (
     <>
-      <Header />
+
       <div>
         <div>
           <NavLink to="/">

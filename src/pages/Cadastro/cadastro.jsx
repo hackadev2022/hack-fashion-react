@@ -1,6 +1,6 @@
 import './style.css'
 import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-router-dom'
-import { Header } from '../../components/Header/Header'
+
 import { Button } from '../../components/Button/Button'
 
 
@@ -9,16 +9,16 @@ export default function Cadastro() {
     return (
         <div>
             <div>
-              <Header />
+
                 <div className='text-container-header'>
 
-                <div className='text-conta'><h1>CRIAR CONTA</h1>
-                    <input type='radio' name='pj'></input>
-                    <label for='pj'> Pessoa Júridica</label>
-                </div>
-                <div className='text-align-style'>
-                    <p>Já possui uma conta ? Clique aqui para fazer <Link className='style-login-btn' to='/Login'>Login</Link></p>
-                </div>
+                    <div className='text-conta'><h1>CRIAR CONTA</h1>
+                        <input type='radio' name='pj'></input>
+                        <label for='pj'> Pessoa Júridica</label>
+                    </div>
+                    <div className='text-align-style'>
+                        <p>Já possui uma conta ? Clique aqui para fazer <Link className='style-login-btn' to='/Login'>Login</Link></p>
+                    </div>
                 </div>
 
                 <div className='cadastro-container'>
@@ -129,7 +129,7 @@ export default function Cadastro() {
             </div>
             <div className='login-create'>
                 <Button classes={'CreateBtn-test'} txt={'Criar Login'} />
-                <Button classes={'LoginBtn-test'} txt={'Login'} /> 
+                <Button classes={'LoginBtn-test'} txt={'Login'} />
             </div>
         </div>
     )
