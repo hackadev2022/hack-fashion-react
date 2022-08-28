@@ -1,41 +1,31 @@
+import { NavLink } from "react-router-dom";
 import "./MenuNavBar.css";
 
-export const MenuNavBar = ({ menuWidth, closeMenu, handleType }) => {
+export const MenuNavBar = ({ menuWidth, closeMenu }) => {
   setTimeout(() => {
     let divMenuNavBar = document.querySelector(".menu-nav-bar");
     divMenuNavBar.style.width = menuWidth;
   }, 1);
 
-  const handleMoletom = () => {
-    handleType.handleMoletom();
-    closeMenu();
-  };
-  const handleCamiseta = () => {
-    handleType.handleCamiseta();
-    closeMenu();
-  };
-  const handleCalça = () => {
-    handleType.handleCalça();
-    closeMenu();
-  };
-  const handleJeans = () => {
-    handleType.handleJeans();
-    closeMenu();
-  };
-  const handleJaqueta = () => {
-    handleType.handleJaqueta();
-    closeMenu();
-  };
-
   return (
     <div onClick={closeMenu} className="menu-nav-bar">
       <i className="menu fa-solid fa-xmark" onClick={closeMenu}></i>
       <ul>
-        <li onClick={handleMoletom}>Moletom</li>
-        <li onClick={handleCamiseta}>Camiseta</li>
-        <li onClick={handleCalça}>Calça</li>
-        <li onClick={handleJeans}>Jeans</li>
-        <li onClick={handleJaqueta}>Jaqueta</li>
+        <li>
+          <NavLink to="/moletom">Moletom</NavLink>
+        </li>
+        <li>
+          <NavLink to="/camiseta">Camiseta</NavLink>
+        </li>
+        <li>
+          <NavLink to="/calça">Calça</NavLink>
+        </li>
+        <li>
+          <NavLink to="/jeans">Jeans</NavLink>
+        </li>
+        <li>
+          <NavLink to="/jaqueta">Jaqueta</NavLink>
+        </li>
       </ul>
     </div>
   );

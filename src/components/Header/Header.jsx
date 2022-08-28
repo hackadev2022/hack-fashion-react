@@ -12,9 +12,11 @@ import {
 
 import "./Header.css";
 
-export const Header = ({ searchFn, setShowOffersOnly }) => {
+export const Header = ({ setShowOffersOnly }) => {
   let [menuWidth, setMenuWidth] = useState("0");
   let [search, setSearch] = useState("");
+
+  const searchId = document.getElementById("SearchEnter");
 
   const openMenu = () => {
     setMenuWidth("100vw");
@@ -22,51 +24,17 @@ export const Header = ({ searchFn, setShowOffersOnly }) => {
   const closeMenu = () => {
     setMenuWidth("0");
   };
-  const handleSearch = () => {
-    searchFn(search);
-    setShowOffersOnly(false);
-  };
-  const handleMoletom = () => {
-    searchFn("Moletom");
-    setShowOffersOnly(false);
-  };
-  const handleCamiseta = () => {
-    searchFn("Camiseta");
-    setShowOffersOnly(false);
-  };
-  const handleCalça = () => {
-    searchFn("Calça");
-    setShowOffersOnly(false);
-  };
-  const handleJeans = () => {
-    searchFn("Jeans");
-    setShowOffersOnly(false);
-  };
-  const handleJaqueta = () => {
-    searchFn("Jaqueta");
-    setShowOffersOnly(false);
-  };
 
   document.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
-      document.getElementById("SearchEnter").click();
+      searchId.click();
     }
   });
 
   return (
     <>
       <header>
-        <MenuNavBar
-          menuWidth={menuWidth}
-          closeMenu={closeMenu}
-          handleType={{
-            handleMoletom,
-            handleCamiseta,
-            handleCalça,
-            handleJeans,
-            handleJaqueta,
-          }}
-        />
+        <MenuNavBar menuWidth={menuWidth} closeMenu={closeMenu} />
         <div className="header__top container">
           <div className="header__imgs">
             <NavLink
@@ -74,6 +42,9 @@ export const Header = ({ searchFn, setShowOffersOnly }) => {
               className={({ isActive }) =>
                 isActive ? "activeBtn" : "activeBtn"
               }
+              onClick={() => {
+                setShowOffersOnly(false);
+              }}
             >
               <img
                 className="header__img-logo img-logo"
@@ -112,21 +83,29 @@ export const Header = ({ searchFn, setShowOffersOnly }) => {
               name="search"
               placeholder="Pesquise"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value.toLowerCase())}
             />
-            <i
-              id="SearchEnter"
-              className="fa-solid fa-magnifying-glass"
-              onClick={handleSearch}
-            ></i>
+            <NavLink to={`/${search}`}>
+              <i id="SearchEnter" className="fa-solid fa-magnifying-glass"></i>
+            </NavLink>
           </div>
           <nav className="header__categories">
             <ul>
-              <li onClick={handleMoletom}>Moletom</li>
-              <li onClick={handleCamiseta}>Camiseta</li>
-              <li onClick={handleCalça}>Calça</li>
-              <li onClick={handleJeans}>Jeans</li>
-              <li onClick={handleJaqueta}>Jaqueta</li>
+              <li>
+                <NavLink to="/moletom">Moletom</NavLink>
+              </li>
+              <li>
+                <NavLink to="/camiseta">Camiseta</NavLink>
+              </li>
+              <li>
+                <NavLink to="/calça">Calça</NavLink>
+              </li>
+              <li>
+                <NavLink to="/jeans">Jeans</NavLink>
+              </li>
+              <li>
+                <NavLink to="/jaqueta">Jaqueta</NavLink>
+              </li>
             </ul>
           </nav>
         </div>

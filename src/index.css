@@ -19,6 +19,11 @@ a:active {
   opacity: 0.8;
 }
 
+a:focus {
+  background-color: transparent;
+  color: var(--letter-color);
+}
+
 ul {
   list-style: none;
 }
