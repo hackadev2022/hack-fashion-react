@@ -7,9 +7,15 @@ import {
   faMinus,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
+// import { render } from "@testing-library/react";
+
 
 export const Carrinho = ({ produtosCarrinho }) => {
-  const [prodCount, setProdCount] = useState(1);
+
+
+
+
   const [ignore, setIgnore] = useState(true);
 
   let subTotalPrice = 0;
@@ -60,9 +66,9 @@ export const Carrinho = ({ produtosCarrinho }) => {
       <Header />
       <div>
         <div>
-          <a href="#">
+          <NavLink to="/">
             <FontAwesomeIcon icon={faArrowLeft} />
-          </a>
+          </NavLink>
         </div>
         <div>Sacola</div>
       </div>
@@ -152,11 +158,11 @@ export const Carrinho = ({ produtosCarrinho }) => {
         </li>
         <hr />
       </ul>
-      <footer>
-        <a href="#">
-          <p id="subtotal">Subtotal - R$ {subTotalPrice.toFixed(2)}</p>
-        </a>
-      </footer>
+      <h6 id="subtotal">Subtotal - R$ {subTotalPrice.toFixed(2)}</h6>
+      <NavLink to="/checkout">
+        <button className="button-checkout">Finalizar Compra</button>
+      </NavLink>
+
     </>
   );
 };

@@ -7,6 +7,7 @@ import { Produto } from "./pages/Produto/Produto";
 
 import { Routes, Route } from "react-router-dom";
 import { Carrinho } from "./pages/Carrinho/Carrinho";
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   let [produtosCarrinho, setProdutosCarrinho] = useState([]);
@@ -33,6 +34,8 @@ function App() {
           path="/Carrinho"
           element={<Carrinho produtosCarrinho={produtosCarrinho} />}
         ></Route>
+        <Route
+          path="/Checkout" element={<Checkout />}></Route>
       </Routes>
     </>
   );
