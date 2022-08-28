@@ -12,7 +12,7 @@ import {
 
 import "./Header.css";
 
-export const Header = ({ searchFn }) => {
+export const Header = ({ searchFn, setShowOffersOnly }) => {
   let [menuWidth, setMenuWidth] = useState("0");
   let [search, setSearch] = useState("");
 
@@ -24,21 +24,27 @@ export const Header = ({ searchFn }) => {
   };
   const handleSearch = () => {
     searchFn(search);
+    setShowOffersOnly(false);
   };
   const handleMoletom = () => {
     searchFn("Moletom");
+    setShowOffersOnly(false);
   };
   const handleCamiseta = () => {
     searchFn("Camiseta");
+    setShowOffersOnly(false);
   };
   const handleCalça = () => {
     searchFn("Calça");
+    setShowOffersOnly(false);
   };
   const handleJeans = () => {
     searchFn("Jeans");
+    setShowOffersOnly(false);
   };
   const handleJaqueta = () => {
     searchFn("Jaqueta");
+    setShowOffersOnly(false);
   };
 
   document.addEventListener("keypress", function (e) {

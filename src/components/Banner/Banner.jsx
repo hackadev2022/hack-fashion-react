@@ -9,6 +9,7 @@ export const Banner = ({
   bannerMainInfo,
   bannerInfo,
   bannerDirectoryImg,
+  fn,
 }) => {
   return (
     <section
@@ -16,6 +17,7 @@ export const Banner = ({
       style={{
         backgroundImage: `url("/img/${bannerDirectoryImg}")`,
       }}
+      onClick={fn}
     >
       <div className="banner__top">
         <img
@@ -45,7 +47,7 @@ export const Banner = ({
         </div>
       </div>
       <div className="banner__bottom">
-        <Button txt="Comprar" />
+        <Button txt="Comprar" fn={fn} />
         <div className="banner__icon">
           <FontAwesomeIcon icon={faChevronDown} />
         </div>

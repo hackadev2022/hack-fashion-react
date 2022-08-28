@@ -7,6 +7,7 @@ import { useState } from "react";
 
 export const Home = () => {
   let [searchFilter, setSearchFilter] = useState("");
+  let [showOffersOnly, setShowOffersOnly] = useState(false);
   const produtosFiltrados = produtos.filter(
     (produto) =>
       produto.name.includes(searchFilter) ||
@@ -14,9 +15,14 @@ export const Home = () => {
       produto.type.includes(searchFilter) ||
       produto.trademark.includes(searchFilter)
   );
+  const produtosOffer = produtos.filter((produto) => produto.offer.isOffer);
 
   const handleSearch = (search) => {
     setSearchFilter(formatSearch(search));
+  };
+
+  const handleClickBanner = () => {
+    setShowOffersOnly(true);
   };
 
   const formatSearch = (e) => {
@@ -30,17 +36,29 @@ export const Home = () => {
 
   return (
     <>
-      <Header searchFn={handleSearch} />
+      <Header searchFn={handleSearch} setShowOffersOnly={setShowOffersOnly} />
       <Banner
         bannerTitle="Título do banner"
-        bannerMainInfo="10% off"
+        bannerMainInfo="Até 50% off"
         bannerInfo="Não perca essa oportunidade !"
         bannerDirectoryImg="banners/banner_ilustrativo3.png"
+        fn={handleClickBanner}
       />
       <section className="section__produtos">
-        {produtosFiltrados.map((produto) => (
-          <Produtos key={produto.id} produto={produto} />
-        ))}
+        {!showOffersOnly && (
+          <>
+            {produtosFiltrados.map((produto) => (
+              <Produtos key={produto.id} produto={produto} />
+            ))}
+          </>
+        )}
+        {showOffersOnly && (
+          <>
+            {produtosOffer.map((produto) => (
+              <Produtos key={produto.id} produto={produto} />
+            ))}
+          </>
+        )}
       </section>
     </>
   );
