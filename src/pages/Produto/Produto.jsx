@@ -1,5 +1,4 @@
 import "./Produto.css";
-import { Header } from "../../components/Header/Header";
 import { useParams } from "react-router-dom";
 import { produtos } from "../../assets/produtos/produtos";
 import { ButtonProduct } from "../../components/Button-product/Button-product";
@@ -14,17 +13,22 @@ export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
 
   return (
     <>
-      <Header />
-      <section>
-        <h1>Estamos aqui</h1>
+      <section className="produto__container">
+        <div className="produto__image-box">
+        
 
-        <img src={produto[0].imgDirectory} alt={produto[0].name} />
-        <h1>R$ {produto[0].price}</h1>
+        <img className="produto__image" src={produto[0].imgDirectory} alt={produto[0].name} />
+        </div>
+        <div>
+        <h2 className="produto__title">{produto[0].name}</h2>  
+        <h1>R$ {produto[0].price}, 00</h1>
         <ButtonProduct
           produto={produto[0]}
           produtosCarrinho={produtosCarrinho}
           setProdutosCarrinho={setProdutosCarrinho}
+        
         />
+        </div>
       </section>
     </>
   );

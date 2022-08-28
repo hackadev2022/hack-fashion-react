@@ -1,0 +1,16 @@
+@import url("../../assets/css/global.css");
+.produto__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(100vh - 150px);
+    padding-top: 50px;
+    background-color: var(--bg-produtos);
+    width: 100%;
+}   
+.produto__image-box {
+    height: 90%;
+}
+.produto__image {
+    height: 100%;
+}
