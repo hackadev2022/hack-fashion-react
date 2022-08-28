@@ -21,7 +21,12 @@ export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
         </div>
         <div>
         <h2 className="produto__title">{produto[0].name}</h2>  
-        <h1>R$ {produto[0].price}, 00</h1>
+        {produto[0].offer.isOffer && (
+          <h1>R$ {(produto[0].price - produto[0].price*produto[0].offer.percent).toFixed(2)}</h1>
+        )}
+        {!produto[0].offer.isOffer && (
+          <h1>R$ {(produto[0].price).toFixed(2)}</h1>
+        )}
         <ButtonProduct
           produto={produto[0]}
           produtosCarrinho={produtosCarrinho}
