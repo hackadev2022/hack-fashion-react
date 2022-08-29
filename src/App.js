@@ -35,7 +35,10 @@ function App() {
             path="/Carrinho"
             element={<Carrinho produtosCarrinho={produtosCarrinho} />}
           ></Route>
-          <Route path="/Checkout" element={<Checkout />}></Route>
+          <Route
+            path="/Checkout"
+            element={<Checkout produtosCarrinho={produtosCarrinho} />}
+          ></Route>
         </Route>
       </Routes>
     </>
