@@ -33,7 +33,7 @@ export const ButtonProduct = ({
         <p className="identifier">Tamanho:</p>
         <input type="radio" id="P" name="size" value="P" />
         <label
-          for="P"
+          htmlFor="P"
           onClick={() => {
             setTamanho("P");
           }}
@@ -49,7 +49,7 @@ export const ButtonProduct = ({
             setTamanho("M");
           }}
         />
-        <label for="M">M</label>
+        <label htmlFor="M">M</label>
 
         <input
           type="radio"
@@ -60,7 +60,7 @@ export const ButtonProduct = ({
             setTamanho("G");
           }}
         />
-        <label for="G">G</label>
+        <label htmlFor="G">G</label>
 
         <input
           type="radio"
@@ -71,7 +71,7 @@ export const ButtonProduct = ({
             setTamanho("GG");
           }}
         />
-        <label for="GG">GG</label>
+        <label htmlFor="GG">GG</label>
       </div>
 
       <div>
@@ -84,7 +84,7 @@ export const ButtonProduct = ({
           }}
         >
           {" "}
-          <i class="fa-solid fa-minus"></i>
+          <i className="fa-solid fa-minus"></i>
         </button>
 
         <span className="button-number">{prodCount}</span>
@@ -96,7 +96,7 @@ export const ButtonProduct = ({
           }}
         >
           {" "}
-          <i class="fa-solid fa-plus"></i>
+          <i className="fa-solid fa-plus"></i>
         </button>
       </div>
 

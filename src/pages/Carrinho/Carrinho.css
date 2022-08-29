@@ -1,128 +1,169 @@
+.cart__container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "img produto" "qtd total";
+    align-items: center;
+
+    grid-gap: 10px;
+    margin-top: 20px;
+
+    gap: 20px;
+}
+
+.space {
+    width: 100%;
+    height: 20px;
+}
+
 .products__container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    width: 50vh;
 }
 .products__container li {
-  padding: 5px;
+    padding: 5px;
 }
 
 .products__container p {
-  padding-bottom: 5px;
+    padding-bottom: 5px;
 }
 
 .cart__return {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  background-color: #1d2d44;
-  padding: 10px;
-  color: #f0ebd8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    background-color: #1d2d44;
+    padding: 10px;
+    color: #f0ebd8;
+
+    margin-bottom: 20px;
 }
 
 .cart__return .icon {
-  font-size: 22px;
-  margin-left: 10px;
+    font-size: 22px;
+    margin-left: 10px;
 }
 
 .img-carrinho img {
-  width: 160px;
+    width: 120px;
 }
 
 .remove {
-  background-color: var(--color-shadow-blue);
-  padding: 8px;
-  padding-right: 10px;
-  padding-left: 10px;
-  border-radius: 20px;
-  color: white;
-  cursor: pointer;
+    background-color: var(--color-shadow-blue);
+    padding: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    opacity: 0.5;
+    margin-right: 10px;
 }
 
 .cart__total {
-  color: #f0ebd8;
-  cursor: pointer;
-  text-align: center;
-  padding: 30px;
-  background-color: #1d2d44;
+    color: #f0ebd8;
+    cursor: pointer;
+    text-align: center;
+    padding: 30px;
+    background-color: #1d2d44;
+    grid-area: total;
 }
 
 .layout-carrinho {
-  display: flex;
-  justify-content: space-between;
+    grid-area: img;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aliceblue;
 }
 
 .layout-carrinho div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .layout-carrinho p {
-  width: 150px;
+    width: 150px;
 }
 
 .shop-line-1 {
-  font-weight: bold;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.products__itens {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .shop-line-2 {
-  font-size: 12px;
-  color: #3e5c76;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
+    font-size: 12px;
+    color: #3e5c76;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .old-price {
-  font-size: 14px;
-  text-decoration: line-through;
+    font-size: 14px;
+    text-decoration: line-through;
 }
 
 .button-quantity {
-  width: 30px;
-  padding-left: 8px;
-  padding-right: 8px;
-  margin-top: 10px;
+    width: 30px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 10px;
 }
 
 .cart__promotion-code {
-  margin-top: 5px;
-  margin-bottom: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .cart__promotion-code input::placeholder {
-  font-size: 14px;
-  color: var(--color-shadow-blue);
+    font-size: 14px;
+    color: var(--color-shadow-blue);
 }
 
 .cart__promotion-code input {
-  border: 1px solid var(--color-shadow-blue);
-  padding: 10px;
-  background-color: #f0ebd8;
-  color: #3e5c76;
-  margin: 20px;
+    border: 1px solid var(--color-shadow-blue);
+    padding: 10px;
+    background-color: #f0ebd8;
+    color: #3e5c76;
+    margin: 20px;
 }
 
 .cart__promotion-code button {
-  cursor: pointer;
-  color: white;
-  font-weight: bold;
-  background-color: var(--color-shadow-blue);
-  border: none;
-  padding: 10px 15px 10px 15px;
-  border-radius: 20px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    background-color: var(--color-shadow-blue);
+    border: none;
+    padding: 10px 15px 10px 15px;
+    border-radius: 20px;
 }
 
-.cart__promotion-code button:hover{
-  background-color: #748cabcc;
+.cart__promotion-code button:hover {
+    background-color: #748cabcc;
 }
 
-.remove:hover{
-  background-color: #748cabcc;
+.remove:hover {
+    background-color: #748cabcc;
 }

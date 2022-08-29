@@ -8,6 +8,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { Button } from "../../components/Button/Button";
 
 export const Carrinho = ({ produtosCarrinho }) => {
   console.log(
@@ -63,6 +64,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
   return (
     <>
+
       <div className="cart__return">
         <div>
           <NavLink to="/" className="icon">
@@ -72,9 +74,11 @@ export const Carrinho = ({ produtosCarrinho }) => {
         <div>Sacola</div>
         <div></div>
       </div>
-      <div className="products__container">
-        <ul>
-          <li>
+      <div className="cart__container">
+        <div className="products__container">
+          {/* <ul>
+            <li> */}
+          <div className="products__itens">
             {produtosCarrinho.map((produto, key) => (
               <ul className="layout-carrinho">
                 <li>
@@ -86,13 +90,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
                       />
                     </div>
 
-                    <FontAwesomeIcon
-                      className="remove"
-                      icon={faX}
-                      onClick={() => {
-                        handleRemoveItem(key);
-                      }}
-                    />
+
                   </figure>
                 </li>
                 <div>
@@ -147,29 +145,54 @@ export const Carrinho = ({ produtosCarrinho }) => {
                     {!produto.offer.isOffer && (
                       <>
                         <p className="shop-line-1">
-                          R$ {produto.price.toFixed(2)}
+                          R$ {formatPrice(produto.price)}
                         </p>
                         <p className="shop-line-2">
-                          10x R$ {(produto.price / 10).toFixed(2)}
+                          10x R$ {formatPrice(produto.price / 10)}
                         </p>
                       </>
                     )}
-                  </li>        
-                </div>         
+
+                  </li>
+                </div>
+                <FontAwesomeIcon
+                  className="remove"
+                  icon={faX}
+                  onClick={() => {
+                    handleRemoveItem(key);
+                  }}
+                />
+
               </ul>
+
             ))}
-          </li>
-          <div className="cart__promotion-code">
-            <input type="text" placeholder="Código Promocional" />
-            <button>Aplicar</button>
+            <div className="space"></div>
           </div>
-        </ul>
-      </div>
-      <div className="cart__total">
-        <NavLink to="/checkout">
-          <h6 id="subtotal">Subtotal - R$ {subTotalPrice.toFixed(2)}</h6>
-        </NavLink>
-      </div>
+          {/* </li> */}
+
+          {/* </ul> */}
+
+
+        </div>
+        <div className="cart__promotion-code">
+          <input type="text" placeholder="Código Promocional" />
+          <button>Aplicar</button>
+        </div>
+        <div className="cart__total">
+          <h6 id="subtotal">Subtotal - R$ {formatPrice(subTotalPrice)}</h6>
+          <NavLink to="/checkout">
+            <Button className="button-checkout" txt={"Finalizar Compra"}>Finalizar Compra</Button>
+          </NavLink>
+        </div></div>
+
     </>
   );
 };
+
+
+export const formatPrice = (value) => {
+  return value
+    .toFixed(2)
+    .toString()
+    .replace(".", ",");
+}
