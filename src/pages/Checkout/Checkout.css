@@ -1,3 +1,10 @@
+.checkout__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .checkout h1 {
   display: flex;
   align-items: baseline;
@@ -14,8 +21,13 @@
 .checkout__produtos {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+
+  background-color: var(--bg-produtos);
+  margin-bottom: 20px;
+  width: 100%;
+  height: auto;
 }
 
 .checkout__produtos-tems {
@@ -29,7 +41,7 @@
   width: 100%;
   height: 100px;
   justify-content: space-around;
-  border: solid 1px black;
+  /* border: solid 1px black; */
   margin: 5px 0;
 }
 
@@ -80,4 +92,8 @@
 
 .checkout__endereco-button {
   margin-top: 5px;
+}
+
+.checkout__metodo-pagamento {
+  display: flex;
 }

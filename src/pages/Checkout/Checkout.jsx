@@ -89,12 +89,14 @@ const Checkout = ({ produtosCarrinho }) => {
   };
   return (
     <section className="checkout">
-      <h1>
-        Seu Pedido{" "}
-        <NavLink to="/">
-          <h6>(continuar comprando)</h6>
-        </NavLink>
-      </h1>
+      <div className="checkout__header">
+        <h1>
+          Seu Pedido{" "}
+          <NavLink to="/">
+            <h6>(continuar comprando)</h6>
+          </NavLink>
+        </h1>
+      </div>
       <div className="checkout__produtos">
         <div className="checkout__produtos-tems">
           {produtosCarrinho.map((produto, key) => (
@@ -243,7 +245,7 @@ const Checkout = ({ produtosCarrinho }) => {
               </div>
             </div>
           </div>
-          <div>
+          <div className="checkout__metodo-pagamento">
             <input type="radio" name="payment-method" id="pix" />
             <label for="pix">
               <div>
@@ -252,7 +254,7 @@ const Checkout = ({ produtosCarrinho }) => {
               </div>
             </label>
           </div>
-          <div>
+          <div className="checkout__metodo-pagamento">
             <input type="radio" checked name="payment-method" id="boleto" />
             <label for="boleto">
               <div>
@@ -261,14 +263,13 @@ const Checkout = ({ produtosCarrinho }) => {
               </div>
             </label>
           </div>
-          <div>
+          <div className="checkout__metodo-pagamento">
             <input type="radio" name="payment-method" id="cartao-credito" />
             <label for="cartao-credito">
               <div>
                 <i class="fa-solid fa-credit-card"></i>
                 Cartão de crédito
               </div>
-              <span>até 6x sem juros</span>
             </label>
           </div>
 
