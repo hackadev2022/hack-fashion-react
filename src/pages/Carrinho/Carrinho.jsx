@@ -65,11 +65,12 @@ export const Carrinho = ({ produtosCarrinho }) => {
     <>
       <div className="cart__return">
         <div>
-          <NavLink to="/">
+          <NavLink to="/" className="icon">
             <FontAwesomeIcon icon={faArrowLeft} />
           </NavLink>
         </div>
         <div>Sacola</div>
+        <div></div>
       </div>
       <div className="products__container">
         <ul>
@@ -86,13 +87,12 @@ export const Carrinho = ({ produtosCarrinho }) => {
                     </div>
 
                     <FontAwesomeIcon
+                      className="remove"
                       icon={faX}
                       onClick={() => {
                         handleRemoveItem(key);
                       }}
                     />
-                    {/* Remover Item
-                    </figcaption> */}
                   </figure>
                 </li>
                 <div>
@@ -154,23 +154,21 @@ export const Carrinho = ({ produtosCarrinho }) => {
                         </p>
                       </>
                     )}
-                  </li>
-                </div>
+                  </li>        
+                </div>         
               </ul>
             ))}
           </li>
-          <hr />
+          <div className="cart__promotion-code">
+            <input type="text" placeholder="Código Promocional" />
+            <button>Aplicar</button>
+          </div>
         </ul>
       </div>
       <div className="cart__total">
-        <h6 id="subtotal">Subtotal - R$ {subTotalPrice.toFixed(2)}</h6>
         <NavLink to="/checkout">
-          <button className="button-checkout">Finalizar Compra</button>
+          <h6 id="subtotal">Subtotal - R$ {subTotalPrice.toFixed(2)}</h6>
         </NavLink>
-      </div>
-      <div className="cart__promotion-code">
-        <input type="text" placeholder="Código de Promoção" />
-        <button>Aplicar</button>
       </div>
     </>
   );

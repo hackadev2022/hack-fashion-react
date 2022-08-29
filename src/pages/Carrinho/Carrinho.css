@@ -1,7 +1,120 @@
 .products__container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.products__container li {
+  padding: 5px;
+}
+
+.products__container p {
+  padding-bottom: 5px;
+}
+
+.cart__return {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  background-color: #1d2d44;
+  padding: 10px;
+  color: #f0ebd8;
+}
+
+.cart__return .icon {
+  font-size: 22px;
+  margin-left: 10px;
+}
+
+.img-carrinho img {
+  width: 160px;
+}
+
+.remove {
+  background-color: var(--color-shadow-blue);
+  padding: 8px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.cart__total {
+  color: #f0ebd8;
+  cursor: pointer;
+  text-align: center;
+  padding: 30px;
+  background-color: #1d2d44;
+}
+
+.layout-carrinho {
+  display: flex;
+  justify-content: space-between;
+}
+
+.layout-carrinho div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.layout-carrinho p {
+  width: 150px;
+}
+
+.shop-line-1 {
+  font-weight: bold;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.shop-line-2 {
+  font-size: 12px;
+  color: #3e5c76;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.old-price {
+  font-size: 14px;
+  text-decoration: line-through;
+}
+
+.button-quantity {
+  width: 30px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 10px;
+}
+
+.cart__promotion-code {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.cart__promotion-code input::placeholder {
+  font-size: 14px;
+  color: var(--color-shadow-blue);
+}
+
+.cart__promotion-code input {
+  border: 1px solid var(--color-shadow-blue);
+  padding: 10px;
+  background-color: #f0ebd8;
+  color: #3e5c76;
+  margin: 20px;
+}
+
+.cart__promotion-code button {
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  background-color: var(--color-shadow-blue);
+  border: none;
+  padding: 10px 15px 10px 15px;
+  border-radius: 20px;
 }
