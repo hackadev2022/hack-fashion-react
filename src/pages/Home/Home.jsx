@@ -12,6 +12,10 @@ export const Home = () => {
 
   const handleClickBanner = () => {
     setShowOffersOnly(true);
+    window.scrollTo({
+      top: 1000,
+      behavior: "smooth",
+    });
   };
 
   return (

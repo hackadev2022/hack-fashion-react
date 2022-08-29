@@ -11,9 +11,9 @@ import { NavLink } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 
 export const Carrinho = ({ produtosCarrinho }) => {
-  console.log(
-    localStorage.setItem("carrinho", JSON.stringify(produtosCarrinho))
-  );
+  // console.log(
+  //   localStorage.setItem("carrinho", JSON.stringify(produtosCarrinho))
+  // );
 
   const [ignore, setIgnore] = useState(true);
 

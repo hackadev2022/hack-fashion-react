@@ -179,7 +179,15 @@ export const Produtos = ({ produto }) => {
                   <i>{totalRating()} avaliações</i>
                 </div>
               </div>
-              <NavLink to={`/Produto/${produto.id}/${produto.name}`}>
+              <NavLink
+                to={`/Produto/${produto.id}/${produto.name}`}
+                onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                }}
+              >
                 <Button txt="Comprar" classes="produtos__button" />
               </NavLink>
             </div>
@@ -200,7 +208,12 @@ export const Produtos = ({ produto }) => {
             />
             <NavLink
               to={`/Produto/${produto.id}/${produto.name}`}
-              className={({ isActive }) => (isActive ? "default" : "default")}
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
             >
               <div className="produtos__img">
                 <img src={produto.imgDirectory} alt={produto.name} />
@@ -366,7 +379,15 @@ export const Produtos = ({ produto }) => {
               </div>
             </div>
 
-            <NavLink to={`/Produto/${produto.id}/${produto.name}`}>
+            <NavLink
+              to={`/Produto/${produto.id}/${produto.name}`}
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
+            >
               <Button txt="Comprar" classes="produtos__button" />
             </NavLink>
           </div>

@@ -247,27 +247,27 @@ const Checkout = ({ produtosCarrinho }) => {
           </div>
           <div className="checkout__metodo-pagamento">
             <input type="radio" name="payment-method" id="pix" />
-            <label for="pix">
+            <label htmlFor="pix">
               <div>
-                <i class="fa-brands fa-pix"></i>
+                <i className="fa-brands fa-pix"></i>
                 PIX
               </div>
             </label>
           </div>
           <div className="checkout__metodo-pagamento">
             <input type="radio" checked name="payment-method" id="boleto" />
-            <label for="boleto">
+            <label htmlFor="boleto">
               <div>
-                <i class="fa-solid fa-barcode"></i>
+                <i className="fa-solid fa-barcode"></i>
                 Boleto
               </div>
             </label>
           </div>
           <div className="checkout__metodo-pagamento">
             <input type="radio" name="payment-method" id="cartao-credito" />
-            <label for="cartao-credito">
+            <label htmlFor="cartao-credito">
               <div>
-                <i class="fa-solid fa-credit-card"></i>
+                <i className="fa-solid fa-credit-card"></i>
                 Cartão de crédito
               </div>
             </label>
