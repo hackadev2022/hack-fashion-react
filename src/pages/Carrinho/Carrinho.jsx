@@ -89,72 +89,69 @@ export const Carrinho = ({ produtosCarrinho }) => {
                         alt={`${produto.name}`}
                       />
                     </div>
-
-
                   </figure>
                 </li>
-                <div>
-                  <li>
-                    <p className="shop-line-1">{produto.name}</p>
-                    <p className="shop-line-2">Tam: {produto.tamanho}</p>
-                    <button
-                      className="button-quantity"
-                      onClick={() => {
-                        handleMinusQuant(key);
-                      }}
-                    >
-                      {" "}
-                      <FontAwesomeIcon icon={faMinus} />
-                    </button>
+                <li>
+                  <p className="shop-line-1">{produto.name}</p>
+                  <p className="shop-line-2">Tam: {produto.tamanho}</p>
+                  <button
+                    className="button-quantity"
+                    onClick={() => {
+                      handleMinusQuant(key);
+                    }}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faMinus} />
+                  </button>
 
-                    <span className="button-number">{produto.quantidade}</span>
+                  <span className="button-number">{produto.quantidade}</span>
 
-                    <button
-                      className="button-quantity"
-                      onClick={() => {
-                        handlePlusQuant(key);
-                      }}
-                    >
-                      {" "}
-                      <FontAwesomeIcon icon={faPlus} />
-                    </button>
-                  </li>
-                  <li>
-                    {produto.offer.isOffer && (
-                      <>
-                        <p className="old-price">
-                          R${produto.price.toFixed(2)}
-                        </p>
-                        <p className="shop-line-1">
-                          R${" "}
-                          {(
-                            produto.price -
-                            produto.price * produto.offer.percent
-                          ).toFixed(2)}
-                        </p>
-                        <p className="shop-line-2">
-                          10x R$
-                          {(
-                            (produto.price -
-                              produto.price * produto.offer.percent) /
-                            10
-                          ).toFixed(2)}
-                        </p>
-                      </>
-                    )}
-                    {!produto.offer.isOffer && (
-                      <>
-                        <p className="shop-line-1">
-                          R$ {formatPrice(produto.price)}
-                        </p>
-                        <p className="shop-line-2">
-                          10x R$ {formatPrice(produto.price / 10)}
-                        </p>
-                      </>
-                    )}
+                  <button
+                    className="button-quantity"
+                    onClick={() => {
+                      handlePlusQuant(key);
+                    }}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
 
-                  </li>
-                </div>
+                  {produto.offer.isOffer && (
+                    <>
+                      <p className="old-price">
+                        R${produto.price.toFixed(2)}
+                      </p>
+                      <p className="shop-line-1">
+                        R${" "}
+                        {(
+                          produto.price -
+                          produto.price * produto.offer.percent
+                        ).toFixed(2)}
+                      </p>
+                      <p className="shop-line-2">
+                        10x R$
+                        {(
+                          (produto.price -
+                            produto.price * produto.offer.percent) /
+                          10
+                        ).toFixed(2)}
+                      </p>
+                    </>
+                  )}
+                  {!produto.offer.isOffer && (
+                    <>
+                      <p className="shop-line-1">
+                        R$ {formatPrice(produto.price)}
+                      </p>
+                      <p className="shop-line-2">
+                        10x R$ {formatPrice(produto.price / 10)}
+                      </p>
+                    </>
+                  )}
+
+
+                </li>
+
                 <FontAwesomeIcon
                   className="remove"
                   icon={faX}
@@ -166,7 +163,10 @@ export const Carrinho = ({ produtosCarrinho }) => {
               </ul>
 
             ))}
+
             <div className="space"></div>
+
+
           </div>
           {/* </li> */}
 
@@ -174,16 +174,19 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
 
         </div>
-        <div className="cart__promotion-code">
+        {/* <div className="cart__promotion-code">
           <input type="text" placeholder="Código Promocional" />
           <button>Aplicar</button>
-        </div>
-        <div className="cart__total">
-          <h6 id="subtotal">Subtotal - R$ {formatPrice(subTotalPrice)}</h6>
-          <NavLink to="/checkout">
-            <Button className="button-checkout" txt={"Finalizar Compra"}>Finalizar Compra</Button>
-          </NavLink>
-        </div></div>
+        </div> */}
+
+
+      </div>
+      <div className="cart__total">
+        <h6 id="subtotal">Subtotal - R$ {formatPrice(subTotalPrice)}</h6>
+        <NavLink to="/checkout">
+          <Button className="button-checkout" txt={"Finalizar Compra"}>Finalizar Compra</Button>
+        </NavLink>
+      </div>
 
     </>
   );
