@@ -37,20 +37,14 @@ export const Header = ({ setShowOffersOnly }) => {
         <MenuNavBar menuWidth={menuWidth} closeMenu={closeMenu} />
         <div className="header__top container">
           <div className="header__imgs">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "activeBtn" : "activeBtn"
-              }
-              onClick={() => {
-                setShowOffersOnly(false);
-              }}
-            >
+            <NavLink to="/">
               <img
                 className="header__img-logo img-logo"
                 src="/img/logo/logo-img.png"
                 alt="logo da Hack Fashion"
               />
+            </NavLink>
+            <NavLink to="/">
               <img
                 className="header__img-name img-name header__img--display-none"
                 src="/img/logo/logo-name.png"
