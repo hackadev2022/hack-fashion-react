@@ -8,6 +8,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import { Button } from "../../components/Button/Button";
 
 export const Carrinho = ({ produtosCarrinho }) => {
   console.log(
@@ -72,9 +73,11 @@ export const Carrinho = ({ produtosCarrinho }) => {
         <div>Sacola</div>
         <div></div>
       </div>
-      <div className="products__container">
-        <ul>
-          <li>
+      <div className="cart__container">
+        <div className="products__container">
+          {/* <ul>
+            <li> */}
+          <div className="products__itens">
             {produtosCarrinho.map((produto, key) => (
               <ul key={key} className="layout-carrinho">
                 <li>
@@ -85,91 +88,98 @@ export const Carrinho = ({ produtosCarrinho }) => {
                         alt={`${produto.name}`}
                       />
                     </div>
-
-                    <FontAwesomeIcon
-                      className="remove"
-                      icon={faX}
-                      onClick={() => {
-                        handleRemoveItem(key);
-                      }}
-                    />
                   </figure>
                 </li>
-                <div>
-                  <li>
-                    <p className="shop-line-1">{produto.name}</p>
-                    <p className="shop-line-2">Tam: {produto.tamanho}</p>
-                    <button
-                      className="button-quantity"
-                      onClick={() => {
-                        handleMinusQuant(key);
-                      }}
-                    >
-                      {" "}
-                      <FontAwesomeIcon icon={faMinus} />
-                    </button>
+                <li>
+                  <p className="shop-line-1">{produto.name}</p>
+                  <p className="shop-line-2">Tam: {produto.tamanho}</p>
+                  <button
+                    className="button-quantity"
+                    onClick={() => {
+                      handleMinusQuant(key);
+                    }}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faMinus} />
+                  </button>
 
-                    <span className="button-number">{produto.quantidade}</span>
+                  <span className="button-number">{produto.quantidade}</span>
 
-                    <button
-                      className="button-quantity"
-                      onClick={() => {
-                        handlePlusQuant(key);
-                      }}
-                    >
-                      {" "}
-                      <FontAwesomeIcon icon={faPlus} />
-                    </button>
-                  </li>
-                  <li>
-                    {produto.offer.isOffer && (
-                      <>
-                        <p className="old-price">
-                          R${produto.price.toFixed(2)}
-                        </p>
-                        <p className="shop-line-1">
-                          R${" "}
-                          {(
-                            produto.price -
-                            produto.price * produto.offer.percent
-                          ).toFixed(2)}
-                        </p>
-                        <p className="shop-line-2">
-                          10x R$
-                          {(
-                            (produto.price -
-                              produto.price * produto.offer.percent) /
-                            10
-                          ).toFixed(2)}
-                        </p>
-                      </>
-                    )}
-                    {!produto.offer.isOffer && (
-                      <>
-                        <p className="shop-line-1">
-                          R$ {produto.price.toFixed(2)}
-                        </p>
-                        <p className="shop-line-2">
-                          10x R$ {(produto.price / 10).toFixed(2)}
-                        </p>
-                      </>
-                    )}
-                  </li>
-                </div>
+                  <button
+                    className="button-quantity"
+                    onClick={() => {
+                      handlePlusQuant(key);
+                    }}
+                  >
+                    {" "}
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
+
+                  {produto.offer.isOffer && (
+                    <>
+                      <p className="old-price">R${produto.price.toFixed(2)}</p>
+                      <p className="shop-line-1">
+                        R${" "}
+                        {(
+                          produto.price -
+                          produto.price * produto.offer.percent
+                        ).toFixed(2)}
+                      </p>
+                      <p className="shop-line-2">
+                        10x R$
+                        {(
+                          (produto.price -
+                            produto.price * produto.offer.percent) /
+                          10
+                        ).toFixed(2)}
+                      </p>
+                    </>
+                  )}
+                  {!produto.offer.isOffer && (
+                    <>
+                      <p className="shop-line-1">
+                        R$ {formatPrice(produto.price)}
+                      </p>
+                      <p className="shop-line-2">
+                        10x R$ {formatPrice(produto.price / 10)}
+                      </p>
+                    </>
+                  )}
+                </li>
+
+                <FontAwesomeIcon
+                  className="remove"
+                  icon={faX}
+                  onClick={() => {
+                    handleRemoveItem(key);
+                  }}
+                />
               </ul>
             ))}
-          </li>
-          <div className="cart__promotion-code">
-            <input type="text" placeholder="Código Promocional" />
-            <button>Aplicar</button>
+
+            <div className="space"></div>
           </div>
-        </ul>
+          {/* </li> */}
+
+          {/* </ul> */}
+        </div>
+        {/* <div className="cart__promotion-code">
+          <input type="text" placeholder="Código Promocional" />
+          <button>Aplicar</button>
+        </div> */}
       </div>
       <div className="cart__total">
+        <h6 id="subtotal">Subtotal - R$ {formatPrice(subTotalPrice)}</h6>
         <NavLink to="/checkout">
-          <h6 id="subtotal">Subtotal - R$ {subTotalPrice.toFixed(2)}</h6>
+          <Button className="button-checkout" txt={"Finalizar Compra"}>
+            Finalizar Compra
+          </Button>
         </NavLink>
       </div>
     </>
   );
+};
+
+export const formatPrice = (value) => {
+  return value.toFixed(2).toString().replace(".", ",");
 };
