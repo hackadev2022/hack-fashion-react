@@ -23,47 +23,32 @@ export const Slider = () => {
         <SwiperSlide>
           <NavLink to="/jeans/calça">
             <img src="img/roupas_sem_fundo/jeans1.png" />
+            <i className="name">Jeans</i>
           </NavLink>
-
-          <a href="#" className="name">
-            Jeans
-          </a>
         </SwiperSlide>
         <SwiperSlide>
           <NavLink to="/camiseta">
             <img src="img/roupas_sem_fundo/shirt1.png" />
+            <i className="name">Camisas</i>
           </NavLink>
-
-          <a href="#" className="name">
-            Camisas
-          </a>
         </SwiperSlide>
         <SwiperSlide>
           <NavLink to="/moletom/camisa">
             <img src="img/roupas_sem_fundo/sweater1.png" />
+            <i className="name">Suéter</i>
           </NavLink>
-
-          <a href="#" className="name">
-            Suéter
-          </a>
         </SwiperSlide>
         <SwiperSlide>
           <NavLink to="/moletom/calça">
             <img src="img/roupas_sem_fundo/sweatpants1.png" />
+            <i className="name">Calças Moletom</i>
           </NavLink>
-
-          <a href="#" className="name">
-            Calças Moletom
-          </a>
         </SwiperSlide>
         <SwiperSlide>
           <NavLink to="/moletom/jaqueta">
             <img src="img/roupas_sem_fundo/sweatshirt1.png" />
+            <i className="name">Camisas Moletom</i>
           </NavLink>
-
-          <a href="#" className="name">
-            Camisas Moletom
-          </a>
         </SwiperSlide>
       </Swiper>
     </>
