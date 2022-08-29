@@ -6,8 +6,14 @@ import { useState } from "react";
 import { Button } from "../../components/Button/Button";
 
 const Checkout = ({ produtosCarrinho }) => {
+  const [showEditEndereco, setShowEditEndereco] = useState(false);
+  const [editName, setEditName] = useState("");
+  const [editEndereco, setEditEndereco] = useState("");
+  const [editCidade, setEditCidade] = useState("");
+  const [editEstado, setEditEstado] = useState("");
+  const [editCep, setEditCep] = useState("");
   const [endereco, setEndereco] = useState({
-    clienteNome: "João",
+    clienteName: "João",
     endereco: "Rua dos Devs",
     cidade: "Goiânia",
     estado: "GO",
@@ -43,6 +49,44 @@ const Checkout = ({ produtosCarrinho }) => {
       setIgnore(true);
     }
   };
+
+  let subTotalPrice = 0;
+  const subTotal = () => {
+    for (let i = 0; i < produtosCarrinho.length; i++) {
+      if (produtosCarrinho[i].offer.isOffer) {
+        subTotalPrice +=
+          (produtosCarrinho[i].price -
+            produtosCarrinho[i].price * produtosCarrinho[i].offer.percent) *
+          produtosCarrinho[i].quantidade;
+      } else {
+        subTotalPrice +=
+          produtosCarrinho[i].price * produtosCarrinho[i].quantidade;
+      }
+    }
+  };
+  subTotal();
+
+  const handleEditar = () => {
+    setEndereco({
+      clienteName: ``,
+      endereco: ``,
+      cidade: ``,
+      estado: ``,
+      cep: ``,
+    });
+    setShowEditEndereco(true);
+  };
+
+  const handleSave = () => {
+    setEndereco({
+      clienteName: `${editName}`,
+      endereco: `${editEndereco}`,
+      cidade: `${editCidade}`,
+      estado: `${editEstado}`,
+      cep: `${editCep}`,
+    });
+    setShowEditEndereco(false);
+  };
   return (
     <section className="checkout">
       <h1>
@@ -52,119 +96,183 @@ const Checkout = ({ produtosCarrinho }) => {
         </NavLink>
       </h1>
       <div className="checkout__produtos">
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th></th>
-              <th>Produto</th>
-              <th>Tamanho</th>
-              <th>Qtd.</th>
-              <th>Preço_Unit.</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {produtosCarrinho.map((produto, key) => (
-              <tr className="checkout__tr">
-                <th>
-                  <div className="checkout__td-item">
-                    <FontAwesomeIcon
-                      className="remove"
-                      icon={faX}
-                      onClick={() => {
-                        handleRemoveItem(key);
-                      }}
-                    />
-                  </div>
-                </th>
-                <td className="checkout__td">
-                  <div className="checkout__td-item">
-                    <img src={produto.imgDirectory} alt={produto.name} />
-                  </div>
-                </td>
-                <td className="checkout__td">
-                  <div className="checkout__td-item">{produto.name}</div>
-                </td>
-                <td className="checkout__td">
-                  <div className="checkout__td-item">{produto.tamanho}</div>
-                </td>
-                <td className="checkout__td">
-                  <div className="checkout__td-item">
-                    <button
-                      className="button-quantity"
-                      onClick={() => {
-                        handleMinusQuant(key);
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faMinus} />
-                    </button>
-                    {produto.quantidade}
-                    <button
-                      className="button-quantity"
-                      onClick={() => {
-                        handlePlusQuant(key);
-                      }}
-                    >
-                      {" "}
-                      <FontAwesomeIcon icon={faPlus} />
-                    </button>
-                  </div>
-                </td>
+        <div className="checkout__produtos-tems">
+          {produtosCarrinho.map((produto, key) => (
+            <div key={key} className="checkout__produtos-item">
+              <div className="checkout__produtos-img">
+                <img src={produto.imgDirectory} alt={produto.name} />
+              </div>
+              <div className="checkout__produtos-infos">
+                <h2>Produto: {produto.name}</h2>
+                <h3>Marca: {produto.trademark}</h3>
+                <h3>Tam.: {produto.tamanho}</h3>
                 {produto.offer.isOffer && (
-                  <>
-                    <td className="checkout__td">
-                      <div className="checkout__td-item">
-                        R$
-                        {(
-                          produto.price -
-                          produto.price * produto.offer.percent
-                        ).toFixed(2)}
-                      </div>
-                    </td>
-                    <td className="checkout__td">
-                      <div className="checkout__td-item">
-                        R$
-                        {(
-                          (produto.price -
-                            produto.price * produto.offer.percent) *
-                          produto.quantidade
-                        ).toFixed(2)}
-                      </div>
-                    </td>
-                  </>
+                  <h3>
+                    R$
+                    {(
+                      produto.price -
+                      produto.price * produto.offer.percent
+                    ).toFixed(2)}
+                  </h3>
                 )}
-                {!produto.offer.isOffer && (
-                  <>
-                    <td className="checkout__td">
-                      <div className="checkout__td-item">
-                        R$
-                        {produto.price.toFixed(2)}
-                      </div>
-                    </td>
-                    <td className="checkout__td">
-                      <div className="checkout__td-item">
-                        R${(produto.price * produto.quantidade).toFixed(2)}
-                      </div>
-                    </td>
-                  </>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                {!produto.offer.isOffer && <b>R${produto.price.toFixed(2)}</b>}
+                <i>
+                  <FontAwesomeIcon
+                    className="checkout__produtos-icon"
+                    icon={faMinus}
+                    onClick={() => {
+                      handleMinusQuant(key);
+                    }}
+                  />
+                  {produto.quantidade}
+                  <FontAwesomeIcon
+                    className="checkout__produtos-icon"
+                    icon={faPlus}
+                    onClick={() => {
+                      handlePlusQuant(key);
+                    }}
+                  />
+                </i>
+              </div>
+              <div className="checkout__produtos-remove">
+                <FontAwesomeIcon
+                  className="checkout__produtos-icon"
+                  icon={faX}
+                  onClick={() => {
+                    handleRemoveItem(key);
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="checkout__infos">
         <h1>Destino</h1>
+
         <div className="checkout__endereco">
-          <ul>
-            <li>{endereco.name}</li>
-            <li>{endereco.endereco}</li>
-            <li>{endereco.cidade}</li>
-            <li>{endereco.estado}</li>
-            <li>{endereco.cep}</li>
-          </ul>
-          <Button txt={"Editar"} />
+          {!showEditEndereco && (
+            <>
+              <ul>
+                <li>{endereco.clienteName}</li>
+                <li>{endereco.endereco}</li>
+                <li>{endereco.cidade}</li>
+                <li>{endereco.estado}</li>
+                <li>{endereco.cep}</li>
+              </ul>
+              <Button
+                txt={"Editar"}
+                fn={handleEditar}
+                classes={"checkout__endereco-button"}
+              />
+            </>
+          )}
+          {showEditEndereco && (
+            <>
+              <ul>
+                <li>
+                  <input
+                    className="checkout__input-text"
+                    type="text"
+                    name="name"
+                    placeholder="Seu nome"
+                    defaultValue={endereco.name}
+                    onChange={(e) => setEditName(e.target.value)}
+                  />
+                </li>
+                <li>
+                  <input
+                    className="checkout__input-text"
+                    type="text"
+                    name="endereço"
+                    placeholder="Seu endereço"
+                    defaultValue={endereco.endereco}
+                    onChange={(e) => setEditEndereco(e.target.value)}
+                  />
+                </li>
+                <li>
+                  <input
+                    className="checkout__input-text"
+                    type="text"
+                    name="cidade"
+                    placeholder="Sua cidade"
+                    defaultValue={endereco.cidade}
+                    onChange={(e) => setEditCidade(e.target.value)}
+                  />
+                </li>
+                <li>
+                  <input
+                    className="checkout__input-text"
+                    type="text"
+                    name="estado"
+                    placeholder="Seu estado"
+                    defaultValue={endereco.estado}
+                    onChange={(e) => setEditEstado(e.target.value)}
+                  />
+                </li>
+                <li>
+                  <input
+                    className="checkout__input-text"
+                    type="text"
+                    name="cep"
+                    placeholder="Seu cep"
+                    defaultValue={endereco.cep}
+                    onChange={(e) => setEditCep(e.target.value)}
+                  />
+                </li>
+              </ul>
+              <Button
+                txt={"Salvar"}
+                fn={handleSave}
+                classes={"checkout__endereco-button"}
+              />
+            </>
+          )}
+        </div>
+        <div className="checkout__pagamento">
+          <div className="checkout__total-price">
+            <div className="checkout__total-price-item">
+              <h1>Como deseja pagar ?</h1>
+              <div className="checkout__frete-price">
+                <h3>Entrega</h3>
+                <h3>RS 30.00</h3>
+              </div>
+              <div className="checkout__total-price-item__total-price">
+                <h3>Total</h3>
+                <h3>RS{(subTotalPrice + 30).toFixed(2)}</h3>
+              </div>
+            </div>
+          </div>
+          <div>
+            <input type="radio" name="payment-method" id="pix" />
+            <label for="pix">
+              <div>
+                <i class="fa-brands fa-pix"></i>
+                PIX
+              </div>
+            </label>
+          </div>
+          <div>
+            <input type="radio" checked name="payment-method" id="boleto" />
+            <label for="boleto">
+              <div>
+                <i class="fa-solid fa-barcode"></i>
+                Boleto
+              </div>
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="payment-method" id="cartao-credito" />
+            <label for="cartao-credito">
+              <div>
+                <i class="fa-solid fa-credit-card"></i>
+                Cartão de crédito
+              </div>
+              <span>até 6x sem juros</span>
+            </label>
+          </div>
+
+          <Button txt={"Finalizar Compra"} />
         </div>
       </div>
     </section>

@@ -18,8 +18,8 @@ export const ProdutosPage = () => {
     <>
       <h1>Filtrando por : {params.type}</h1>
       <section className="section__produtos">
-        {produtosFiltrados.map((produto) => (
-          <Produtos key={produto.id} produto={produto} />
+        {produtosFiltrados.map((produto, key) => (
+          <Produtos key={key} produto={produto} />
         ))}
       </section>
     </>

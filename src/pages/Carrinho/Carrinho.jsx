@@ -76,7 +76,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
         <ul>
           <li>
             {produtosCarrinho.map((produto, key) => (
-              <ul className="layout-carrinho">
+              <ul key={key} className="layout-carrinho">
                 <li>
                   <figure>
                     <div className="img-carrinho">
@@ -154,8 +154,8 @@ export const Carrinho = ({ produtosCarrinho }) => {
                         </p>
                       </>
                     )}
-                  </li>        
-                </div>         
+                  </li>
+                </div>
               </ul>
             ))}
           </li>
