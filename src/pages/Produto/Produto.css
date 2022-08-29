@@ -2,6 +2,7 @@
 .produto__container {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: flex-start;
     padding-right: 10px;
     height: calc(100vh - 150px);
@@ -37,4 +38,23 @@
 
 h2#produto__offer {
     color: red;
+}
+
+@media screen and (max-width: 770px) {
+    .produto__container {
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding-left: 10px;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .produto__image {
+        height: 120px;
+    }
+
+    .produto-info {
+        margin-right: 50px;
+    }
 }
