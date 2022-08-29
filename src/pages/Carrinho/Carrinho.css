@@ -118,3 +118,11 @@
   padding: 10px 15px 10px 15px;
   border-radius: 20px;
 }
+
+.cart__promotion-code button:hover{
+  background-color: #748cabcc;
+}
+
+.remove:hover{
+  background-color: #748cabcc;
+}
