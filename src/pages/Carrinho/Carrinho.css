@@ -78,8 +78,8 @@
 }
 
 .layout-carrinho {
-    padding-left: 20px;
-    padding-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   grid-area: img;
   display: flex;
   justify-content: space-between;
@@ -184,7 +184,11 @@
 }
 
 @media screen and (max-width: 280px) {
-    .products__container li {
-        margin-right: -12px;
-    }
+  .products__container li {
+    margin-right: -6px;
+  }
+
+  .products__container li:nth-child(2) {
+    margin-right: -50px;
+  }
 }
