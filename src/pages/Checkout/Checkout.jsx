@@ -151,129 +151,150 @@ const Checkout = ({ produtosCarrinho }) => {
       </div>
       <div className="checkout__infos">
         <h1>Destino</h1>
-
-        <div className="checkout__endereco">
-          {!showEditEndereco && (
-            <>
-              <ul>
-                <li>{endereco.clienteName}</li>
-                <li>{endereco.endereco}</li>
-                <li>{endereco.cidade}</li>
-                <li>{endereco.estado}</li>
-                <li>{endereco.cep}</li>
-              </ul>
-              <Button
-                txt={"Editar"}
-                fn={handleEditar}
-                classes={"checkout__endereco-button"}
-              />
-            </>
-          )}
-          {showEditEndereco && (
-            <>
-              <ul>
-                <li>
-                  <input
-                    className="checkout__input-text"
-                    type="text"
-                    name="name"
-                    placeholder="Seu nome"
-                    defaultValue={endereco.name}
-                    onChange={(e) => setEditName(e.target.value)}
-                  />
-                </li>
-                <li>
-                  <input
-                    className="checkout__input-text"
-                    type="text"
-                    name="endereço"
-                    placeholder="Seu endereço"
-                    defaultValue={endereco.endereco}
-                    onChange={(e) => setEditEndereco(e.target.value)}
-                  />
-                </li>
-                <li>
-                  <input
-                    className="checkout__input-text"
-                    type="text"
-                    name="cidade"
-                    placeholder="Sua cidade"
-                    defaultValue={endereco.cidade}
-                    onChange={(e) => setEditCidade(e.target.value)}
-                  />
-                </li>
-                <li>
-                  <input
-                    className="checkout__input-text"
-                    type="text"
-                    name="estado"
-                    placeholder="Seu estado"
-                    defaultValue={endereco.estado}
-                    onChange={(e) => setEditEstado(e.target.value)}
-                  />
-                </li>
-                <li>
-                  <input
-                    className="checkout__input-text"
-                    type="text"
-                    name="cep"
-                    placeholder="Seu cep"
-                    defaultValue={endereco.cep}
-                    onChange={(e) => setEditCep(e.target.value)}
-                  />
-                </li>
-              </ul>
-              <Button
-                txt={"Salvar"}
-                fn={handleSave}
-                classes={"checkout__endereco-button"}
-              />
-            </>
-          )}
-        </div>
-        <div className="checkout__pagamento">
-          <div className="checkout__total-price">
-            <div className="checkout__total-price-item">
-              <h1>Como deseja pagar ?</h1>
-              <div className="checkout__frete-price">
-                <h3>Entrega</h3>
-                <h3>RS 30.00</h3>
-              </div>
-              <div className="checkout__total-price-item__total-price">
-                <h3>Total</h3>
-                <h3>RS{(subTotalPrice + 30).toFixed(2)}</h3>
+        <div className="checkout__infos-items">
+          <div className="checkout__endereco">
+            {!showEditEndereco && (
+              <>
+                <ul>
+                  <li>
+                    <b className="checkout__endereco-items">Remetente: </b>
+                    {endereco.clienteName}
+                  </li>
+                  <li>
+                    <b className="checkout__endereco-items">Endereco: </b>
+                    {endereco.endereco}
+                  </li>
+                  <li>
+                    <b className="checkout__endereco-items">Cidade: </b>
+                    {endereco.cidade}
+                  </li>
+                  <li>
+                    <b className="checkout__endereco-items">Estado: </b>
+                    {endereco.estado}
+                  </li>
+                  <li>
+                    <b className="checkout__endereco-items">CEP: </b>
+                    {endereco.cep}
+                  </li>
+                </ul>
+                <Button
+                  txt={"Editar"}
+                  fn={handleEditar}
+                  classes={"checkout__endereco-button"}
+                />
+              </>
+            )}
+            {showEditEndereco && (
+              <>
+                <ul>
+                  <li>
+                    <b className="checkout__endereco-items">Remetente: </b>
+                    <input
+                      className="checkout__input-text"
+                      type="text"
+                      name="name"
+                      placeholder="Seu nome"
+                      defaultValue={endereco.name}
+                      onChange={(e) => setEditName(e.target.value)}
+                    />
+                  </li>
+                  <li>
+                    <b className="checkout__endereco-items">Endereco: </b>
+                    <input
+                      className="checkout__input-text"
+                      type="text"
+                      name="endereço"
+                      placeholder="Seu endereço"
+                      defaultValue={endereco.endereco}
+                      onChange={(e) => setEditEndereco(e.target.value)}
+                    />
+                  </li>
+                  <li>
+                    <b className="checkout__endereco-items">Cidade: </b>
+                    <input
+                      className="checkout__input-text"
+                      type="text"
+                      name="cidade"
+                      placeholder="Sua cidade"
+                      defaultValue={endereco.cidade}
+                      onChange={(e) => setEditCidade(e.target.value)}
+                    />
+                  </li>
+                  <li>
+                    <b className="checkout__endereco-items">Estado: </b>
+                    <input
+                      className="checkout__input-text"
+                      type="text"
+                      name="estado"
+                      placeholder="Seu estado"
+                      defaultValue={endereco.estado}
+                      onChange={(e) => setEditEstado(e.target.value)}
+                    />
+                  </li>
+                  <li>
+                    <b className="checkout__endereco-items">CEP: </b>
+                    <input
+                      className="checkout__input-text"
+                      type="text"
+                      name="cep"
+                      placeholder="Seu cep"
+                      defaultValue={endereco.cep}
+                      onChange={(e) => setEditCep(e.target.value)}
+                    />
+                  </li>
+                </ul>
+                <Button
+                  txt={"Salvar"}
+                  fn={handleSave}
+                  classes={"checkout__endereco-button"}
+                />
+              </>
+            )}
+          </div>
+          <div className="checkout__pagamento">
+            <div className="checkout__total-price">
+              <div className="checkout__total-price-item">
+                <h1>Como deseja pagar ?</h1>
+                <div className="checkout__frete-price">
+                  <h3>Entrega</h3>
+                  <h3>RS 30.00</h3>
+                </div>
+                <div className="checkout__total-price-item__total-price">
+                  <h3>Total</h3>
+                  <h3>RS{(subTotalPrice + 30).toFixed(2)}</h3>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="checkout__metodo-pagamento">
-            <input type="radio" name="payment-method" id="pix" />
-            <label htmlFor="pix">
-              <div>
-                <i className="fa-brands fa-pix"></i>
-                PIX
-              </div>
-            </label>
-          </div>
-          <div className="checkout__metodo-pagamento">
-            <input type="radio" checked name="payment-method" id="boleto" />
-            <label htmlFor="boleto">
-              <div>
-                <i className="fa-solid fa-barcode"></i>
-                Boleto
-              </div>
-            </label>
-          </div>
-          <div className="checkout__metodo-pagamento">
-            <input type="radio" name="payment-method" id="cartao-credito" />
-            <label htmlFor="cartao-credito">
-              <div>
-                <i className="fa-solid fa-credit-card"></i>
-                Cartão de crédito
-              </div>
-            </label>
-          </div>
+            <div className="checkout__metodo-pagamento">
+              <input type="radio" name="payment-method" id="pix" />
+              <label htmlFor="pix">
+                <div>
+                  <i className="fa-brands fa-pix"></i>
+                  PIX
+                </div>
+              </label>
+            </div>
+            <div className="checkout__metodo-pagamento">
+              <input type="radio" checked name="payment-method" id="boleto" />
+              <label htmlFor="boleto">
+                <div>
+                  <i className="fa-solid fa-barcode"></i>
+                  Boleto
+                </div>
+              </label>
+            </div>
+            <div className="checkout__metodo-pagamento">
+              <input type="radio" name="payment-method" id="cartao-credito" />
+              <label htmlFor="cartao-credito">
+                <div>
+                  <i className="fa-solid fa-credit-card"></i>
+                  Cartão de crédito
+                </div>
+              </label>
+            </div>
 
-          <Button txt={"Finalizar Compra"} />
+            <Button txt={"Finalizar Compra"} />
+          </div>
         </div>
       </div>
     </section>

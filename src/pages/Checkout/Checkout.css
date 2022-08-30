@@ -55,6 +55,10 @@
   height: 100%;
 }
 
+.checkout__produtos-infos {
+  width: 200px;
+}
+
 .checkout__total-price {
   max-width: 280px;
   width: 100%;
@@ -87,7 +91,23 @@
 }
 
 .checkout__endereco {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin-top: 10px;
+}
+
+.checkout__endereco ul {
+  width: 300px;
+}
+
+.checkout__endereco li {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.checkout__endereco-items {
+  width: 100px;
 }
 
 .checkout__endereco-button {
@@ -96,4 +116,19 @@
 
 .checkout__metodo-pagamento {
   display: flex;
+}
+
+.checkout__input-text:focus {
+  background-color: transparent;
+  color: var(--letter-color);
+}
+
+@media (min-width: 770px) {
+  .checkout__infos-items {
+    display: flex;
+    justify-content: space-around;
+  }
+  .checkout__endereco li {
+    justify-content: space-between;
+  }
 }
