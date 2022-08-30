@@ -161,8 +161,4 @@ body {
     height: 1.5rem;
     transition: 1s cubic-bezier(0.47, 0, 0.745, 0.715);
   }
-
-  button {
-    width: 6.5rem;
-  }
 }

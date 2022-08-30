@@ -5,7 +5,7 @@ import {
   faArrowLeft,
   faMinus,
   faPlus,
-  faX,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
@@ -64,7 +64,6 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
   return (
     <>
-
       <div className="cart__return">
         <div>
           <NavLink to="/" className="icon">
@@ -118,9 +117,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
                   {produto.offer.isOffer && (
                     <>
-                      <p className="old-price">
-                        R${produto.price.toFixed(2)}
-                      </p>
+                      <p className="old-price">R${produto.price.toFixed(2)}</p>
                       <p className="shop-line-1">
                         R${" "}
                         {(
@@ -148,54 +145,47 @@ export const Carrinho = ({ produtosCarrinho }) => {
                       </p>
                     </>
                   )}
-
-
                 </li>
 
-                <FontAwesomeIcon
-                  className="remove"
-                  icon={faX}
-                  onClick={() => {
-                    handleRemoveItem(key);
-                  }}
-                />
-
+                <li className="remove-block">
+                  <FontAwesomeIcon
+                    className="remove"
+                    icon={faXmark}
+                    onClick={() => {
+                      handleRemoveItem(key);
+                    }}
+                  />
+                </li>
               </ul>
-
             ))}
 
             <div className="space"></div>
-
-
           </div>
-          {/* </li> */}
-
-          {/* </ul> */}
-
-
         </div>
-        {/* <div className="cart__promotion-code">
-          <input type="text" placeholder="Código Promocional" />
+
+        <div className="cart__promotion-code">
+          <p>Código promocional</p>
+          <input type="text" placeholder="Insira seu código promocional" />
           <button>Aplicar</button>
-        </div> */}
+        </div>
 
-
+        <div id="subtotal">
+          <div>
+            <p>Subtotal</p>
+          </div>
+          <div>
+            <h6>R$ {formatPrice(subTotalPrice)}</h6>
+          </div>
+        </div>
       </div>
-      <div className="cart__total">
-        <h6 id="subtotal">Subtotal - R$ {formatPrice(subTotalPrice)}</h6>
-        <NavLink to="/checkout">
-          <Button className="button-checkout" txt={"Finalizar Compra"}>Finalizar Compra</Button>
-        </NavLink>
-      </div>
 
+      <NavLink to="/checkout" className="cart__total">
+        <p>Finalizar compra</p>
+      </NavLink>
     </>
   );
 };
 
-
 export const formatPrice = (value) => {
-  return value
-    .toFixed(2)
-    .toString()
-    .replace(".", ",");
-}
+  return value.toFixed(2).toString().replace(".", ",");
+};
