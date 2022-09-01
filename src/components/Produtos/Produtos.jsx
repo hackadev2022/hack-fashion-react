@@ -61,9 +61,9 @@ export const Produtos = ({ produto }) => {
             </div>
             <div className="produtos__bottom">
               <div className="produtos__info">
-                <b>R$ {produto.price.toFixed(2)}</b>
+                <b>R$ {produto.price.toFixed(2).toString().replace(".", ",")}</b>
                 <small>
-                  3x R$ {`${(produto.price / 3).toFixed(2)}`} sem juros
+                  3x R$ {`${((produto.price / 3).toFixed(2)).toString().replace(".", ",")}`} sem juros
                 </small>
                 <p className="produtos__name">{produto.name}</p>
                 <p className="produtos__trademark">{produto.trademark}</p>
@@ -225,15 +225,15 @@ export const Produtos = ({ produto }) => {
               {produto.offer.isOffer && (
                 <>
                   <small>
-                    <del>R${produto.price.toFixed(2)}</del>
+                    <del>R${(produto.price.toFixed(2)).toString().replace(".", ",")}</del>
                   </small>{" "}
                   <br />
                   <b>
                     R${" "}
-                    {(
+                    {((
                       produto.price -
                       produto.price * produto.offer.percent
-                    ).toFixed(2)}
+                    ).toFixed(2)).toString().replace(".", ",")}
                     <div
                       className="produtos__offer-div"
                       style={{
@@ -252,7 +252,7 @@ export const Produtos = ({ produto }) => {
                     {`${(
                       (produto.price - produto.price * produto.offer.percent) /
                       3
-                    ).toFixed(2)}`}{" "}
+                    ).toFixed(2).toString().replace(".", ",")}`}{" "}
                     sem juros
                   </small>
                   <p className="produtos__name">{produto.name}</p>
@@ -261,9 +261,9 @@ export const Produtos = ({ produto }) => {
               )}
               {!produto.offer.isOffer && (
                 <div className="produtos__info">
-                  <b>R$ {produto.price.toFixed(2)}</b>
+                  <b>R$ {produto.price.toFixed(2).toString().replace(".", ",")}</b>
                   <small>
-                    3x R$ {`${(produto.price / 3).toFixed(2)}`} sem juros
+                    3x R$ {`${(produto.price / 3).toFixed(2).toString().replace(".", ",")}`} sem juros
                   </small>
                   <p className="produtos__name">{produto.name}</p>
                   <p className="produtos__trademark">{produto.trademark}</p>
