@@ -1,8 +1,5 @@
 footer {
     font-size: 1.3rem;
-
-    position: absolute;
-    bottom: auto;
 }
 
 footer li:hover {
