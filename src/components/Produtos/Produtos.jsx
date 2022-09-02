@@ -61,9 +61,9 @@ export const Produtos = ({ produto }) => {
             </div>
             <div className="produtos__bottom">
               <div className="produtos__info">
-                <b>R$ {produto.price.toFixed(2)}</b>
+                <b>R$ {produto.price.toFixed(2).toString().replace(".", ",")}</b>
                 <small>
-                  3x R$ {`${(produto.price / 3).toFixed(2)}`} sem juros
+                  3x R$ {`${((produto.price / 3).toFixed(2)).toString().replace(".", ",")}`} sem juros
                 </small>
                 <p className="produtos__name">{produto.name}</p>
                 <p className="produtos__trademark">{produto.trademark}</p>
@@ -179,7 +179,15 @@ export const Produtos = ({ produto }) => {
                   <i>{totalRating()} avaliações</i>
                 </div>
               </div>
-              <NavLink to={`/Produto/${produto.id}/${produto.name}`}>
+              <NavLink
+                to={`/Produto/${produto.id}/${produto.name}`}
+                onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                }}
+              >
                 <Button txt="Comprar" classes="produtos__button" />
               </NavLink>
             </div>
@@ -200,7 +208,12 @@ export const Produtos = ({ produto }) => {
             />
             <NavLink
               to={`/Produto/${produto.id}/${produto.name}`}
-              className={({ isActive }) => (isActive ? "default" : "default")}
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
             >
               <div className="produtos__img">
                 <img src={produto.imgDirectory} alt={produto.name} />
@@ -212,15 +225,15 @@ export const Produtos = ({ produto }) => {
               {produto.offer.isOffer && (
                 <>
                   <small>
-                    <del>R${produto.price.toFixed(2)}</del>
+                    <del>R${(produto.price.toFixed(2)).toString().replace(".", ",")}</del>
                   </small>{" "}
                   <br />
                   <b>
                     R${" "}
-                    {(
+                    {((
                       produto.price -
                       produto.price * produto.offer.percent
-                    ).toFixed(2)}
+                    ).toFixed(2)).toString().replace(".", ",")}
                     <div
                       className="produtos__offer-div"
                       style={{
@@ -239,7 +252,7 @@ export const Produtos = ({ produto }) => {
                     {`${(
                       (produto.price - produto.price * produto.offer.percent) /
                       3
-                    ).toFixed(2)}`}{" "}
+                    ).toFixed(2).toString().replace(".", ",")}`}{" "}
                     sem juros
                   </small>
                   <p className="produtos__name">{produto.name}</p>
@@ -248,9 +261,9 @@ export const Produtos = ({ produto }) => {
               )}
               {!produto.offer.isOffer && (
                 <div className="produtos__info">
-                  <b>R$ {produto.price.toFixed(2)}</b>
+                  <b>R$ {produto.price.toFixed(2).toString().replace(".", ",")}</b>
                   <small>
-                    3x R$ {`${(produto.price / 3).toFixed(2)}`} sem juros
+                    3x R$ {`${(produto.price / 3).toFixed(2).toString().replace(".", ",")}`} sem juros
                   </small>
                   <p className="produtos__name">{produto.name}</p>
                   <p className="produtos__trademark">{produto.trademark}</p>
@@ -366,7 +379,15 @@ export const Produtos = ({ produto }) => {
               </div>
             </div>
 
-            <NavLink to={`/Produto/${produto.id}/${produto.name}`}>
+            <NavLink
+              to={`/Produto/${produto.id}/${produto.name}`}
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
+            >
               <Button txt="Comprar" classes="produtos__button" />
             </NavLink>
           </div>

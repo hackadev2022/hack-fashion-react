@@ -4,6 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./Slider.css";
 import { Navigation } from "swiper";
+import { NavLink } from "react-router-dom";
 
 export const Slider = () => {
   return (
@@ -20,34 +21,34 @@ export const Slider = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="img/roupas_sem_fundo/jeans1.png" />
-          <a href="#" className="name">
-            Jeans
-          </a>
+          <NavLink to="/jeans/calça">
+            <img src="img/roupas_sem_fundo/jeans1.png" alt="jeans" />
+            <i className="name">Jeans</i>
+          </NavLink>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="img/roupas_sem_fundo/shirt1.png" />
-          <a href="#" className="name">
-            Camisas
-          </a>
+          <NavLink to="/camiseta">
+            <img src="img/roupas_sem_fundo/shirt1.png" alt="shirt" />
+            <i className="name">Camisas</i>
+          </NavLink>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="img/roupas_sem_fundo/sweater1.png" />
-          <a href="#" className="name">
-            Suéter
-          </a>
+          <NavLink to="/moletom/camisa">
+            <img src="img/roupas_sem_fundo/sweater1.png" alt="sweater" />
+            <i className="name">Suéter</i>
+          </NavLink>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="img/roupas_sem_fundo/sweatpants1.png" />
-          <a href="#" className="name">
-            Calças Moletom
-          </a>
+          <NavLink to="/moletom/calça">
+            <img src="img/roupas_sem_fundo/sweatpants1.png" alt="sweatpants" />
+            <i className="name">Calças Moletom</i>
+          </NavLink>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="img/roupas_sem_fundo/sweatshirt1.png" />
-          <a href="#" className="name">
-            Camisas Moletom
-          </a>
+          <NavLink to="/moletom/jaqueta">
+            <img src="img/roupas_sem_fundo/sweatshirt1.png" alt="sweatshirt" />
+            <i className="name">Camisas Moletom</i>
+          </NavLink>
         </SwiperSlide>
       </Swiper>
     </>

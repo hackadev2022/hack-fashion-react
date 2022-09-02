@@ -1,5 +1,6 @@
 import "./Home.css";
 import { Banner } from "../../components/Banner/Banner";
+import { Slider } from "../../components/Slider/Slider";
 import { Produtos } from "../../components/Produtos/Produtos";
 import { produtos } from "../../assets/produtos/produtos";
 import { useState } from "react";
@@ -11,6 +12,10 @@ export const Home = () => {
 
   const handleClickBanner = () => {
     setShowOffersOnly(true);
+    window.scrollTo({
+      top: 1000,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -22,6 +27,8 @@ export const Home = () => {
         bannerDirectoryImg="banners/banner_ilustrativo3.png"
         fn={handleClickBanner}
       />
+      <Slider />
+
       <section className="section__produtos">
         {!showOffersOnly && (
           <>

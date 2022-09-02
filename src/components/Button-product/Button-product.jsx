@@ -25,6 +25,7 @@ export const ButtonProduct = ({
     offer: produto.offer,
     price: produto.price,
     imgDirectory: produto.imgDirectory,
+    trademark: produto.trademark,
   };
 
   return (

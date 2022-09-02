@@ -11,9 +11,9 @@ import { NavLink } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 
 export const Carrinho = ({ produtosCarrinho }) => {
-  console.log(
-    localStorage.setItem("carrinho", JSON.stringify(produtosCarrinho))
-  );
+  // console.log(
+  //   localStorage.setItem("carrinho", JSON.stringify(produtosCarrinho))
+  // );
 
   const [ignore, setIgnore] = useState(true);
 
@@ -174,7 +174,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
             <p>Subtotal</p>
           </div>
           <div>
-            <h6>R$ {formatPrice(subTotalPrice)}</h6>
+            <h6>{formatPrice(subTotalPrice)}</h6>
           </div>
         </div>
       </div>
@@ -186,6 +186,9 @@ export const Carrinho = ({ produtosCarrinho }) => {
   );
 };
 
-export const formatPrice = (value) => {
-  return value.toFixed(2).toString().replace(".", ",");
-};
+export const formatPrice = (price) => {
+  return price.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+};;
