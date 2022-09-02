@@ -45,11 +45,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 50vh;
 }
 
 .login-container .in-text-pass {
-  width: 19rem;
-  height: 1.5rem;
+  width: 30rem;
+  height: 2rem;
   border: 1px solid black;
   padding: 1.1rem;
   color: rgb(0, 0, 0);
@@ -67,14 +68,14 @@ body {
 
 .login-container button {
   border: none;
-  width: 6.5rem;
-  height: 2rem;
+  width: 12rem;
+  height: 3rem;
   background-color: var(--color-rich-black);
   color: white;
   border-radius: 12px;
   cursor: pointer;
   transition: 0.7s ease-in-out;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 .login-container button:hover {
@@ -98,6 +99,7 @@ body {
 
 .login-container .link-style {
   color: black;
+  margin-top: 10px;
   border: 1px solid black;
   background-color: var(--highlight-color);
   transition: 2s cubic-bezier() ease-in;
