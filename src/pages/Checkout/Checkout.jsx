@@ -87,6 +87,14 @@ const Checkout = ({ produtosCarrinho }) => {
     });
     setShowEditEndereco(false);
   };
+
+  const formatPrice = (price) => {
+    return price.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
+
   return (
     <section className="checkout">
       <div className="checkout__header">
@@ -110,14 +118,14 @@ const Checkout = ({ produtosCarrinho }) => {
                 <h3>Tam.: {produto.tamanho}</h3>
                 {produto.offer.isOffer && (
                   <h3>
-                    R$
-                    {(
+
+                    {formatPrice(
                       produto.price -
                       produto.price * produto.offer.percent
-                    ).toFixed(2)}
+                    )}
                   </h3>
                 )}
-                {!produto.offer.isOffer && <b>R${produto.price.toFixed(2)}</b>}
+                {!produto.offer.isOffer && <b>R${formatPrice(produto.price)}</b>}
                 <i>
                   <FontAwesomeIcon
                     className="checkout__produtos-icon"
@@ -257,11 +265,11 @@ const Checkout = ({ produtosCarrinho }) => {
                 <h1>Como deseja pagar ?</h1>
                 <div className="checkout__frete-price">
                   <h3>Entrega</h3>
-                  <h3>RS 30.00</h3>
+                  <h3>R$ 30, 00</h3>
                 </div>
                 <div className="checkout__total-price-item__total-price">
                   <h3>Total</h3>
-                  <h3>RS{(subTotalPrice + 30).toFixed(2)}</h3>
+                  <h3>{formatPrice((subTotalPrice + 30))}</h3>
                 </div>
               </div>
             </div>

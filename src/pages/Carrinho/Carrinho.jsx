@@ -117,21 +117,21 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
                   {produto.offer.isOffer && (
                     <>
-                      <p className="old-price">R${produto.price.toFixed(2)}</p>
+                      <p className="old-price">{formatPrice(produto.price)}</p>
                       <p className="shop-line-1">
-                        R${" "}
-                        {(
+                        {" "}
+                        {formatPrice(
                           produto.price -
                           produto.price * produto.offer.percent
-                        ).toFixed(2)}
+                        )}
                       </p>
                       <p className="shop-line-2">
-                        10x R$
-                        {(
+                        10x{" "}
+                        {(formatPrice(
                           (produto.price -
                             produto.price * produto.offer.percent) /
                           10
-                        ).toFixed(2)}
+                        ))}
                       </p>
                     </>
                   )}
@@ -141,7 +141,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
                         R$ {formatPrice(produto.price)}
                       </p>
                       <p className="shop-line-2">
-                        10x R$ {formatPrice(produto.price / 10)}
+                        10x {" "} {formatPrice(produto.price / 10)}
                       </p>
                     </>
                   )}
@@ -169,7 +169,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
         </div> */}
       </div>
       <div className="cart__total">
-        <h6 id="subtotal">Subtotal - R$ {formatPrice(subTotalPrice)}</h6>
+        <h6 id="subtotal">Subtotal - {" "}{formatPrice(subTotalPrice)}</h6>
         <NavLink to="/checkout">
           <Button className="button-checkout" txt={"Finalizar Compra"}>
             Finalizar Compra
@@ -180,6 +180,9 @@ export const Carrinho = ({ produtosCarrinho }) => {
   );
 };
 
-export const formatPrice = (value) => {
-  return value.toFixed(2).toString().replace(".", ",");
-};
+export const formatPrice = (price) => {
+  return price.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+};;

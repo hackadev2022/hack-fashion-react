@@ -1,134 +1,150 @@
 .checkout__header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .checkout h1 {
-  display: flex;
-  align-items: baseline;
-  font-size: 3rem;
+    display: flex;
+    align-items: baseline;
+    font-size: 3rem;
 }
 .checkout h6 {
-  font-size: 1rem;
+    font-size: 1rem;
 }
 
 .checkout img {
-  height: 60px;
+    height: 60px;
 }
 
 .checkout__produtos {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-  background-color: var(--bg-produtos);
-  margin-bottom: 20px;
-  width: 100%;
-  height: auto;
+    background-color: var(--bg-produtos);
+    margin-bottom: 20px;
+    width: 100%;
+    height: auto;
 }
 
 .checkout__produtos-tems {
-  overflow-y: auto;
-  width: 100%;
-  max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+    max-height: 400px;
 }
 
 .checkout__produtos-item {
-  display: flex;
-  width: 100%;
-  height: 100px;
-  justify-content: space-around;
-  /* border: solid 1px black; */
-  margin: 5px 0;
+    display: flex;
+    width: 100%;
+    height: 100px;
+    justify-content: space-between;
+    /* border: solid 1px black; */
+    margin: 5px 0;
 }
 
 .checkout__produtos-img,
 .checkout__produtos-infos,
 .checkout__produtos-remove {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    height: 100%;
+
+    line-height: 17px;
+    text-align: start;
+}
+
+.checkout__produtos-remove {
+    padding-right: 15px;
 }
 
 .checkout__produtos-infos {
-  width: 200px;
+    width: 200px;
 }
 
 .checkout__total-price {
-  max-width: 280px;
-  width: 100%;
+    max-width: 280px;
+    width: 100%;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .checkout__total-price-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
 }
 .checkout__total-price-item h1 {
-  width: 100%;
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+    width: 100%;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }
 
 .checkout__frete-price,
 .checkout__total-price-item__total-price {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .checkout__endereco {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .checkout__endereco ul {
-  width: 300px;
+    width: 300px;
 }
 
 .checkout__endereco li {
-  display: flex;
-  justify-content: flex-start;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .checkout__endereco-items {
-  width: 100px;
+    width: 100px;
 }
 
 .checkout__endereco-button {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 .checkout__metodo-pagamento {
-  display: flex;
+    display: flex;
 }
 
 .checkout__input-text:focus {
-  background-color: transparent;
-  color: var(--letter-color);
+    background-color: transparent;
+    color: var(--letter-color);
+}
+
+.checkout__produtos-icon {
+    cursor: pointer;
+    padding: 5px 5px;
+
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 @media (min-width: 770px) {
-  .checkout__infos-items {
-    display: flex;
-    justify-content: space-around;
-  }
-  .checkout__endereco li {
-    justify-content: space-between;
-  }
+    .checkout__infos-items {
+        display: flex;
+        justify-content: space-around;
+    }
+    .checkout__endereco li {
+        justify-content: space-between;
+    }
 }
