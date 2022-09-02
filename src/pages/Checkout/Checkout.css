@@ -90,10 +90,18 @@
     margin-bottom: 10px;
 }
 
+.checkout__infos-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+}
 .checkout__frete-price,
 .checkout__total-price-item__total-price {
     display: flex;
     width: 100%;
+    /* flex-direction: column; */
+    gap: 1.5rem;
     justify-content: space-between;
 }
 
@@ -123,10 +131,19 @@
 
 .checkout__metodo-pagamento {
     display: flex;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+}
+
+.checkout__input-text {
+    width: 100%;
+    padding: 5px;
 }
 
 .checkout__input-text:focus {
-    background-color: transparent;
+    background-color: var(--bg-produtos);
+
     color: var(--letter-color);
 }
 
@@ -140,6 +157,9 @@
 }
 
 @media (min-width: 770px) {
+    .checkout {
+        margin-left: 10px;
+    }
     .checkout__infos-items {
         display: flex;
         justify-content: space-around;

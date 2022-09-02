@@ -96,7 +96,7 @@ const Checkout = ({ produtosCarrinho }) => {
   };
 
   return (
-    <section className="checkout">
+    <section className="checkout" style={{ marginLeft: 5 + "px" }}>
       <div className="checkout__header">
         <h1>
           Seu Pedido{" "}
@@ -260,9 +260,10 @@ const Checkout = ({ produtosCarrinho }) => {
             )}
           </div>
           <div className="checkout__pagamento">
+            <h1>Pagamento</h1>
             <div className="checkout__total-price">
               <div className="checkout__total-price-item">
-                <h1>Como deseja pagar ?</h1>
+                <h3>Como deseja pagar ?</h3>
                 <div className="checkout__frete-price">
                   <h3>Entrega</h3>
                   <h3>R$ 30, 00</h3>
@@ -283,7 +284,7 @@ const Checkout = ({ produtosCarrinho }) => {
               </label>
             </div>
             <div className="checkout__metodo-pagamento">
-              <input type="radio" checked name="payment-method" id="boleto" />
+              <input type="radio" checked name="payment-method" id="boleto" readOnly />
               <label htmlFor="boleto">
                 <div>
                   <i className="fa-solid fa-barcode"></i>
