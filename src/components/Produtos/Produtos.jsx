@@ -35,6 +35,13 @@ export const Produtos = ({ produto }) => {
   };
   //Total Rating//
 
+  const formatPrice = (price) => {
+    return price.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
+
   return (
     <div className="produtos__container">
       {!produto.inStock && (
@@ -61,9 +68,9 @@ export const Produtos = ({ produto }) => {
             </div>
             <div className="produtos__bottom">
               <div className="produtos__info">
-                <b>R$ {produto.price.toFixed(2).toString().replace(".", ",")}</b>
+                <b> {formatPrice(produto.price)}</b>
                 <small>
-                  3x R$ {`${((produto.price / 3).toFixed(2)).toString().replace(".", ",")}`} sem juros
+                  3x {`${formatPrice(produto.price / 3)}`} sem juros
                 </small>
                 <p className="produtos__name">{produto.name}</p>
                 <p className="produtos__trademark">{produto.trademark}</p>
@@ -225,15 +232,13 @@ export const Produtos = ({ produto }) => {
               {produto.offer.isOffer && (
                 <>
                   <small>
-                    <del>R${(produto.price.toFixed(2)).toString().replace(".", ",")}</del>
+                    <del>{formatPrice(produto.price)}</del>
                   </small>{" "}
                   <br />
                   <b>
-                    R${" "}
-                    {((
-                      produto.price -
-                      produto.price * produto.offer.percent
-                    ).toFixed(2)).toString().replace(".", ",")}
+                    {formatPrice(
+                      produto.price - produto.price * produto.offer.percent
+                    )}
                     <div
                       className="produtos__offer-div"
                       style={{
@@ -248,11 +253,11 @@ export const Produtos = ({ produto }) => {
                     </div>
                   </b>
                   <small>
-                    3x R${" "}
-                    {`${(
+                    3x
+                    {`${formatPrice(
                       (produto.price - produto.price * produto.offer.percent) /
-                      3
-                    ).toFixed(2).toString().replace(".", ",")}`}{" "}
+                        3
+                    )}`}{" "}
                     sem juros
                   </small>
                   <p className="produtos__name">{produto.name}</p>
@@ -261,9 +266,10 @@ export const Produtos = ({ produto }) => {
               )}
               {!produto.offer.isOffer && (
                 <div className="produtos__info">
-                  <b>R$ {produto.price.toFixed(2).toString().replace(".", ",")}</b>
+                  <b>{formatPrice(produto.price)}</b>
                   <small>
-                    3x R$ {`${(produto.price / 3).toFixed(2).toString().replace(".", ",")}`} sem juros
+                    3x
+                    {`${formatPrice(produto.price / 3)}`} sem juros
                   </small>
                   <p className="produtos__name">{produto.name}</p>
                   <p className="produtos__trademark">{produto.trademark}</p>

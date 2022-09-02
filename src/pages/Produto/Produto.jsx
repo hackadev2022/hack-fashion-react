@@ -33,6 +33,13 @@ export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
   }, 1);
   //zoom img
 
+  const formatPrice = (price) => {
+    return price.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
+
   return (
     <>
       <section className="produto__container">
@@ -51,18 +58,14 @@ export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
           {/* Produto em oferta */}
           {produto[0].offer.isOffer && (
             <h2 id="produto__offer">
-              R${" "}
-              {(
-                produto[0].price -
-                produto[0].price * produto[0].offer.percent
-              ).toFixed(2)}
+              {formatPrice(
+                produto[0].price - produto[0].price * produto[0].offer.percent
+              )}
             </h2>
           )}
           {/* Produto normal */}
           {!produto[0].offer.isOffer && (
-            <h2 className="produto__normal">
-              R$ {produto[0].price.toFixed(2)}
-            </h2>
+            <h2 className="produto__normal">{formatPrice(produto[0].price)}</h2>
           )}
 
           <ButtonProduct
