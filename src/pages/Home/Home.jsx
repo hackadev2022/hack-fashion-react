@@ -3,9 +3,19 @@ import { Banner } from "../../components/Banner/Banner";
 import { Slider } from "../../components/Slider/Slider";
 import { Produtos } from "../../components/Produtos/Produtos";
 import { produtos } from "../../assets/produtos/produtos";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const Home = () => {
+  // const [produtos, setProdutos] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("http://localhost/products")
+  //     .then((res) => res.json())
+  //     .then((resultado) => {
+  //       setProdutos(resultado);
+  //     });
+  // });
+
   const produtosOffer = produtos.filter((produto) => produto.offer.isOffer);
 
   let [showOffersOnly, setShowOffersOnly] = useState(false);
