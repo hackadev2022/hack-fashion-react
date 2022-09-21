@@ -22,9 +22,9 @@ export const ButtonProduct = ({
     name: produto.name,
     tamanho: tamanho,
     quantidade: prodCount,
-    offer: produto.offer,
+    offer: produto.offer_percent,
     price: produto.price,
-    imgDirectory: produto.imgDirectory,
+    img_link: produto.img_link,
     trademark: produto.trademark,
   };
 

@@ -20,10 +20,10 @@ export const Carrinho = ({ produtosCarrinho }) => {
   let subTotalPrice = 0;
   const subTotal = () => {
     for (let i = 0; i < produtosCarrinho.length; i++) {
-      if (produtosCarrinho[i].offer.isOffer) {
+      if (produtosCarrinho[i].offer_percent > 0) {
         subTotalPrice +=
           (produtosCarrinho[i].price -
-            produtosCarrinho[i].price * produtosCarrinho[i].offer.percent) *
+            produtosCarrinho[i].price * produtosCarrinho[i].offer_percent) *
           produtosCarrinho[i].quantidade;
       } else {
         subTotalPrice +=
@@ -75,8 +75,6 @@ export const Carrinho = ({ produtosCarrinho }) => {
       </div>
       <div className="cart__container">
         <div className="products__container">
-          {/* <ul>
-            <li> */}
           <div className="products__itens">
             {produtosCarrinho.map((produto, key) => (
               <ul key={key} className="layout-carrinho">
@@ -84,7 +82,7 @@ export const Carrinho = ({ produtosCarrinho }) => {
                   <figure>
                     <div className="img-carrinho">
                       <img
-                        src={`${produto.imgDirectory}`}
+                        src={`${produto.img_link}`}
                         alt={`${produto.name}`}
                       />
                     </div>
@@ -115,33 +113,32 @@ export const Carrinho = ({ produtosCarrinho }) => {
                     <FontAwesomeIcon icon={faPlus} />
                   </button>
 
-                  {produto.offer.isOffer && (
+                  {produto.offer_percent > 0 && (
                     <>
                       <p className="old-price">{formatPrice(produto.price)}</p>
                       <p className="shop-line-1">
                         {" "}
                         {formatPrice(
-                          produto.price -
-                          produto.price * produto.offer.percent
+                          produto.price - produto.price * produto.offer_percent
                         )}
                       </p>
                       <p className="shop-line-2">
                         10x{" "}
-                        {(formatPrice(
+                        {formatPrice(
                           (produto.price -
-                            produto.price * produto.offer.percent) /
-                          10
-                        ))}
+                            produto.price * produto.offer_percent) /
+                            10
+                        )}
                       </p>
                     </>
                   )}
-                  {!produto.offer.isOffer && (
+                  {!produto.offer_percent > 0 && (
                     <>
                       <p className="shop-line-1">
                         R$ {formatPrice(produto.price)}
                       </p>
                       <p className="shop-line-2">
-                        10x {" "} {formatPrice(produto.price / 10)}
+                        10x {formatPrice(produto.price / 10)}
                       </p>
                     </>
                   )}
@@ -159,17 +156,10 @@ export const Carrinho = ({ produtosCarrinho }) => {
 
             <div className="space"></div>
           </div>
-          {/* </li> */}
-
-          {/* </ul> */}
         </div>
-        {/* <div className="cart__promotion-code">
-          <input type="text" placeholder="Código Promocional" />
-          <button>Aplicar</button>
-        </div> */}
       </div>
       <div className="cart__total">
-        <h6 id="subtotal">Subtotal - {" "}{formatPrice(subTotalPrice)}</h6>
+        <h6 id="subtotal">Subtotal - {formatPrice(subTotalPrice)}</h6>
         <NavLink to="/checkout">
           <Button className="button-checkout" txt={"Finalizar Compra"}>
             Finalizar Compra
@@ -185,4 +175,4 @@ export const formatPrice = (price) => {
     style: "currency",
     currency: "BRL",
   });
-};;
+};
