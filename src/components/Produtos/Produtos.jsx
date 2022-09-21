@@ -222,7 +222,7 @@ export const Produtos = ({ produto }) => {
                 </div>
               </div>
               <NavLink
-                to={`/Produto/${produto.id}/${produto.name}`}
+                to={`/Produto/${produto.product_id}/${produto.name}`}
                 onClick={() => {
                   window.scrollTo({
                     top: 0,
@@ -249,7 +249,7 @@ export const Produtos = ({ produto }) => {
               style={{ color: `${favoriteHeart}`, transition: "all 0.3s" }}
             />
             <NavLink
-              to={`/Produto/${produto.id}/${produto.name}`}
+              to={`/Produto/${produto.product_id}/${produto.name}`}
               onClick={() => {
                 window.scrollTo({
                   top: 0,
@@ -421,7 +421,7 @@ export const Produtos = ({ produto }) => {
             </div>
 
             <NavLink
-              to={`/Produto/${produto.id}/${produto.name}`}
+              to={`/Produto/${produto.product_id}/${produto.name}`}
               onClick={() => {
                 window.scrollTo({
                   top: 0,
