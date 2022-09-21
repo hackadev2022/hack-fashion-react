@@ -4,21 +4,55 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Button } from "../Button/Button";
+import { useEffect } from "react";
 
 export const Produtos = ({ produto }) => {
   //Stars//
-  let ratingStar = 0;
-  let [numberOfStars, setNumberOfStars] = useState(0);
-  setTimeout(() => {
-    for (let i = 0; i < 5; i++) {
-      let aux = ratingStar;
-      ratingStar = produto.ratingStar[i];
-      if (aux > ratingStar) {
-        ratingStar = aux;
+  const [numberOfStars, setNumberOfStars] = useState(1);
+  const [arrayOfStars, setArrayOfStars] = useState([]);
+  const [productStars, setProductStars] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost/productStar/${produto.product_id}`)
+      .then((res) => res.json())
+      .then((resultado) => {
+        setProductStars(resultado);
+      })
+      .then(() => {
+        teste();
+      });
+  });
+
+  const teste = () => {
+    let i = true;
+    while (i) {
+      if (productStars !== []) {
+        setArrayOfStars([
+          productStars[0].one_star,
+          productStars[0].two_star,
+          productStars[0].three_star,
+          productStars[0].four_star,
+          productStars[0].five_star,
+        ]);
+        let ratingStar = 0;
+        for (let i = 0; i < 5; i++) {
+          let aux = ratingStar;
+          ratingStar = arrayOfStars[i];
+          if (aux > ratingStar) {
+            ratingStar = aux;
+          }
+        }
+        setNumberOfStars(arrayOfStars.lastIndexOf(ratingStar) + 1);
+        // console.log(`produto.product_id = ${produto.product_id}`);
+        // console.log(`productStars = `);
+        // console.log(productStars);
+        // console.log(`arrayOfStars `);
+        // console.log(arrayOfStars);
+        i = false;
       }
     }
-    setNumberOfStars(produto.ratingStar.lastIndexOf(ratingStar) + 1);
-  }, 10);
+  };
+
   //Stars//
 
   //Heart//
@@ -29,7 +63,8 @@ export const Produtos = ({ produto }) => {
   const totalRating = () => {
     let soma = 0;
     for (let i = 0; i < 5; i++) {
-      soma = soma + produto.ratingStar[i];
+      soma += arrayOfStars[i];
+      // console.log(`arrayOfStars[${i}] = ${arrayOfStars[i]}`);
     }
     return soma;
   };
@@ -44,7 +79,7 @@ export const Produtos = ({ produto }) => {
 
   return (
     <div className="produtos__container">
-      {!produto.inStock && (
+      {!produto.in_stock && (
         <>
           <div className="produtos__out-of-stock">
             <b>
@@ -63,7 +98,7 @@ export const Produtos = ({ produto }) => {
                 style={{ color: `${favoriteHeart}`, transition: "all 0.3s" }}
               />
               <div className="produtos__img">
-                <img src={produto.imgDirectory} alt={produto.name} />
+                <img src={produto.img_link} alt={produto.name} />
               </div>
             </div>
             <div className="produtos__bottom">
@@ -201,7 +236,7 @@ export const Produtos = ({ produto }) => {
           </div>
         </>
       )}
-      {produto.inStock && (
+      {produto.in_stock && (
         <div className="produtos">
           <div className="produtos__top">
             <FontAwesomeIcon
@@ -223,13 +258,13 @@ export const Produtos = ({ produto }) => {
               }}
             >
               <div className="produtos__img">
-                <img src={produto.imgDirectory} alt={produto.name} />
+                <img src={produto.img_link} alt={produto.name} />
               </div>
             </NavLink>
           </div>
           <div className="produtos__bottom">
             <div className="produtos__info">
-              {produto.offer.isOffer && (
+              {produto.offer_percent > 0 && (
                 <>
                   <small>
                     <del>{formatPrice(produto.price)}</del>
@@ -237,7 +272,7 @@ export const Produtos = ({ produto }) => {
                   <br />
                   <b>
                     {formatPrice(
-                      produto.price - produto.price * produto.offer.percent
+                      produto.price - produto.price * produto.offer_percent
                     )}
                     <div
                       className="produtos__offer-div"
@@ -248,14 +283,14 @@ export const Produtos = ({ produto }) => {
                       }}
                     >
                       <i style={{ color: "white" }}>
-                        -{produto.offer.percent * 100}%
+                        -{produto.offer_percent * 100}%
                       </i>
                     </div>
                   </b>
                   <small>
                     3x
                     {`${formatPrice(
-                      (produto.price - produto.price * produto.offer.percent) /
+                      (produto.price - produto.price * produto.offer_percent) /
                         3
                     )}`}{" "}
                     sem juros
@@ -264,7 +299,7 @@ export const Produtos = ({ produto }) => {
                   <p className="produtos__trademark">{produto.trademark}</p>
                 </>
               )}
-              {!produto.offer.isOffer && (
+              {produto.offer_percent === 0 && (
                 <div className="produtos__info">
                   <b>{formatPrice(produto.price)}</b>
                   <small>
