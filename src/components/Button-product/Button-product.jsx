@@ -9,7 +9,6 @@ export const ButtonProduct = ({
   produtosCarrinho,
   setProdutosCarrinho,
 }) => {
-  // const [productSizes, setProductSizes] = useState([]);
   const [update, setUpdate] = useState(false);
   let productSizeP = useRef(0);
   let productSizeM = useRef(0);
@@ -33,6 +32,7 @@ export const ButtonProduct = ({
     productSizeG,
     productSizeGG,
     produto.product_id,
+    update,
   ]);
 
   const [prodCount, setProdCount] = useState(1);

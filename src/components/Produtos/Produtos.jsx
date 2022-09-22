@@ -5,65 +5,30 @@ import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Button } from "../Button/Button";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 export const Produtos = ({ produto }) => {
   //Stars//
-  const [numberOfStars, setNumberOfStars] = useState(1);
-  const [arrayOfStars, setArrayOfStars] = useState([]);
-  const [productStars, setProductStars] = useState([]);
+  const [update, setUpdate] = useState(false);
+
+  let numberOfStars = useRef(1);
+  let totalStars = useRef(0);
 
   useEffect(() => {
     fetch(`http://localhost/productStar/${produto.product_id}`)
       .then((res) => res.json())
       .then((resultado) => {
-        setProductStars(resultado);
-      })
-      .then(() => {
-        starsCounter();
+        totalStars.current = resultado[0].totalStars;
+        numberOfStars.current = resultado[0].numberOfStars;
+        setUpdate(!update);
       });
-  });
-
-  const starsCounter = () => {
-    let i = true;
-    while (i) {
-      if (productStars !== []) {
-        setArrayOfStars([
-          productStars[0].one_star,
-          productStars[0].two_star,
-          productStars[0].three_star,
-          productStars[0].four_star,
-          productStars[0].five_star,
-        ]);
-        let ratingStar = 0;
-        for (let i = 0; i < 5; i++) {
-          let aux = ratingStar;
-          ratingStar = arrayOfStars[i];
-          if (aux > ratingStar) {
-            ratingStar = aux;
-          }
-        }
-        setNumberOfStars(arrayOfStars.lastIndexOf(ratingStar) + 1);
-        i = false;
-      }
-    }
-  };
+  }, [produto.product_id]);
 
   //Stars//
 
   //Heart//
   let [favoriteHeart, setFavoriteHeart] = useState("");
   //Heart//
-
-  //Total Rating//
-  const totalRating = () => {
-    let soma = 0;
-    for (let i = 0; i < 5; i++) {
-      soma += arrayOfStars[i];
-      // console.log(`arrayOfStars[${i}] = ${arrayOfStars[i]}`);
-    }
-    return soma;
-  };
-  //Total Rating//
 
   const formatPrice = (price) => {
     return price.toLocaleString("pt-BR", {
@@ -107,7 +72,7 @@ export const Produtos = ({ produto }) => {
               </div>
               <div className="produtos__rating">
                 <div className="produtos__stars">
-                  {numberOfStars === 1 && (
+                  {numberOfStars.current === 1 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -120,7 +85,7 @@ export const Produtos = ({ produto }) => {
                       <FontAwesomeIcon icon={faStar} className="fiveStar" />
                     </>
                   )}
-                  {numberOfStars === 2 && (
+                  {numberOfStars.current === 2 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -137,7 +102,7 @@ export const Produtos = ({ produto }) => {
                       <FontAwesomeIcon icon={faStar} className="fiveStar" />
                     </>
                   )}
-                  {numberOfStars === 3 && (
+                  {numberOfStars.current === 3 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -158,7 +123,7 @@ export const Produtos = ({ produto }) => {
                       <FontAwesomeIcon icon={faStar} className="fiveStar" />
                     </>
                   )}
-                  {numberOfStars === 4 && (
+                  {numberOfStars.current === 4 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -183,7 +148,7 @@ export const Produtos = ({ produto }) => {
                       <FontAwesomeIcon icon={faStar} className="fiveStar" />
                     </>
                   )}
-                  {numberOfStars === 5 && (
+                  {numberOfStars.current === 5 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -213,7 +178,7 @@ export const Produtos = ({ produto }) => {
                   )}
                 </div>
                 <div className="produtos__totalRating">
-                  <i>{totalRating()} avaliações</i>
+                  <i>{`${totalStars.current}`} avaliações</i>
                 </div>
               </div>
               <NavLink
@@ -308,7 +273,7 @@ export const Produtos = ({ produto }) => {
             </div>
             <div className="produtos__rating">
               <div className="produtos__stars">
-                {numberOfStars === 1 && (
+                {numberOfStars.current === 1 && (
                   <>
                     <FontAwesomeIcon
                       icon={faStar}
@@ -321,7 +286,7 @@ export const Produtos = ({ produto }) => {
                     <FontAwesomeIcon icon={faStar} className="fiveStar" />
                   </>
                 )}
-                {numberOfStars === 2 && (
+                {numberOfStars.current === 2 && (
                   <>
                     <FontAwesomeIcon
                       icon={faStar}
@@ -338,7 +303,7 @@ export const Produtos = ({ produto }) => {
                     <FontAwesomeIcon icon={faStar} className="fiveStar" />
                   </>
                 )}
-                {numberOfStars === 3 && (
+                {numberOfStars.current === 3 && (
                   <>
                     <FontAwesomeIcon
                       icon={faStar}
@@ -359,7 +324,7 @@ export const Produtos = ({ produto }) => {
                     <FontAwesomeIcon icon={faStar} className="fiveStar" />
                   </>
                 )}
-                {numberOfStars === 4 && (
+                {numberOfStars.current === 4 && (
                   <>
                     <FontAwesomeIcon
                       icon={faStar}
@@ -384,7 +349,7 @@ export const Produtos = ({ produto }) => {
                     <FontAwesomeIcon icon={faStar} className="fiveStar" />
                   </>
                 )}
-                {numberOfStars === 5 && (
+                {numberOfStars.current === 5 && (
                   <>
                     <FontAwesomeIcon icon={faStar} style={{ color: "gold" }} />
                     <FontAwesomeIcon
@@ -411,7 +376,7 @@ export const Produtos = ({ produto }) => {
                 )}
               </div>
               <div className="produtos__totalRating">
-                <i>{totalRating()} avaliações</i>
+                <i>{`${totalStars.current}`} avaliações</i>
               </div>
             </div>
 
