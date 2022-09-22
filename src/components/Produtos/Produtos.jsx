@@ -19,11 +19,11 @@ export const Produtos = ({ produto }) => {
         setProductStars(resultado);
       })
       .then(() => {
-        teste();
+        starsCounter();
       });
   });
 
-  const teste = () => {
+  const starsCounter = () => {
     let i = true;
     while (i) {
       if (productStars !== []) {
@@ -43,11 +43,6 @@ export const Produtos = ({ produto }) => {
           }
         }
         setNumberOfStars(arrayOfStars.lastIndexOf(ratingStar) + 1);
-        // console.log(`produto.product_id = ${produto.product_id}`);
-        // console.log(`productStars = `);
-        // console.log(productStars);
-        // console.log(`arrayOfStars `);
-        // console.log(arrayOfStars);
         i = false;
       }
     }
