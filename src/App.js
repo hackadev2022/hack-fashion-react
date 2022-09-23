@@ -12,6 +12,7 @@ import Layout from "./components/Layout/Layout";
 
 function App() {
   let [produtosCarrinho, setProdutosCarrinho] = useState([]);
+  const [isLoged, setIsLoged] = useState(false);
   return (
     <>
       <Routes>
@@ -19,7 +20,10 @@ function App() {
           <Route index element={<Home />}></Route>
           <Route path="/:type" element={<ProdutosPage />}></Route>
           <Route path="/:type/:type2" element={<ProdutosPage />}></Route>
-          <Route path="/Login" element={<Login />}></Route>
+          <Route
+            path="/Login"
+            element={<Login setIsLoged={setIsLoged} />}
+          ></Route>
           <Route path="/Cadastro" element={<Cadastro />}></Route>
           <Route
             path="/Produto/:itemID/:nome"
@@ -37,7 +41,9 @@ function App() {
           ></Route>
           <Route
             path="/Checkout"
-            element={<Checkout produtosCarrinho={produtosCarrinho} />}
+            element={
+              <Checkout produtosCarrinho={produtosCarrinho} isLoged={isLoged} />
+            }
           ></Route>
         </Route>
       </Routes>
