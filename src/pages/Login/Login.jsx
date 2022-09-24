@@ -2,24 +2,26 @@ import React from "react";
 import "./login-style.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-// import { useRef } from "react";
+import axios from "axios";
 
-export default function Login({ setIsLoged }) {
-  let [loginId, setLoginId] = useState("");
+export default function Login({ customerData, setCustomerData }) {
+  let [loginEmail, setLoginEmail] = useState("");
   let [loginPassword, setLoginPassword] = useState("");
+  let [update, setUpdate] = useState(false);
 
-  // const login = () => {
-  //   fetch(`http://localhost/customers/${loginId}`)
-  //     .then((res) => res.json())
-  //     .then((resultado) => {
-  //       productSizeP.current = resultado[0].p;
-  //       productSizeM.current = resultado[0].m;
-  //       productSizeG.current = resultado[0].g;
-  //       productSizeGG.current = resultado[0].gg;
-
-  //       setUpdate(!update);
-  //     });
-  // };
+  const login = async () => {
+    try {
+      const resultado = await axios.post("http://localhost/login", {
+        loginEmail,
+        loginPassword,
+      });
+      setCustomerData(resultado.data);
+      console.log(customerData);
+      setUpdate(!update);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -29,8 +31,8 @@ export default function Login({ setIsLoged }) {
           type="text"
           name="loginId"
           placeholder="exemplo@exemplo.com"
-          value={loginId}
-          onChange={(e) => setLoginId(e.target.value)}
+          value={loginEmail}
+          onChange={(e) => setLoginEmail(e.target.value)}
         ></input>
         <div className="space"></div>
         <input
@@ -41,7 +43,14 @@ export default function Login({ setIsLoged }) {
           placeholder="SENHA"
           onChange={(e) => setLoginPassword(e.target.value)}
         ></input>
-        <button className="space loginbtn">LOGIN</button>
+        <button
+          className="space loginbtn"
+          onClick={() => {
+            login();
+          }}
+        >
+          LOGIN
+        </button>
         <br></br>
         <p>Não é cadastrado?</p>
         <Link className="link-style" to="/Cadastro">

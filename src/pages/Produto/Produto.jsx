@@ -5,10 +5,10 @@ import { useState, useEffect } from "react";
 
 export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
   const params = useParams();
-
   const [product, setProduct] = useState([]);
+  const itemId = params.itemID;
+
   useEffect(() => {
-    const itemId = params.itemID;
     fetch(`http://localhost/products/${itemId}`)
       .then((res) => res.json())
       .then((resultado) => {
@@ -33,7 +33,7 @@ export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
           });
         }, 1);
       });
-  }, []);
+  }, [itemId]);
 
   const formatPrice = (price) => {
     return price.toLocaleString("pt-BR", {

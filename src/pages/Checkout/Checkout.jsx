@@ -97,7 +97,7 @@ const Checkout = ({ produtosCarrinho, isLoged }) => {
 
   return (
     <>
-      {!isLoged && (
+      {(!isLoged || isLoged === "wrongPassword" || isLoged === "notFound") && (
         <NavLink to="/Login">
           <div
             style={{
@@ -112,7 +112,7 @@ const Checkout = ({ produtosCarrinho, isLoged }) => {
           </div>
         </NavLink>
       )}
-      {isLoged && (
+      {isLoged === true && (
         <section className="checkout" style={{ marginLeft: 5 + "px" }}>
           <div className="checkout__header">
             <h1>

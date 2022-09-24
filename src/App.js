@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 import { Home } from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
@@ -12,7 +12,16 @@ import Layout from "./components/Layout/Layout";
 
 function App() {
   let [produtosCarrinho, setProdutosCarrinho] = useState([]);
-  const [isLoged, setIsLoged] = useState(false);
+
+  const [customerData, setCustomerData] = useState([
+    {
+      customer_id: "",
+      name: "",
+      phone: "",
+      loged: false,
+    },
+  ]);
+
   return (
     <>
       <Routes>
@@ -22,7 +31,12 @@ function App() {
           <Route path="/:type/:type2" element={<ProdutosPage />}></Route>
           <Route
             path="/Login"
-            element={<Login setIsLoged={setIsLoged} />}
+            element={
+              <Login
+                customerData={customerData}
+                setCustomerData={setCustomerData}
+              />
+            }
           ></Route>
           <Route path="/Cadastro" element={<Cadastro />}></Route>
           <Route
@@ -42,7 +56,10 @@ function App() {
           <Route
             path="/Checkout"
             element={
-              <Checkout produtosCarrinho={produtosCarrinho} isLoged={isLoged} />
+              <Checkout
+                produtosCarrinho={produtosCarrinho}
+                isLoged={customerData[0].loged}
+              />
             }
           ></Route>
         </Route>
