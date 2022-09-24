@@ -21,11 +21,11 @@ function App() {
       loged: false,
     },
   ]);
-
+  console.log(`app: ${customerData[0].loged}`);
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout customerData={customerData} />}>
           <Route index element={<Home />}></Route>
           <Route path="/:type" element={<ProdutosPage />}></Route>
           <Route path="/:type/:type2" element={<ProdutosPage />}></Route>

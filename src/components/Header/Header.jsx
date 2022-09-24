@@ -6,13 +6,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
   faUser,
+  faUserCheck,
   faCartShopping,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./Header.css";
 
-export const Header = ({ setShowOffersOnly }) => {
+export const Header = ({ customerData }) => {
   let [menuWidth, setMenuWidth] = useState("0");
   let [search, setSearch] = useState("");
 
@@ -30,6 +31,8 @@ export const Header = ({ setShowOffersOnly }) => {
       searchId.click();
     }
   });
+
+  console.log(`header: ${customerData[0].loged}`);
 
   return (
     <>
@@ -60,7 +63,12 @@ export const Header = ({ setShowOffersOnly }) => {
                 isActive ? "activeUser" : "activeUser"
               }
             >
-              <FontAwesomeIcon icon={faUser} />
+              {customerData[0].loged === true && (
+                <FontAwesomeIcon icon={faUserCheck} />
+              )}
+              {customerData[0].loged !== true && (
+                <FontAwesomeIcon icon={faUser} />
+              )}
             </NavLink>
             <NavLink to="/Carrinho">
               <FontAwesomeIcon icon={faCartShopping} />
