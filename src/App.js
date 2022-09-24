@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { Home } from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
