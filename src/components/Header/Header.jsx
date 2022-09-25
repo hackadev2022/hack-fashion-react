@@ -16,6 +16,7 @@ import "./Header.css";
 export const Header = ({ customerData }) => {
   let [menuWidth, setMenuWidth] = useState("0");
   let [search, setSearch] = useState("");
+  let [update, setUpdate] = useState(false);
 
   const searchId = document.getElementById("SearchEnter");
 
@@ -29,6 +30,7 @@ export const Header = ({ customerData }) => {
   document.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
       searchId.click();
+      setUpdate(!update);
     }
   });
 
