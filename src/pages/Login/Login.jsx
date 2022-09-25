@@ -16,7 +16,7 @@ export default function Login({ customerData, setCustomerData }) {
         loginPassword,
       });
       setCustomerData(resultado.data);
-      console.log(customerData);
+
       setUpdate(!update);
     } catch (error) {
       console.log(error);

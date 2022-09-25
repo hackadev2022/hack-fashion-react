@@ -32,8 +32,6 @@ export const Header = ({ customerData }) => {
     }
   });
 
-  console.log(`header: ${customerData[0].loged}`);
-
   return (
     <>
       <header>

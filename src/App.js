@@ -21,7 +21,7 @@ function App() {
       loged: false,
     },
   ]);
-  console.log(`app: ${customerData[0].loged}`);
+
   return (
     <>
       <Routes>
