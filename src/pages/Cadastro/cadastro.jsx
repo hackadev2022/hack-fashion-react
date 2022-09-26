@@ -1,17 +1,58 @@
 import "./style.css";
 import { Link } from "react-router-dom";
-
 import { Button } from "../../components/Button/Button";
+import { useState } from "react";
+import axios from 'axios'
+const url = 'http://localhost:80/customer'
+
 
 export default function Cadastro() {
+
+  const [ nome, setNome] = useState(undefined)
+  const [ email, setEmail] = useState(undefined)
+  const [ telefone, setTelefone] = useState(undefined)
+  const [ senha, setSenha] = useState(undefined)
+
+  const [ cep, setCep] = useState(undefined)
+  const [ endereço, setEndereço] = useState(undefined)
+  const [ numero, setNumero] = useState(undefined)
+  const [ complemento, setComplemento] = useState(undefined)
+  const [ referencia, setReferencia] = useState(undefined)
+  const [ bairro, setBairro] = useState(undefined)
+  const [ cidade, setCidade] = useState(undefined)
+  const [ estados, setEstados] = useState(undefined)
+
+
+  const hendleSubmit = async () =>{
+    try {
+
+      let status;
+
+          if(telefone === undefined){
+                status = await axios.post(url, {nome, email, senha})
+          }else{
+                status = await axios.post(url, {nome, email, senha, telefone})
+          }
+          console.log(status)
+         
+    } catch (error) {
+       console.log(error)
+    }
+}
+
+
   return (
     <div>
       <div>
         <div className="text-container-header">
           <div className="text-conta">
             <h1>CRIAR CONTA</h1>
-            <input type="radio" name="pj"></input>
-            <label for="pj"> Pessoa Júridica</label>
+
+            {/* <input type="radio" name="option-radio" value={value} onChange={(e) => setValue(e.target.value)}/>
+            <label for="pj"> Pessoa Júridica </label> */}
+
+            <input type="radio" name="option-radio" />
+            <label for="cpf"> Pessoa Fisica </label>
           </div>
           <div className="text-align-style">
             <p>
@@ -28,192 +69,193 @@ export default function Cadastro() {
 
           <div className="area-cadastro">
             <h1>Dados cadastrais</h1>
-            <label for="name">Nome do Responsável</label>
+            <label for="name">Nome</label>
             <input
               type="text"
               name="name"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira seu nome completo"
-              required=""
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              
             ></input>
-            <br></br>
-            <br></br>
+
             <label for="email">Email</label>
-            <br></br>
             <input
               type="email"
               name="name"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira seu email"
-              required=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              
             ></input>
-            <br></br>
-            <br></br>
+{/* 
             <label for="cnpj">CNPJ</label>
-            <br></br>
             <input
               type="number"
               name="cnpj"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira seu CNPJ"
-              required=""
-            ></input>
-            <br></br>
-            <br></br>
-            <label for="r-social">Razão Social</label>
-            <br></br>
+              
+            ></input> */}
+
+            {/* <label for="r-social">Razão Social</label>
             <input
               type="text"
               name="r-social"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira a Razão Social"
-              required=""
-            ></input>
-            <br></br>
-            <br></br>
-            <label for="i-estadual">Inscrição Estadual</label>
-            <br></br>
+              
+            ></input> */}
+
+            {/* <label for="i-estadual">Inscrição Estadual</label>
             <input
               type=""
               name="i-estadual"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira sua Inscrição"
-              required=""
-            ></input>
-            <br></br>
-            <br></br>
+              
+            ></input> */}
+
             <label for="Celular">Celular</label>
-            <br></br>
             <input
               type="number"
               name="Celular"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira seu celular"
-              required=""
+              value={telefone}
+              onChange={(e) => setTelefone(e.target.value)}
+              
             ></input>
-            <br></br>
-            <br></br>
-            <label for="fixo">Telefone Fixo</label>
-            <br></br>
+
+            {/* <label for="fixo">Telefone Fixo</label>
             <input
               type="number"
               name="fixo"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira seu Telefone Fixo"
-              required=""
-            ></input>
-            <br></br>
-            <br></br>
-            <label for="n-vendedor">Nome do vendedor</label>
-            <br></br>
+
+              
+            ></input> */}
+
+            {/* <label for="n-vendedor">Nome do vendedor</label>
             <input
               type="number"
               name="n-vendedor"
               id="name"
               title="Este campo é obrigátorio"
               placeholder=""
-              required=""
+              
+            ></input> */}
+
+            <label for="fixo">Senha</label>
+            <input
+              type="text"
+              name="senha"
+              id="name"
+              title="Este campo é obrigátorio"
+              placeholder="Insira seu Telefone Fixo"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              
             ></input>
+
           </div>
 
           <div className="area-cadastro-endereco">
+
             <h1>Endereço</h1>
 
             <label for="cep">CEP</label>
-            <br></br>
             <input
               type="number"
               name="cep"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira seu CEP"
-              required=""
+              value={cep}
+              onChange={(e) => setCep(e.target.value)}
+              
             ></input>
-            <br></br>
-            <br></br>
+
             <label for="endereço">Endereço</label>
-            <br></br>
             <input
               type="text"
               name="endereço"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira seu Endereço"
-              required=""
+              value={endereço}
+              onChange={(e) => setEndereço(e.target.value)}
+              
             ></input>
-            <br></br>
-            <br></br>
+
             <label for="Número">Número</label>
-            <br></br>
+
             <input
               type="number"
               name="Número"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Numero Da Casa"
-              required=""
+              value={numero}
+              onChange={(e) => setNumero(e.target.value)}
+              
             ></input>
-            <br></br>
-            <br></br>
+
             <label for="Complemento">Complemento</label>
-            <br></br>
             <input
               type="text"
               name="Complemento"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Complemento"
-              required=""
+              value={cep}
+              onChange={(e) => setCep(e.target.value)}
+              
             ></input>
-            <br></br>
-            <br></br>
+
             <label for="Rêferencia">Rêferencia </label>
-            <br></br>
             <input
               type="Rêferencia "
               name="Rêferencia"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira uma referencia"
-              required=""
+              
             ></input>
-            <br></br>
-            <br></br>
+
             <label for="Bairro">Bairro </label>
-            <br></br>
             <input
               type="text"
               name="Bairro"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira o seu Bairro"
-              required=""
+              
             ></input>
-            <br></br>
-            <br></br>
+
             <label for="Cidade">Cidade</label>
-            <br></br>
             <input
               type="text"
               name="Cidade"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira a sua cidade"
-              required=""
+              
             ></input>
-            <br></br>
-            <br></br>
-            <label for="Estado">Estados</label>
-            <br></br>
 
-            <select name="Estado" id="Estado" required="">
+            <label for="Estado">Estados</label>
+
+            <select name="Estado" id="Estado" >
               <option value="">Selecione</option>
               <option value="SP">São Paulo</option>
               <option value="RJ">Rio de Janeiro</option>
@@ -245,7 +287,7 @@ export default function Cadastro() {
         </div>
       </div>
       <div className="login-create">
-        <Button classes={"CreateBtn-test"} txt={"Criar Login"} />
+        <Button classes={"CreateBtn-test"} txt={"Criar Login"} fn={hendleSubmit}/>
         <Button classes={"LoginBtn-test"} txt={"Login"} />
       </div>
     </div>
