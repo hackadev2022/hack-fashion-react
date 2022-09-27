@@ -2,25 +2,31 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { useState } from "react";
-import axios from 'axios'
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+
+
 const url = 'http://localhost:80/customer'
 
-
 export default function Cadastro() {
+
+  const {register, setValue, setFocus} = useForm();
 
   const [ nome, setNome] = useState(undefined)
   const [ email, setEmail] = useState(undefined)
   const [ telefone, setTelefone] = useState(undefined)
   const [ senha, setSenha] = useState(undefined)
 
-  const [ cep, setCep] = useState(undefined)
+  var [ cep, setCep] = useState(undefined)
   const [ endereço, setEndereço] = useState(undefined)
   const [ numero, setNumero] = useState(undefined)
   const [ complemento, setComplemento] = useState(undefined)
   const [ referencia, setReferencia] = useState(undefined)
   const [ bairro, setBairro] = useState(undefined)
   const [ cidade, setCidade] = useState(undefined)
-  const [ estados, setEstados] = useState(undefined)
+  const [uf, setUf] = useState(undefined)
+  // const [ estados, setEstados] = useState(undefined)
+
 
 
   const hendleSubmit = async () =>{
@@ -29,9 +35,11 @@ export default function Cadastro() {
       let status;
 
           if(telefone === undefined){
-                status = await axios.post(url, {nome, email, senha})
+                status = await axios.post(url, {nome, email, senha, cep, endereço, numero,
+                  complemento, referencia, bairro, cidade})
           }else{
-                status = await axios.post(url, {nome, email, senha, telefone})
+                status = await axios.post(url, {nome, email, senha, telefone, cep, endereço, numero,
+                  complemento, referencia, bairro, cidade})
           }
           console.log(status)
          
@@ -39,6 +47,18 @@ export default function Cadastro() {
        console.log(error)
     }
 }
+
+// const checkCEP = (e) => {
+//     cep = e.target.value.replace(/\D/g, '')
+//     console.log(cep)
+//     fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
+//       console.log(data);
+//       setValue('endereço', data.logradouro)
+//       setValue('bairro', data.bairro)
+//       setValue('cidade', data.localidade)
+//     })
+// }
+
 
 
   return (
@@ -183,6 +203,7 @@ export default function Cadastro() {
               placeholder="Insira seu CEP"
               value={cep}
               onChange={(e) => setCep(e.target.value)}
+//              onBlur={checkCEP}
               
             ></input>
 
@@ -195,6 +216,7 @@ export default function Cadastro() {
               placeholder="Insira seu Endereço"
               value={endereço}
               onChange={(e) => setEndereço(e.target.value)}
+             // {...register("endereço")}
               
             ></input>
 
@@ -218,8 +240,8 @@ export default function Cadastro() {
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Complemento"
-              value={cep}
-              onChange={(e) => setCep(e.target.value)}
+              value={complemento}
+              onChange={(e) => setComplemento(e.target.value)}
               
             ></input>
 
@@ -230,6 +252,8 @@ export default function Cadastro() {
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira uma referencia"
+              value={referencia}
+              onChange={(e) => setReferencia(e.target.value)}
               
             ></input>
 
@@ -240,6 +264,9 @@ export default function Cadastro() {
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira o seu Bairro"
+              value={bairro}
+              onChange={(e) => setBairro(e.target.value)}
+             // {...register("bairro")}
               
             ></input>
 
@@ -250,12 +277,15 @@ export default function Cadastro() {
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira a sua cidade"
+              value={cidade}
+              onChange={(e) => setCidade(e.target.value)}
+              //{...register("cidade")}
               
             ></input>
 
             <label for="Estado">Estados</label>
 
-            <select name="Estado" id="Estado" >
+            <select name="Estado" id="Estado" value={uf} onChange={(e) => setUf(e.target.value)}>
               <option value="">Selecione</option>
               <option value="SP">São Paulo</option>
               <option value="RJ">Rio de Janeiro</option>
