@@ -4,8 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Button } from "../../components/Button/Button";
+import axios from "axios";
+import { useEffect } from "react";
 
-const Checkout = ({ produtosCarrinho, isLoged }) => {
+const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
   const [showEditEndereco, setShowEditEndereco] = useState(false);
   const [editName, setEditName] = useState("");
   const [editEndereco, setEditEndereco] = useState("");
@@ -53,10 +55,10 @@ const Checkout = ({ produtosCarrinho, isLoged }) => {
   let subTotalPrice = 0;
   const subTotal = () => {
     for (let i = 0; i < produtosCarrinho.length; i++) {
-      if (produtosCarrinho[i].offer_percent > 0) {
+      if (produtosCarrinho[i].offer > 0) {
         subTotalPrice +=
           (produtosCarrinho[i].price -
-            produtosCarrinho[i].price * produtosCarrinho[i].offer_percent) *
+            produtosCarrinho[i].price * produtosCarrinho[i].offer) *
           produtosCarrinho[i].quantidade;
       } else {
         subTotalPrice +=
@@ -93,6 +95,57 @@ const Checkout = ({ produtosCarrinho, isLoged }) => {
       style: "currency",
       currency: "BRL",
     });
+  };
+
+  //puxar do banco o id_address
+
+  const [addressIds, setAddressIds] = useState();
+  const [addressId, setAddressId] = useState();
+  const [update, setUpdate] = useState(false);
+
+  useEffect(() => {
+    if (customer_id !== "") {
+      try {
+        fetch(`http://localhost/address/${customer_id}`)
+          .then((res) => res.json())
+          .then((resultado) => {
+            setAddressIds(resultado);
+          })
+          .then(() => {
+            setAddressId(addressIds[addressIds.length - 1].id_address);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [customer_id]);
+
+  //criar pedido (customer_id, id_address, total_price) e retornar o pedido_id
+
+  const [pedidoId, setPedidoId] = useState();
+
+  const finalizePurchase = async () => {
+    try {
+      const resultado = await axios.post("http://localhost/pedido", {
+        customer_id,
+        id_address: addressId,
+        total_price: subTotalPrice,
+      });
+      setPedidoId(resultado.data[0].pedido_id).then(async () => {
+        //criar order_details (product_id, pedido_id, quantity, size)
+        for (let i = 0; i < produtosCarrinho.length; i++) {
+          await axios.post("http://localhost/orderDetails", {
+            product_id: produtosCarrinho[i].product_id,
+            pedido_id: pedidoId,
+            quantity: produtosCarrinho[i].quantidade,
+            size: produtosCarrinho[i].tamanho,
+          });
+        }
+      });
+      setUpdate(!update);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -133,16 +186,14 @@ const Checkout = ({ produtosCarrinho, isLoged }) => {
                     <h2>Produto: {produto.name}</h2>
                     <h3>Marca: {produto.trademark}</h3>
                     <h3>Tam.: {produto.tamanho}</h3>
-                    {produto.offer_percent > 0 && (
+                    {produto.offer > 0 && (
                       <h3>
                         {formatPrice(
-                          produto.price - produto.price * produto.offer_percent
+                          produto.price - produto.price * produto.offer
                         )}
                       </h3>
                     )}
-                    {!produto.offer_percent > 0 && (
-                      <b>{formatPrice(produto.price)}</b>
-                    )}
+                    {!produto.offer > 0 && <b>{formatPrice(produto.price)}</b>}
                     <i>
                       <FontAwesomeIcon
                         className="checkout__produtos-icon"
@@ -329,7 +380,7 @@ const Checkout = ({ produtosCarrinho, isLoged }) => {
                   </label>
                 </div>
 
-                <Button txt={"Finalizar Compra"} />
+                <Button txt={"Finalizar Compra"} fn={finalizePurchase} />
               </div>
             </div>
           </div>
