@@ -47,6 +47,7 @@ export const ButtonProduct = ({
   };
 
   const produtoEscolhido = {
+    product_id: produto.product_id,
     name: produto.name,
     tamanho: tamanho,
     quantidade: prodCount,
