@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Home } from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
@@ -21,6 +21,15 @@ function App() {
       loged: false,
     },
   ]);
+
+  useEffect(() => {
+    if (localStorage.customerData) {
+      setCustomerData(JSON.parse(localStorage.customerData));
+    }
+  }, []);
+
+  console.log("customerData");
+  console.log(customerData);
 
   return (
     <>

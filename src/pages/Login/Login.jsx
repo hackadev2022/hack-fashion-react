@@ -15,7 +15,10 @@ export default function Login({ customerData, setCustomerData }) {
         loginEmail,
         loginPassword,
       });
+
       setCustomerData(resultado.data);
+
+      localStorage.setItem("customerData", JSON.stringify(resultado.data));
 
       setUpdate(!update);
     } catch (error) {
@@ -154,6 +157,7 @@ export default function Login({ customerData, setCustomerData }) {
                     loged: false,
                   },
                 ]);
+                localStorage.removeItem("customerData");
               }}
             >
               DESLOGAR
