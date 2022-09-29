@@ -99,49 +99,48 @@ const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
 
   //puxar do banco o id_address
 
-  const [addressIds, setAddressIds] = useState();
   const [addressId, setAddressId] = useState();
+  // const [addressId, setAddressId] = useState();
   const [update, setUpdate] = useState(false);
+
+  let localCustomerData = JSON.parse(localStorage.customerData);
+
+  if (localCustomerData[0].customer_id) {
+    customer_id = localCustomerData[0].customer_id;
+  }
 
   useEffect(() => {
     if (customer_id !== "") {
-      try {
-        fetch(`http://localhost/address/${customer_id}`)
-          .then((res) => res.json())
-          .then((resultado) => {
-            setAddressIds(resultado);
-          })
-          .then(() => {
-            setAddressId(addressIds[addressIds.length - 1].id_address);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+      fetch(`http://localhost/address/${customer_id}`)
+        .then((res) => res.json())
+        .then((resultado) => {
+          setAddressId(resultado);
+        });
     }
-  }, [customer_id]);
+  }, []);
 
-  //criar pedido (customer_id, id_address, total_price) e retornar o pedido_id
-
-  const [pedidoId, setPedidoId] = useState();
+  // const [pedidoId, setPedidoId] = useState();
 
   const finalizePurchase = async () => {
     try {
-      const resultado = await axios.post("http://localhost/pedido", {
-        customer_id,
-        id_address: addressId,
-        total_price: subTotalPrice,
-      });
-      setPedidoId(resultado.data[0].pedido_id).then(async () => {
-        //criar order_details (product_id, pedido_id, quantity, size)
-        for (let i = 0; i < produtosCarrinho.length; i++) {
-          await axios.post("http://localhost/orderDetails", {
-            product_id: produtosCarrinho[i].product_id,
-            pedido_id: pedidoId,
-            quantity: produtosCarrinho[i].quantidade,
-            size: produtosCarrinho[i].tamanho,
-          });
-        }
-      });
+      await axios
+        .post("http://localhost/pedido", {
+          customer_id,
+          id_address: addressId,
+          total_price: subTotalPrice,
+        }) //criar order_details (product_id, pedido_id, quantity, size)
+        .then(async (resultado) => {
+          for (let i = 0; i < produtosCarrinho.length; i++) {
+            await axios.post("http://localhost/orderDetails", {
+              product_id: produtosCarrinho[i].product_id,
+              pedido_id: resultado.data[0].pedido_id,
+              quantity: produtosCarrinho[i].quantidade,
+              size: produtosCarrinho[i].tamanho,
+            });
+          }
+        });
+
+      localStorage.removeItem("produtosCarrinho");
       setUpdate(!update);
     } catch (error) {
       console.log(error);
@@ -225,165 +224,185 @@ const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
               ))}
             </div>
           </div>
-          <div className="checkout__infos">
-            <h1>Destino</h1>
-            <div className="checkout__infos-items">
-              <div className="checkout__endereco">
-                {!showEditEndereco && (
-                  <>
-                    <ul>
-                      <li>
-                        <b className="checkout__endereco-items">Remetente: </b>
-                        {endereco.clienteName}
-                      </li>
-                      <li>
-                        <b className="checkout__endereco-items">Endereco: </b>
-                        {endereco.endereco}
-                      </li>
-                      <li>
-                        <b className="checkout__endereco-items">Cidade: </b>
-                        {endereco.cidade}
-                      </li>
-                      <li>
-                        <b className="checkout__endereco-items">Estado: </b>
-                        {endereco.estado}
-                      </li>
-                      <li>
-                        <b className="checkout__endereco-items">CEP: </b>
-                        {endereco.cep}
-                      </li>
-                    </ul>
-                    <Button
-                      txt={"Editar"}
-                      fn={handleEditar}
-                      classes={"checkout__endereco-button"}
-                    />
-                  </>
-                )}
-                {showEditEndereco && (
-                  <>
-                    <ul>
-                      <li>
-                        <b className="checkout__endereco-items">Remetente: </b>
-                        <input
-                          className="checkout__input-text"
-                          type="text"
-                          name="name"
-                          placeholder="Seu nome"
-                          defaultValue={endereco.name}
-                          onChange={(e) => setEditName(e.target.value)}
+          {produtosCarrinho.length > 0 && (
+            <>
+              <div className="checkout__infos">
+                <h1>Destino</h1>
+                <div className="checkout__infos-items">
+                  <div className="checkout__endereco">
+                    {!showEditEndereco && (
+                      <>
+                        <ul>
+                          <li>
+                            <b className="checkout__endereco-items">
+                              Remetente:{" "}
+                            </b>
+                            {endereco.clienteName}
+                          </li>
+                          <li>
+                            <b className="checkout__endereco-items">
+                              Endereco:{" "}
+                            </b>
+                            {endereco.endereco}
+                          </li>
+                          <li>
+                            <b className="checkout__endereco-items">Cidade: </b>
+                            {endereco.cidade}
+                          </li>
+                          <li>
+                            <b className="checkout__endereco-items">Estado: </b>
+                            {endereco.estado}
+                          </li>
+                          <li>
+                            <b className="checkout__endereco-items">CEP: </b>
+                            {endereco.cep}
+                          </li>
+                        </ul>
+                        <Button
+                          txt={"Editar"}
+                          fn={handleEditar}
+                          classes={"checkout__endereco-button"}
                         />
-                      </li>
-                      <li>
-                        <b className="checkout__endereco-items">Endereco: </b>
-                        <input
-                          className="checkout__input-text"
-                          type="text"
-                          name="endereço"
-                          placeholder="Seu endereço"
-                          defaultValue={endereco.endereco}
-                          onChange={(e) => setEditEndereco(e.target.value)}
+                      </>
+                    )}
+                    {showEditEndereco && (
+                      <>
+                        <ul>
+                          <li>
+                            <b className="checkout__endereco-items">
+                              Remetente:{" "}
+                            </b>
+                            <input
+                              className="checkout__input-text"
+                              type="text"
+                              name="name"
+                              placeholder="Seu nome"
+                              defaultValue={endereco.name}
+                              onChange={(e) => setEditName(e.target.value)}
+                            />
+                          </li>
+                          <li>
+                            <b className="checkout__endereco-items">
+                              Endereco:{" "}
+                            </b>
+                            <input
+                              className="checkout__input-text"
+                              type="text"
+                              name="endereço"
+                              placeholder="Seu endereço"
+                              defaultValue={endereco.endereco}
+                              onChange={(e) => setEditEndereco(e.target.value)}
+                            />
+                          </li>
+                          <li>
+                            <b className="checkout__endereco-items">Cidade: </b>
+                            <input
+                              className="checkout__input-text"
+                              type="text"
+                              name="cidade"
+                              placeholder="Sua cidade"
+                              defaultValue={endereco.cidade}
+                              onChange={(e) => setEditCidade(e.target.value)}
+                            />
+                          </li>
+                          <li>
+                            <b className="checkout__endereco-items">Estado: </b>
+                            <input
+                              className="checkout__input-text"
+                              type="text"
+                              name="estado"
+                              placeholder="Seu estado"
+                              defaultValue={endereco.estado}
+                              onChange={(e) => setEditEstado(e.target.value)}
+                            />
+                          </li>
+                          <li>
+                            <b className="checkout__endereco-items">CEP: </b>
+                            <input
+                              className="checkout__input-text"
+                              type="text"
+                              name="cep"
+                              placeholder="Seu cep"
+                              defaultValue={endereco.cep}
+                              onChange={(e) => setEditCep(e.target.value)}
+                            />
+                          </li>
+                        </ul>
+                        <Button
+                          txt={"Salvar"}
+                          fn={handleSave}
+                          classes={"checkout__endereco-button"}
                         />
-                      </li>
-                      <li>
-                        <b className="checkout__endereco-items">Cidade: </b>
-                        <input
-                          className="checkout__input-text"
-                          type="text"
-                          name="cidade"
-                          placeholder="Sua cidade"
-                          defaultValue={endereco.cidade}
-                          onChange={(e) => setEditCidade(e.target.value)}
-                        />
-                      </li>
-                      <li>
-                        <b className="checkout__endereco-items">Estado: </b>
-                        <input
-                          className="checkout__input-text"
-                          type="text"
-                          name="estado"
-                          placeholder="Seu estado"
-                          defaultValue={endereco.estado}
-                          onChange={(e) => setEditEstado(e.target.value)}
-                        />
-                      </li>
-                      <li>
-                        <b className="checkout__endereco-items">CEP: </b>
-                        <input
-                          className="checkout__input-text"
-                          type="text"
-                          name="cep"
-                          placeholder="Seu cep"
-                          defaultValue={endereco.cep}
-                          onChange={(e) => setEditCep(e.target.value)}
-                        />
-                      </li>
-                    </ul>
-                    <Button
-                      txt={"Salvar"}
-                      fn={handleSave}
-                      classes={"checkout__endereco-button"}
-                    />
-                  </>
-                )}
-              </div>
-              <div className="checkout__pagamento">
-                <h1>Pagamento</h1>
-                <div className="checkout__total-price">
-                  <div className="checkout__total-price-item">
-                    <h3>Como deseja pagar ?</h3>
-                    <div className="checkout__frete-price">
-                      <h3>Entrega</h3>
-                      <h3>R$ 30, 00</h3>
+                      </>
+                    )}
+                  </div>
+                  <div className="checkout__pagamento">
+                    <h1>Pagamento</h1>
+                    <div className="checkout__total-price">
+                      <div className="checkout__total-price-item">
+                        <h3>Como deseja pagar ?</h3>
+                        <div className="checkout__frete-price">
+                          <h3>Entrega</h3>
+                          <h3>R$ 30, 00</h3>
+                        </div>
+                        <div className="checkout__total-price-item__total-price">
+                          <h3>Total</h3>
+                          <h3>{formatPrice(subTotalPrice + 30)}</h3>
+                        </div>
+                      </div>
                     </div>
-                    <div className="checkout__total-price-item__total-price">
-                      <h3>Total</h3>
-                      <h3>{formatPrice(subTotalPrice + 30)}</h3>
+                    <div className="checkout__metodo-pagamento">
+                      <input type="radio" name="payment-method" id="pix" />
+                      <label htmlFor="pix">
+                        <div>
+                          <i className="fa-brands fa-pix"></i>
+                          PIX
+                        </div>
+                      </label>
                     </div>
+                    <div className="checkout__metodo-pagamento">
+                      <input
+                        type="radio"
+                        checked
+                        name="payment-method"
+                        id="boleto"
+                        readOnly
+                      />
+                      <label htmlFor="boleto">
+                        <div>
+                          <i className="fa-solid fa-barcode"></i>
+                          Boleto
+                        </div>
+                      </label>
+                    </div>
+                    <div className="checkout__metodo-pagamento">
+                      <input
+                        type="radio"
+                        name="payment-method"
+                        id="cartao-credito"
+                      />
+                      <label htmlFor="cartao-credito">
+                        <div>
+                          <i className="fa-solid fa-credit-card"></i>
+                          Cartão de crédito
+                        </div>
+                      </label>
+                    </div>
+
+                    <Button txt={"Finalizar Compra"} fn={finalizePurchase} />
                   </div>
                 </div>
-                <div className="checkout__metodo-pagamento">
-                  <input type="radio" name="payment-method" id="pix" />
-                  <label htmlFor="pix">
-                    <div>
-                      <i className="fa-brands fa-pix"></i>
-                      PIX
-                    </div>
-                  </label>
-                </div>
-                <div className="checkout__metodo-pagamento">
-                  <input
-                    type="radio"
-                    checked
-                    name="payment-method"
-                    id="boleto"
-                    readOnly
-                  />
-                  <label htmlFor="boleto">
-                    <div>
-                      <i className="fa-solid fa-barcode"></i>
-                      Boleto
-                    </div>
-                  </label>
-                </div>
-                <div className="checkout__metodo-pagamento">
-                  <input
-                    type="radio"
-                    name="payment-method"
-                    id="cartao-credito"
-                  />
-                  <label htmlFor="cartao-credito">
-                    <div>
-                      <i className="fa-solid fa-credit-card"></i>
-                      Cartão de crédito
-                    </div>
-                  </label>
-                </div>
-
-                <Button txt={"Finalizar Compra"} fn={finalizePurchase} />
               </div>
-            </div>
-          </div>
+            </>
+          )}
+          {produtosCarrinho.length === 0 && (
+            <>
+              <h1>Seu carrinho está vazio :/</h1>
+              <NavLink to={"/"}>
+                Veja nossos produtos ! <h3>Clique AQUI</h3>
+              </NavLink>
+            </>
+          )}
         </section>
       )}
     </>
