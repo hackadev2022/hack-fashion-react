@@ -13,6 +13,15 @@ import Layout from "./components/Layout/Layout";
 function App() {
   let [produtosCarrinho, setProdutosCarrinho] = useState([]);
 
+  useEffect(() => {
+    if (localStorage.customerData) {
+      setCustomerData(JSON.parse(localStorage.customerData));
+    }
+    if (localStorage.produtosCarrinho) {
+      setProdutosCarrinho(JSON.parse(localStorage.produtosCarrinho));
+    }
+  }, []);
+
   const [customerData, setCustomerData] = useState([
     {
       customer_id: "",
@@ -21,15 +30,6 @@ function App() {
       loged: false,
     },
   ]);
-
-  useEffect(() => {
-    if (localStorage.customerData) {
-      setCustomerData(JSON.parse(localStorage.customerData));
-    }
-  }, []);
-
-  console.log("customerData");
-  console.log(customerData);
 
   return (
     <>

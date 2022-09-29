@@ -43,6 +43,10 @@ export const ButtonProduct = ({
       alert("Escolha o tamanho !");
     } else {
       setProdutosCarrinho([...produtosCarrinho, produtoEscolhido]);
+      localStorage.setItem(
+        "produtosCarrinho",
+        JSON.stringify([...produtosCarrinho, produtoEscolhido])
+      );
     }
   };
 
