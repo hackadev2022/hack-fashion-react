@@ -8,6 +8,7 @@ import { ProdutosPage } from "./pages/ProdutosPage/ProdutosPage";
 import { Routes, Route } from "react-router-dom";
 import { Carrinho } from "./pages/Carrinho/Carrinho";
 import Checkout from "./pages/Checkout/Checkout";
+import UserConfigs from "./pages/UserConfigs/UserConfigs";
 import Layout from "./components/Layout/Layout";
 
 function App() {
@@ -42,6 +43,15 @@ function App() {
             path="/Login"
             element={
               <Login
+                customerData={customerData}
+                setCustomerData={setCustomerData}
+              />
+            }
+          ></Route>
+          <Route
+            path="/userConfigs"
+            element={
+              <UserConfigs
                 customerData={customerData}
                 setCustomerData={setCustomerData}
               />

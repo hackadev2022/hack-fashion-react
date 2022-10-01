@@ -57,19 +57,16 @@ export const Header = ({ customerData }) => {
           </div>
           <nav className="header__nav">
             <FontAwesomeIcon icon={faLocationDot} />
-            <NavLink
-              to="/Login"
-              className={({ isActive }) =>
-                isActive ? "activeUser" : "activeUser"
-              }
-            >
-              {customerData[0].loged === true && (
+            {customerData[0].loged === true && (
+              <NavLink to="/userConfigs">
                 <FontAwesomeIcon icon={faUserCheck} />
-              )}
-              {customerData[0].loged !== true && (
+              </NavLink>
+            )}
+            {customerData[0].loged !== true && (
+              <NavLink to="/Login">
                 <FontAwesomeIcon icon={faUser} />
-              )}
-            </NavLink>
+              </NavLink>
+            )}
             <NavLink to="/Carrinho">
               <FontAwesomeIcon icon={faCartShopping} />
             </NavLink>
