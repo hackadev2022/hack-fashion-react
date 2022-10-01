@@ -3,63 +3,53 @@ import { Link } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 import { useState } from "react";
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
+import useEstados from "./Hooks/useEstados";
+import useCidades from "./Hooks/useCidades";
 
 
 const url = 'http://localhost:80/customer'
 
 export default function Cadastro() {
-
-  const {register, setValue, setFocus} = useForm();
+  const  estados = useEstados()
+  const [selectedEstados, setSelectedEstados] = useState('')
+  const  cidades = useCidades({uf: selectedEstados})
 
   const [ nome, setNome] = useState(undefined)
   const [ email, setEmail] = useState(undefined)
   const [ telefone, setTelefone] = useState(undefined)
   const [ senha, setSenha] = useState(undefined)
 
-  var [ cep, setCep] = useState(undefined)
+  const [ cep, setCep] = useState(undefined)
   const [ endereço, setEndereço] = useState(undefined)
   const [ numero, setNumero] = useState(undefined)
   const [ complemento, setComplemento] = useState(undefined)
   const [ referencia, setReferencia] = useState(undefined)
   const [ bairro, setBairro] = useState(undefined)
-  const [ cidade, setCidade] = useState(undefined)
-  const [uf, setUf] = useState(undefined)
-  // const [ estados, setEstados] = useState(undefined)
 
 
 
   const hendleSubmit = async () =>{
     try {
 
-      let status;
+      //let status;
 
           if(telefone === undefined){
-                status = await axios.post(url, {nome, email, senha, cep, endereço, numero,
-                  complemento, referencia, bairro, cidade})
+                 await axios.post(url, {nome, email, senha, cep, endereço, numero,
+                  complemento, referencia, bairro})
           }else{
-                status = await axios.post(url, {nome, email, senha, telefone, cep, endereço, numero,
-                  complemento, referencia, bairro, cidade})
+                 await axios.post(url, {nome, email, senha, telefone, cep, endereço, numero,
+                  complemento, referencia, bairro})
           }
-          console.log(status)
+          //console.log(status)
          
     } catch (error) {
        console.log(error)
     }
 }
 
-// const checkCEP = (e) => {
-//     cep = e.target.value.replace(/\D/g, '')
-//     console.log(cep)
-//     fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => {
-//       console.log(data);
-//       setValue('endereço', data.logradouro)
-//       setValue('bairro', data.bairro)
-//       setValue('cidade', data.localidade)
-//     })
-// }
-
-
+const handleEstadosUpdate = (event) => {
+  setSelectedEstados(event.target.value)
+}
 
   return (
     <div>
@@ -67,12 +57,6 @@ export default function Cadastro() {
         <div className="text-container-header">
           <div className="text-conta">
             <h1>CRIAR CONTA</h1>
-
-            {/* <input type="radio" name="option-radio" value={value} onChange={(e) => setValue(e.target.value)}/>
-            <label for="pj"> Pessoa Júridica </label> */}
-
-            <input type="radio" name="option-radio" />
-            <label for="cpf"> Pessoa Fisica </label>
           </div>
           <div className="text-align-style">
             <p>
@@ -104,7 +88,7 @@ export default function Cadastro() {
             <label for="email">Email</label>
             <input
               type="email"
-              name="name"
+              name="email"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira seu email"
@@ -112,36 +96,6 @@ export default function Cadastro() {
               onChange={(e) => setEmail(e.target.value)}
               
             ></input>
-{/* 
-            <label for="cnpj">CNPJ</label>
-            <input
-              type="number"
-              name="cnpj"
-              id="name"
-              title="Este campo é obrigátorio"
-              placeholder="Insira seu CNPJ"
-              
-            ></input> */}
-
-            {/* <label for="r-social">Razão Social</label>
-            <input
-              type="text"
-              name="r-social"
-              id="name"
-              title="Este campo é obrigátorio"
-              placeholder="Insira a Razão Social"
-              
-            ></input> */}
-
-            {/* <label for="i-estadual">Inscrição Estadual</label>
-            <input
-              type=""
-              name="i-estadual"
-              id="name"
-              title="Este campo é obrigátorio"
-              placeholder="Insira sua Inscrição"
-              
-            ></input> */}
 
             <label for="Celular">Celular</label>
             <input
@@ -155,30 +109,9 @@ export default function Cadastro() {
               
             ></input>
 
-            {/* <label for="fixo">Telefone Fixo</label>
-            <input
-              type="number"
-              name="fixo"
-              id="name"
-              title="Este campo é obrigátorio"
-              placeholder="Insira seu Telefone Fixo"
-
-              
-            ></input> */}
-
-            {/* <label for="n-vendedor">Nome do vendedor</label>
-            <input
-              type="number"
-              name="n-vendedor"
-              id="name"
-              title="Este campo é obrigátorio"
-              placeholder=""
-              
-            ></input> */}
-
             <label for="fixo">Senha</label>
             <input
-              type="text"
+              type="password"
               name="senha"
               id="name"
               title="Este campo é obrigátorio"
@@ -203,7 +136,6 @@ export default function Cadastro() {
               placeholder="Insira seu CEP"
               value={cep}
               onChange={(e) => setCep(e.target.value)}
-//              onBlur={checkCEP}
               
             ></input>
 
@@ -216,7 +148,6 @@ export default function Cadastro() {
               placeholder="Insira seu Endereço"
               value={endereço}
               onChange={(e) => setEndereço(e.target.value)}
-             // {...register("endereço")}
               
             ></input>
 
@@ -266,53 +197,59 @@ export default function Cadastro() {
               placeholder="Insira o seu Bairro"
               value={bairro}
               onChange={(e) => setBairro(e.target.value)}
-             // {...register("bairro")}
-              
             ></input>
 
+            <label for="Estado">Estados</label>
+            <select value={selectedEstados} onChange={handleEstadosUpdate}>
+              {estados.map(estado =><option value={estado.sigla}>{estado.nome}</option>)}
+            </select>
+
             <label for="Cidade">Cidade</label>
-            <input
+            <select>
+              {cidades.map(cidade => <option>{cidade.nome}</option>)}
+            </select>
+
+            
+            {/* <input
               type="text"
               name="Cidade"
               id="name"
               title="Este campo é obrigátorio"
               placeholder="Insira a sua cidade"
               value={cidade}
-              onChange={(e) => setCidade(e.target.value)}
-              //{...register("cidade")}
+              onChange={(e) => setCidade(e.target.value)}              
               
-            ></input>
+            ></input> */}
 
-            <label for="Estado">Estados</label>
 
-            <select name="Estado" id="Estado" value={uf} onChange={(e) => setUf(e.target.value)}>
+            {/* <select name="Estado" id="Estado" value={estados} onChange={(e) => setEstados(e.target.value)}>
               <option value="">Selecione</option>
-              <option value="SP">São Paulo</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="GO">Goías</option>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="PA">Pará</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>
-              <option value="DF">Distrito Federal</option>
-            </select>
+              <option value="São Paulo">São Paulo</option>
+              <option value="Rio de Janeiro">Rio de Janeiro</option>
+              <option value="Minas Gerais">Minas Gerais</option>
+              <option value="Goías">Goías</option>
+              <option value="Acre">Acre</option>
+              <option value="Alagoas">Alagoas</option>
+              <option value="Amapá">Amapá</option>
+              <option value="Amazonas">Amazonas</option>
+              <option value="Bahia">Bahia</option>
+              <option value="Ceará">Ceará</option>
+              <option value="Espírito Santo">Espírito Santo</option>
+              <option value="Maranhão">Maranhão</option>
+              <option value="Mato Grosso">Mato Grosso</option>
+              <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+              <option value="Pará">Pará</option>
+              <option value="Pernambuco">Pernambuco</option>
+              <option value="Piauí">Piauí</option>
+              <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+              <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+              <option value="Rondônia">Rondônia</option>
+              <option value="Roraima">Roraima</option>
+              <option value="Santa Catarina">Santa Catarina</option>
+              <option value="Sergipe">Sergipe</option>
+              <option value="Tocantins">Tocantins</option>
+              <option value="Distrito Federal">Distrito Federal</option>
+            </select> */}
           </div>
         </div>
       </div>
