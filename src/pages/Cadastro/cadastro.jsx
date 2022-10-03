@@ -16,7 +16,7 @@ export default function Cadastro() {
 
   const [nome, setNome] = useState(undefined)
   const [email, setEmail] = useState(undefined)
-  const [telefone, setTelefone] = useState(undefined)
+  const [celular, setCelular] = useState(undefined)
   const [senha, setSenha] = useState(undefined)
 
   const [cep, setCep] = useState(undefined)
@@ -35,15 +35,15 @@ export default function Cadastro() {
   const hendleSubmit = async () => {
     try {
 
-      if (telefone === undefined) {
+      if (celular === undefined) {
         await axios.post(url, {
-          nome, email, senha, cep, endereço, numero,
-          complemento, referencia, bairro, selectedEstados, city
+          nome, email, senha, celular, cep, endereço, complemento,
+          referencia, bairro, selectedEstados, city
         })
       } else {
         await axios.post(url, {
-          nome, email, senha, telefone, cep, endereço, numero,
-          complemento, referencia, bairro, selectedEstados, city
+          nome, email, senha, celular, cep, endereço, numero, complemento,
+          referencia, bairro, selectedEstados, city
         })
       }
   
@@ -57,7 +57,8 @@ export default function Cadastro() {
   const handleEstadosUpdate = (event) => {
     setSelectedEstados(event.target.value)
   }
-
+  
+  console.log(celular)
 
   return (
     <div>
@@ -103,28 +104,29 @@ export default function Cadastro() {
               onChange={(e) => setEmail(e.target.value)}
             ></input>
 
-            <label for="Celular">Celular</label>
-            <input
-              type="number"
-              name="Celular"
-              id="name"
-              title="Este campo é obrigátorio"
-              placeholder="Insira seu celular"
-              value={telefone}
-              onChange={(e) => setTelefone(e.target.value)}
-            ></input>
-
             <label for="fixo">Senha</label>
             <input
               type="password"
               name="senha"
               id="name"
               title="Este campo é obrigátorio"
-              placeholder="Insira seu Telefone Fixo"
+              placeholder="Insira sua senha"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
 
             ></input>
+            
+            <label for="Celular">Celular</label>
+            <input
+              type="number"
+              name="celular"
+              id="name"
+              title="Este campo é obrigátorio"
+              placeholder="Insira seu celular"
+              value={celular}
+              onChange={(e) => setCelular(e.target.value)}
+            ></input>
+
 
           </div>
 
@@ -146,7 +148,7 @@ export default function Cadastro() {
 
             <label for="cep">CEP</label>
             <input
-              type="number"
+              type="text"
               name="cep"
               id="name"
               title="Este campo é obrigátorio"
@@ -186,7 +188,7 @@ export default function Cadastro() {
               placeholder="Numero Da Casa"
               value={numero}
               onChange={(e) => setNumero(e.target.value)}
-            ></input>
+            ></input> 
 
             <label for="Complemento">Complemento</label>
             <input
