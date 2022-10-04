@@ -2,8 +2,9 @@ import "./Checkout.css";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../components/Button/Button";
+import Cards from './PaymentsCards/Cards'
 
 const Checkout = ({ produtosCarrinho }) => {
   const [showEditEndereco, setShowEditEndereco] = useState(false);
@@ -20,6 +21,18 @@ const Checkout = ({ produtosCarrinho }) => {
     cep: "75400000",
   });
   const [ignore, setIgnore] = useState(true);
+
+  const [pixValue, setPixValue] = useState()
+
+  useEffect(() => {
+
+    console.log(pixValue)
+
+  })
+
+  const valueLog = (event) => {
+    setPixValue(event.target.value)
+  }
 
   const handleMinusQuant = (key) => {
     if (produtosCarrinho[key].quantidade > 1) {
@@ -275,16 +288,25 @@ const Checkout = ({ produtosCarrinho }) => {
               </div>
             </div>
             <div className="checkout__metodo-pagamento">
-              <input type="radio" name="payment-method" id="pix" />
+              <input type="radio" name="payment-method" id="pix"
+                value='Pix'
+                onChange={valueLog}
+                onClick={valueLog}
+              />
               <label htmlFor="pix">
                 <div>
                   <i className="fa-brands fa-pix"></i>
                   PIX
                 </div>
+
               </label>
             </div>
             <div className="checkout__metodo-pagamento">
-              <input type="radio" checked name="payment-method" id="boleto" readOnly />
+              <input type="radio" name="payment-method" id="boleto"
+                value='Boleto'
+                onChange={(e) => setPixValue(e.target.value)}
+                onClick={valueLog}
+              />
               <label htmlFor="boleto">
                 <div>
                   <i className="fa-solid fa-barcode"></i>
@@ -293,7 +315,11 @@ const Checkout = ({ produtosCarrinho }) => {
               </label>
             </div>
             <div className="checkout__metodo-pagamento">
-              <input type="radio" name="payment-method" id="cartao-credito" />
+              <input type="radio" name="payment-method" id="cartao-credito"
+                value='Cartão de crédito'
+                onChange={(e) => setPixValue(e.target.value)}
+                onClick={valueLog}
+              />
               <label htmlFor="cartao-credito">
                 <div>
                   <i className="fa-solid fa-credit-card"></i>
@@ -302,8 +328,48 @@ const Checkout = ({ produtosCarrinho }) => {
               </label>
             </div>
 
+
+          {
+            pixValue === 'Pix' && (
+              < Cards styleCards={'CardPix'} text={<>
+                <h3>Copie o codigo abaixo</h3>
+                <br />
+                <p className="txt-pix-code">#b3_?4?hV;nUx7VPDNz+b*EA!%Z$Kv7</p>
+
+                </>
+              } />
+            )
+          }
+
+          {
+            pixValue === 'Boleto' && (
+              < Cards styleCards={'CardBoleto'} text={
+              <button>Gerar Boleto</button>
+            } />
+            )
+          }
+
+          {
+            pixValue === 'Cartão de crédito' && (
+              < Cards styleCards={'CardCredit'} text={<>
+              <label >Nome</label>
+              <input type="text" />
+                <br />
+              <label >Numero cartão</label>
+              <input type="number" />
+              <br />
+              <label >CVV</label>
+              <input type="number" />
+
+            </>} />
+            )
+          }
             <Button txt={"Finalizar Compra"} />
           </div>
+
+
+
+
         </div>
       </div>
     </section>
