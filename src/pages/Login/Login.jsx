@@ -101,6 +101,42 @@ export default function Login({ customerData, setCustomerData }) {
         </div>
       )}
 
+      {customerData[0].loged === "notRegistered" && (
+        <div className="login-container">
+          <h1>Usuário não cadastrado</h1>
+          <input
+            className="in-text-pass"
+            type="text"
+            name="loginId"
+            placeholder="exemplo@exemplo.com"
+            value={loginEmail}
+            onChange={(e) => setLoginEmail(e.target.value)}
+          ></input>
+          <div className="space"></div>
+          <input
+            className="in-text-pass"
+            type="password"
+            name="loginPassword"
+            value={loginPassword}
+            placeholder="SENHA"
+            onChange={(e) => setLoginPassword(e.target.value)}
+          ></input>
+          <button
+            className="space loginbtn"
+            onClick={() => {
+              login();
+            }}
+          >
+            LOGIN
+          </button>
+          <br></br>
+          <p>Não é cadastrado?</p>
+          <Link className="link-style" to="/Cadastro">
+            Cadastre-se
+          </Link>
+        </div>
+      )}
+
       {customerData[0].loged === "wrongPassword" && (
         <div className="login-container">
           <h1>Senha incorreta</h1>
