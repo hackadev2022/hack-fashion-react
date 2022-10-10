@@ -16,7 +16,9 @@ export const CadastroTeste = () => {
   let [update, setUpdate] = useState(false);
 
   const cadastro = async () => {
-    await setDddPhone(`(${ddd})${phone}`);
+    setDddPhone(`(${ddd})${phone}`);
+    console.log("dddPhone");
+    console.log(dddPhone);
     if (
       name === "" ||
       email === "" ||
