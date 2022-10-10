@@ -8,7 +8,7 @@ export const CadastroTeste = () => {
   let [password, setPassword] = useState("");
   let [ddd, setDdd] = useState("");
   let [phone, setPhone] = useState("");
-  let [dddPhone, setDddPhone] = useState("");
+
   let [address, setAddress] = useState("");
   let [uf, setUf] = useState("");
   let [city, setCity] = useState("");
@@ -16,9 +16,6 @@ export const CadastroTeste = () => {
   let [update, setUpdate] = useState(false);
 
   const cadastro = async () => {
-    setDddPhone(`(${ddd})${phone}`);
-    console.log("dddPhone");
-    console.log(dddPhone);
     if (
       name === "" ||
       email === "" ||
@@ -36,7 +33,7 @@ export const CadastroTeste = () => {
           name,
           email,
           password,
-          phone: dddPhone,
+          phone: `(${ddd})${phone}`,
         });
         await axios.post("http://localhost/address", {
           customer_id: customer_id.data[0].customer_id,
@@ -87,7 +84,7 @@ export const CadastroTeste = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <br />
-      Telefone: (
+      Telefone*: (
       <input
         id="cadastro-teste__input-ddd"
         type="text"

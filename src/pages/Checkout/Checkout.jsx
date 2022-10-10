@@ -122,10 +122,10 @@ const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
     }
   }, []);
 
-  const [gambiarra, setGambiarra] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const finalizePurchase = async () => {
-    if (gambiarra === true) {
+    if (loading === true) {
       try {
         await axios
           .post("http://localhost/pedido", {
@@ -149,13 +149,13 @@ const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
       } catch (error) {
         console.log(error);
       }
-      setGambiarra(!gambiarra);
+      setLoading(!loading);
     }
   };
 
   return (
     <>
-      {gambiarra === true && (
+      {loading === true && (
         <>
           {(!isLoged ||
             isLoged === "wrongPassword" ||
@@ -440,7 +440,11 @@ const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
           )}
         </>
       )}
-      {gambiarra === false && <h1>TU JÁ FINALIZOU O PEDIDO DOIDO</h1>}
+      {loading === false && (
+        <>
+          <h1>TU JÁ FINALIZOU O PEDIDO DOIDO</h1>
+        </>
+      )}
     </>
   );
 };
