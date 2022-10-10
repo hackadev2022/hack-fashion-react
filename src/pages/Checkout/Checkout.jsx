@@ -103,10 +103,13 @@ const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
   // const [addressId, setAddressId] = useState();
   const [update, setUpdate] = useState(false);
 
-  let localCustomerData = JSON.parse(localStorage.customerData);
+  let localCustomerData;
 
-  if (localCustomerData[0].customer_id) {
-    customer_id = localCustomerData[0].customer_id;
+  if (localStorage.customerData !== undefined) {
+    localCustomerData = JSON.parse(localStorage.customerData);
+    if (localCustomerData[0].customer_id) {
+      customer_id = localCustomerData[0].customer_id;
+    }
   }
 
   useEffect(() => {
