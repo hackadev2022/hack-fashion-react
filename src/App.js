@@ -81,6 +81,7 @@ function App() {
                 produtosCarrinho={produtosCarrinho}
                 isLoged={customerData[0].loged}
                 customer_id={customerData[0].customer_id}
+                setProdutosCarrinho={setProdutosCarrinho}
               />
             }
           ></Route>

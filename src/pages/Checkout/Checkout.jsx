@@ -7,7 +7,12 @@ import { Button } from "../../components/Button/Button";
 import axios from "axios";
 import { useEffect } from "react";
 
-const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
+const Checkout = ({
+  produtosCarrinho,
+  isLoged,
+  customer_id,
+  setProdutosCarrinho,
+}) => {
   const [showEditEndereco, setShowEditEndereco] = useState(false);
   const [editName, setEditName] = useState("");
   const [editEndereco, setEditEndereco] = useState("");
@@ -145,6 +150,7 @@ const Checkout = ({ produtosCarrinho, isLoged, customer_id }) => {
           });
 
         localStorage.removeItem("produtosCarrinho");
+        setProdutosCarrinho([]);
         setUpdate(!update);
       } catch (error) {
         console.log(error);
