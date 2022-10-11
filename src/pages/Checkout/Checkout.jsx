@@ -5,6 +5,7 @@ import { faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import Cards from './PaymentsCards/Cards'
+import axios from "axios"
 
 const Checkout = ({ produtosCarrinho }) => {
   const [showEditEndereco, setShowEditEndereco] = useState(false);
@@ -20,6 +21,11 @@ const Checkout = ({ produtosCarrinho }) => {
     estado: "GO",
     cep: "75400000",
   });
+  const url = 'http://localhost:3000/sms';
+
+  console.log('produtos')
+  console.log(produtosCarrinho)
+
   const [ignore, setIgnore] = useState(true);
 
   const [pixValue, setPixValue] = useState()
@@ -62,6 +68,16 @@ const Checkout = ({ produtosCarrinho }) => {
       setIgnore(true);
     }
   };
+  const msgteste = 'deu certin.'
+
+  const hendleSubmitMsg = async () => {
+    try {      
+        await axios.post('http://localhost:80/sms', {msgteste})
+    } catch (error) {
+      console.log(error)      
+    }
+  }
+
 
   let subTotalPrice = 0;
   const subTotal = () => {
@@ -78,6 +94,7 @@ const Checkout = ({ produtosCarrinho }) => {
     }
   };
   subTotal();
+
 
   const handleEditar = () => {
     setEndereco({
@@ -106,7 +123,7 @@ const Checkout = ({ produtosCarrinho }) => {
       style: "currency",
       currency: "BRL",
     });
-  };
+  };  
 
   return (
     <section className="checkout" style={{ marginLeft: 5 + "px" }}>
@@ -364,7 +381,8 @@ const Checkout = ({ produtosCarrinho }) => {
             </>} />
             )
           }
-            <Button txt={"Finalizar Compra"} />
+            {/* <Button txt={"Finalizar Compra"} fn={hendleSubmitMsg}/> */}
+            <button onClick={() => {hendleSubmitMsg()}}>teste</button>
           </div>
 
 
@@ -376,4 +394,4 @@ const Checkout = ({ produtosCarrinho }) => {
   );
 };
 
-export default Checkout;
+export default Checkout
