@@ -139,6 +139,7 @@ const Checkout = ({
             total_price: subTotalPrice,
           }) //criar order_details (product_id, pedido_id, quantity, size)
           .then(async (resultado) => {
+            console.log('linha 142')
             for (let i = 0; i < produtosCarrinho.length; i++) {
               await axios.post("http://localhost/orderDetails", {
                 product_id: produtosCarrinho[i].product_id,
@@ -146,9 +147,11 @@ const Checkout = ({
                 quantity: produtosCarrinho[i].quantidade,
                 size: produtosCarrinho[i].tamanho,
               });
+              console.log('linha 150')
+              await axios.post('http://localhost:80/sms', {pedido_id: resultado.data[0].pedido_id, customer_id})
+              console.log('linha 152')
             }
           });
-
         localStorage.removeItem("produtosCarrinho");
         setProdutosCarrinho([]);
         setUpdate(!update);
