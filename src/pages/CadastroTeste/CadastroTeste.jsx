@@ -89,7 +89,7 @@ export const CadastroTeste = () => {
         id="cadastro-teste__input-ddd"
         type="text"
         name="ddd"
-        placeholder="00"
+        placeholder="12"
         maxLength="2"
         value={ddd}
         onChange={(e) => setDdd(e.target.value)}
@@ -99,7 +99,7 @@ export const CadastroTeste = () => {
         id="cadastro-teste__input-phone"
         type="text"
         name="phone"
-        placeholder="Celular"
+        placeholder="987654321"
         maxLength="9"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
