@@ -26,10 +26,14 @@ export const UserConfigs = ({ customerData, setCustomerData }) => {
 
   const fnUpdate = async () => {
     if (
-      name === undefined &&
-      email === undefined &&
-      password === undefined &&
-      (ddd === undefined || phone === undefined)
+      (name === undefined || name === "") &&
+      (email === undefined || email === "") &&
+      (password === undefined || password === "") &&
+      (ddd === undefined ||
+        ddd === "" ||
+        phone === undefined ||
+        phone === "" ||
+        phone.length < 9)
     ) {
       alert("necessário preencher pelo menos 1 campo para realizar alteração");
     } else {
