@@ -282,11 +282,13 @@ const Checkout = ({
                                 {endereco.cep}
                               </li>
                             </ul>
-                            <Button
-                              txt={"Editar"}
-                              fn={handleEditar}
-                              classes={"checkout__endereco-button"}
-                            />
+                            <NavLink to="/userConfigs">
+                              <Button
+                                txt={"Editar"}
+                                // fn={handleEditar}
+                                classes={"checkout__endereco-button"}
+                              />
+                            </NavLink>
                           </>
                         )}
                         {showEditEndereco && (

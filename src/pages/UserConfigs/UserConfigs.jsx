@@ -4,12 +4,22 @@ import { Button } from "../../components/Button/Button";
 import "./UserConfigs.css";
 import axios from "axios";
 
-export const UserConfigs = ({ customerData, setCustomerData }) => {
+export const UserConfigs = ({
+  customerData,
+  setCustomerData,
+  addressData,
+  setAddressData,
+}) => {
   let [name, setName] = useState();
   let [email, setEmail] = useState();
   let [password, setPassword] = useState();
   let [ddd, setDdd] = useState();
   let [phone, setPhone] = useState();
+
+  let [address, setAddress] = useState("");
+  let [uf, setUf] = useState("");
+  let [city, setCity] = useState("");
+  let [cep, setCep] = useState("");
 
   const fnDeslogar = () => {
     setCustomerData([
@@ -22,9 +32,11 @@ export const UserConfigs = ({ customerData, setCustomerData }) => {
       },
     ]);
     localStorage.removeItem("customerData");
+    setAddressData();
+    localStorage.removeItem("addressData");
   };
 
-  const fnUpdate = async () => {
+  const fnUpdateUser = async () => {
     if (
       (name === undefined || name === "") &&
       (email === undefined || email === "") &&
@@ -54,6 +66,34 @@ export const UserConfigs = ({ customerData, setCustomerData }) => {
       }
     }
   };
+
+  const fnUpdateAddress = async () => {
+    if (
+      (address === undefined || address === "") &&
+      (uf === undefined || uf === "") &&
+      (city === undefined || city === "") &&
+      (cep === undefined || cep === "" || cep.length < 8)
+    ) {
+      alert("necessário preencher pelo menos 1 campo para realizar alteração");
+    } else {
+      try {
+        await axios.put("http://localhost/address", {
+          customer_id: customerData[0].customer_id,
+          address,
+          uf,
+          city,
+          cep,
+        });
+
+        alert(`alteração feita com sucesso, realize o login novamente`);
+
+        fnDeslogar();
+      } catch (error) {
+        alert(`erro: ${error}`);
+      }
+    }
+  };
+
   return (
     <section className="section__userConfigs">
       {customerData[0].loged !== true && (
@@ -64,7 +104,7 @@ export const UserConfigs = ({ customerData, setCustomerData }) => {
       {customerData[0].loged === true && (
         <>
           <section>
-            <h1>ALTERAR DADOS</h1>
+            <h1>ALTERAR DADOS DO USUÁRIO</h1>
             <br />
             Nome :
             <input
@@ -118,7 +158,61 @@ export const UserConfigs = ({ customerData, setCustomerData }) => {
             />
             <br />
             <br />
-            <Button txt={"SALVAR ALTERAÇÕES"} fn={fnUpdate}></Button>
+            <Button
+              txt={"SALVAR ALTERAÇÕES DO USUÁRIO"}
+              fn={fnUpdateUser}
+            ></Button>
+            <br />
+            <hr />
+            <h1>ALTERAR ENDEREÇO</h1>
+            <br />
+            Estado*:
+            <input
+              id="cadastro-teste__input-uf"
+              type="text"
+              name="uf"
+              placeholder={`${addressData.uf}`}
+              maxLength="2"
+              value={uf}
+              onChange={(e) => setUf(e.target.value.toUpperCase())}
+            />
+            <br />
+            Cidade *:
+            <input
+              id="cadastro-teste__input-city"
+              type="text"
+              name="city"
+              placeholder={`${addressData.city}`}
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <br />
+            CEP *:
+            <input
+              id="cadastro-teste__input-cep"
+              type="text"
+              name="cep"
+              placeholder={`${addressData.cep}`}
+              maxLength="8"
+              value={cep}
+              onChange={(e) => setCep(e.target.value)}
+            />
+            <br />
+            Endereço *:
+            <input
+              id="cadastro-teste__input-address"
+              type="text"
+              name="address"
+              placeholder={`${addressData.address}`}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <br />
+            <br />
+            <Button
+              txt={"SALVAR ALTERAÇÕES DE ENDEREÇO"}
+              fn={fnUpdateAddress}
+            ></Button>
             <br />
           </section>
           <Button txt={"DESLOGAR"} fn={fnDeslogar}></Button>

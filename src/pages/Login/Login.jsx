@@ -4,21 +4,33 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export default function Login({ customerData, setCustomerData }) {
+export default function Login({
+  customerData,
+  setCustomerData,
+  setAddressData,
+}) {
   let [loginEmail, setLoginEmail] = useState("");
   let [loginPassword, setLoginPassword] = useState("");
   let [update, setUpdate] = useState(false);
 
   const login = async () => {
     try {
-      const resultado = await axios.post("http://localhost/login", {
+      const resultadoLogin = await axios.post("http://localhost/login", {
         loginEmail,
         loginPassword,
       });
 
-      setCustomerData(resultado.data);
+      setCustomerData(resultadoLogin.data);
+      localStorage.setItem("customerData", JSON.stringify(resultadoLogin.data));
 
-      localStorage.setItem("customerData", JSON.stringify(resultado.data));
+      let resultadoAddress = await axios.post("http://localhost/addressData", {
+        customer_id: resultadoLogin.data[0].customer_id,
+      });
+      setAddressData(resultadoAddress.data);
+      localStorage.setItem(
+        "addressData",
+        JSON.stringify(resultadoAddress.data)
+      );
 
       setUpdate(!update);
     } catch (error) {
@@ -194,6 +206,8 @@ export default function Login({ customerData, setCustomerData }) {
                   },
                 ]);
                 localStorage.removeItem("customerData");
+                setAddressData();
+                localStorage.removeItem("addressData");
               }}
             >
               DESLOGAR

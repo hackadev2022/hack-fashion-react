@@ -22,6 +22,9 @@ function App() {
     if (localStorage.produtosCarrinho) {
       setProdutosCarrinho(JSON.parse(localStorage.produtosCarrinho));
     }
+    if (localStorage.addressData) {
+      setAddressData(JSON.parse(localStorage.addressData));
+    }
   }, []);
 
   const [customerData, setCustomerData] = useState([
@@ -32,6 +35,8 @@ function App() {
       loged: false,
     },
   ]);
+
+  let [addressData, setAddressData] = useState();
 
   return (
     <>
@@ -46,6 +51,7 @@ function App() {
               <Login
                 customerData={customerData}
                 setCustomerData={setCustomerData}
+                setAddressData={setAddressData}
               />
             }
           ></Route>
@@ -55,6 +61,8 @@ function App() {
               <UserConfigs
                 customerData={customerData}
                 setCustomerData={setCustomerData}
+                addressData={addressData}
+                setAddressData={setAddressData}
               />
             }
           ></Route>
