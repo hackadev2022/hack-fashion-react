@@ -5056,10 +5056,10 @@
   "resolved" "https://registry.npmjs.org/fraction.js/-/fraction.js-4.2.0.tgz"
   "version" "4.2.0"
 
-"framer-motion@^7.5.2":
-  "integrity" "sha512-HKQetVN92thmbl5ALDkmdr0xcTP6JD80l6rASs2g5e92zFkWYBE7rZLy++sbCq0L6JSviusb5t0txt19K8xSwg=="
-  "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-7.5.2.tgz"
-  "version" "7.5.2"
+"framer-motion@^7.5.3":
+  "integrity" "sha512-VvANga9Z7bYtKMAsM/je81FwJDHfThOYywN04xVQ4OGdMVY09Bowx/q7nZd6XtytLuv6byc6GT1mYwag+SQ/nw=="
+  "resolved" "https://registry.npmjs.org/framer-motion/-/framer-motion-7.5.3.tgz"
+  "version" "7.5.3"
   dependencies:
     "@motionone/dom" "10.13.1"
     "framesync" "6.1.2"
