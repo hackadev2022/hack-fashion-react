@@ -103,7 +103,7 @@ const Checkout = ({
           .post("http://localhost/pedido", {
             customer_id,
             id_address: addressId,
-            total_price: subTotalPrice,
+            total_price: subTotalPrice + 30,
           }) //criar order_details (product_id, pedido_id, quantity, size)
           .then(async (resultado) => {
             for (let i = 0; i < produtosCarrinho.length; i++) {

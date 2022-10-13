@@ -11,19 +11,15 @@ import { NavLink } from "react-router-dom";
 import { Button } from "../../components/Button/Button";
 
 export const Carrinho = ({ produtosCarrinho }) => {
-  // console.log(
-  //   localStorage.setItem("carrinho", JSON.stringify(produtosCarrinho))
-  // );
-
   const [ignore, setIgnore] = useState(true);
 
   let subTotalPrice = 0;
   const subTotal = () => {
     for (let i = 0; i < produtosCarrinho.length; i++) {
-      if (produtosCarrinho[i].offer_percent > 0) {
+      if (produtosCarrinho[i].offer > 0) {
         subTotalPrice +=
           (produtosCarrinho[i].price -
-            produtosCarrinho[i].price * produtosCarrinho[i].offer_percent) *
+            produtosCarrinho[i].price * produtosCarrinho[i].offer) *
           produtosCarrinho[i].quantidade;
       } else {
         subTotalPrice +=
@@ -113,26 +109,24 @@ export const Carrinho = ({ produtosCarrinho }) => {
                     <FontAwesomeIcon icon={faPlus} />
                   </button>
 
-                  {produto.offer_percent > 0 && (
+                  {produto.offer > 0 && (
                     <>
                       <p className="old-price">{formatPrice(produto.price)}</p>
                       <p className="shop-line-1">
                         {" "}
                         {formatPrice(
-                          produto.price - produto.price * produto.offer_percent
+                          produto.price - produto.price * produto.offer
                         )}
                       </p>
                       <p className="shop-line-2">
                         10x{" "}
                         {formatPrice(
-                          (produto.price -
-                            produto.price * produto.offer_percent) /
-                            10
+                          (produto.price - produto.price * produto.offer) / 10
                         )}
                       </p>
                     </>
                   )}
-                  {!produto.offer_percent > 0 && (
+                  {!produto.offer > 0 && (
                     <>
                       <p className="shop-line-1">
                         R$ {formatPrice(produto.price)}
