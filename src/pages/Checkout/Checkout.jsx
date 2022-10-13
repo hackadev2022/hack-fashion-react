@@ -10,22 +10,10 @@ import { useEffect } from "react";
 const Checkout = ({
   produtosCarrinho,
   isLoged,
-  customer_id,
+  customerData,
   setProdutosCarrinho,
+  addressData,
 }) => {
-  const [showEditEndereco, setShowEditEndereco] = useState(false);
-  const [editName, setEditName] = useState("");
-  const [editEndereco, setEditEndereco] = useState("");
-  const [editCidade, setEditCidade] = useState("");
-  const [editEstado, setEditEstado] = useState("");
-  const [editCep, setEditCep] = useState("");
-  const [endereco, setEndereco] = useState({
-    clienteName: "João",
-    endereco: "Rua dos Devs",
-    cidade: "Goiânia",
-    estado: "GO",
-    cep: "75400000",
-  });
   const [ignore, setIgnore] = useState(true);
 
   const handleMinusQuant = (key) => {
@@ -73,28 +61,6 @@ const Checkout = ({
   };
   subTotal();
 
-  const handleEditar = () => {
-    setEndereco({
-      clienteName: ``,
-      endereco: ``,
-      cidade: ``,
-      estado: ``,
-      cep: ``,
-    });
-    setShowEditEndereco(true);
-  };
-
-  const handleSave = () => {
-    setEndereco({
-      clienteName: `${editName}`,
-      endereco: `${editEndereco}`,
-      cidade: `${editCidade}`,
-      estado: `${editEstado}`,
-      cep: `${editCep}`,
-    });
-    setShowEditEndereco(false);
-  };
-
   const formatPrice = (price) => {
     return price.toLocaleString("pt-BR", {
       style: "currency",
@@ -109,6 +75,7 @@ const Checkout = ({
   const [update, setUpdate] = useState(false);
 
   let localCustomerData;
+  let customer_id;
 
   if (localStorage.customerData !== undefined) {
     localCustomerData = JSON.parse(localStorage.customerData);
@@ -118,7 +85,7 @@ const Checkout = ({
   }
 
   useEffect(() => {
-    if (customer_id !== "") {
+    if (customer_id !== "" && customer_id !== undefined) {
       fetch(`http://localhost/address/${customer_id}`)
         .then((res) => res.json())
         .then((resultado) => {
@@ -144,7 +111,7 @@ const Checkout = ({
                 product_id: produtosCarrinho[i].product_id,
                 pedido_id: resultado.data[0].pedido_id,
                 quantity: produtosCarrinho[i].quantidade,
-                size: produtosCarrinho[i].tamanho,
+                size: produtosCarrinho[i].tamanho.toLowerCase(),
               });
             }
           });
@@ -248,131 +215,44 @@ const Checkout = ({
                     <h1>Destino</h1>
                     <div className="checkout__infos-items">
                       <div className="checkout__endereco">
-                        {!showEditEndereco && (
-                          <>
-                            <ul>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  Remetente:{" "}
-                                </b>
-                                {endereco.clienteName}
-                              </li>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  Endereco:{" "}
-                                </b>
-                                {endereco.endereco}
-                              </li>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  Cidade:{" "}
-                                </b>
-                                {endereco.cidade}
-                              </li>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  Estado:{" "}
-                                </b>
-                                {endereco.estado}
-                              </li>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  CEP:{" "}
-                                </b>
-                                {endereco.cep}
-                              </li>
-                            </ul>
-                            <NavLink to="/userConfigs">
-                              <Button
-                                txt={"Editar"}
-                                // fn={handleEditar}
-                                classes={"checkout__endereco-button"}
-                              />
-                            </NavLink>
-                          </>
-                        )}
-                        {showEditEndereco && (
-                          <>
-                            <ul>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  Remetente:{" "}
-                                </b>
-                                <input
-                                  className="checkout__input-text"
-                                  type="text"
-                                  name="name"
-                                  placeholder="Seu nome"
-                                  defaultValue={endereco.name}
-                                  onChange={(e) => setEditName(e.target.value)}
-                                />
-                              </li>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  Endereco:{" "}
-                                </b>
-                                <input
-                                  className="checkout__input-text"
-                                  type="text"
-                                  name="endereço"
-                                  placeholder="Seu endereço"
-                                  defaultValue={endereco.endereco}
-                                  onChange={(e) =>
-                                    setEditEndereco(e.target.value)
-                                  }
-                                />
-                              </li>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  Cidade:{" "}
-                                </b>
-                                <input
-                                  className="checkout__input-text"
-                                  type="text"
-                                  name="cidade"
-                                  placeholder="Sua cidade"
-                                  defaultValue={endereco.cidade}
-                                  onChange={(e) =>
-                                    setEditCidade(e.target.value)
-                                  }
-                                />
-                              </li>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  Estado:{" "}
-                                </b>
-                                <input
-                                  className="checkout__input-text"
-                                  type="text"
-                                  name="estado"
-                                  placeholder="Seu estado"
-                                  defaultValue={endereco.estado}
-                                  onChange={(e) =>
-                                    setEditEstado(e.target.value)
-                                  }
-                                />
-                              </li>
-                              <li>
-                                <b className="checkout__endereco-items">
-                                  CEP:{" "}
-                                </b>
-                                <input
-                                  className="checkout__input-text"
-                                  type="text"
-                                  name="cep"
-                                  placeholder="Seu cep"
-                                  defaultValue={endereco.cep}
-                                  onChange={(e) => setEditCep(e.target.value)}
-                                />
-                              </li>
-                            </ul>
+                        <>
+                          <ul>
+                            <li>
+                              <b className="checkout__endereco-items">
+                                Remetente:{" "}
+                              </b>
+                              {customerData[0].name}
+                            </li>
+                            <li>
+                              <b className="checkout__endereco-items">
+                                Endereco:{" "}
+                              </b>
+                              {addressData.address}
+                            </li>
+                            <li>
+                              <b className="checkout__endereco-items">
+                                Cidade:{" "}
+                              </b>
+                              {addressData.city}
+                            </li>
+                            <li>
+                              <b className="checkout__endereco-items">
+                                Estado:{" "}
+                              </b>
+                              {addressData.uf}
+                            </li>
+                            <li>
+                              <b className="checkout__endereco-items">CEP: </b>
+                              {addressData.cep}
+                            </li>
+                          </ul>
+                          <NavLink to="/userConfigs">
                             <Button
-                              txt={"Salvar"}
-                              fn={handleSave}
+                              txt={"Editar"}
                               classes={"checkout__endereco-button"}
                             />
-                          </>
-                        )}
+                          </NavLink>
+                        </>
                       </div>
                       <div className="checkout__pagamento">
                         <h1>Pagamento</h1>

@@ -36,7 +36,14 @@ function App() {
     },
   ]);
 
-  let [addressData, setAddressData] = useState();
+  let [addressData, setAddressData] = useState([
+    {
+      address: "",
+      cep: "",
+      city: "",
+      uf: "",
+    },
+  ]);
 
   return (
     <>
@@ -88,8 +95,9 @@ function App() {
               <Checkout
                 produtosCarrinho={produtosCarrinho}
                 isLoged={customerData[0].loged}
-                customer_id={customerData[0].customer_id}
+                customerData={customerData}
                 setProdutosCarrinho={setProdutosCarrinho}
+                addressData={addressData}
               />
             }
           ></Route>
