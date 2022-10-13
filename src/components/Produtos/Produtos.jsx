@@ -4,36 +4,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Button } from "../Button/Button";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 export const Produtos = ({ produto }) => {
   //Stars//
-  let ratingStar = 0;
-  let [numberOfStars, setNumberOfStars] = useState(0);
-  setTimeout(() => {
-    for (let i = 0; i < 5; i++) {
-      let aux = ratingStar;
-      ratingStar = produto.ratingStar[i];
-      if (aux > ratingStar) {
-        ratingStar = aux;
-      }
-    }
-    setNumberOfStars(produto.ratingStar.lastIndexOf(ratingStar) + 1);
-  }, 10);
+  const [update, setUpdate] = useState(false);
+
+  let numberOfStars = useRef(1);
+  let totalStars = useRef(0);
+
+  useEffect(() => {
+    fetch(`http://15.228.244.21:3000/productStar/${produto.product_id}`)
+      .then((res) => res.json())
+      .then((resultado) => {
+        totalStars.current = resultado[0].totalStars;
+        numberOfStars.current = resultado[0].numberOfStars;
+        setUpdate(!update);
+      });
+  }, [produto.product_id]);
+
   //Stars//
 
   //Heart//
   let [favoriteHeart, setFavoriteHeart] = useState("");
   //Heart//
-
-  //Total Rating//
-  const totalRating = () => {
-    let soma = 0;
-    for (let i = 0; i < 5; i++) {
-      soma = soma + produto.ratingStar[i];
-    }
-    return soma;
-  };
-  //Total Rating//
 
   const formatPrice = (price) => {
     return price.toLocaleString("pt-BR", {
@@ -44,7 +39,7 @@ export const Produtos = ({ produto }) => {
 
   return (
     <div className="produtos__container">
-      {!produto.inStock && (
+      {!produto.in_stock && (
         <>
           <div className="produtos__out-of-stock">
             <b>
@@ -63,7 +58,7 @@ export const Produtos = ({ produto }) => {
                 style={{ color: `${favoriteHeart}`, transition: "all 0.3s" }}
               />
               <div className="produtos__img">
-                <img src={produto.imgDirectory} alt={produto.name} />
+                <img src={produto.img_link} alt={produto.name} />
               </div>
             </div>
             <div className="produtos__bottom">
@@ -77,7 +72,7 @@ export const Produtos = ({ produto }) => {
               </div>
               <div className="produtos__rating">
                 <div className="produtos__stars">
-                  {numberOfStars === 1 && (
+                  {numberOfStars.current === 1 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -90,7 +85,7 @@ export const Produtos = ({ produto }) => {
                       <FontAwesomeIcon icon={faStar} className="fiveStar" />
                     </>
                   )}
-                  {numberOfStars === 2 && (
+                  {numberOfStars.current === 2 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -107,7 +102,7 @@ export const Produtos = ({ produto }) => {
                       <FontAwesomeIcon icon={faStar} className="fiveStar" />
                     </>
                   )}
-                  {numberOfStars === 3 && (
+                  {numberOfStars.current === 3 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -128,7 +123,7 @@ export const Produtos = ({ produto }) => {
                       <FontAwesomeIcon icon={faStar} className="fiveStar" />
                     </>
                   )}
-                  {numberOfStars === 4 && (
+                  {numberOfStars.current === 4 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -153,7 +148,7 @@ export const Produtos = ({ produto }) => {
                       <FontAwesomeIcon icon={faStar} className="fiveStar" />
                     </>
                   )}
-                  {numberOfStars === 5 && (
+                  {numberOfStars.current === 5 && (
                     <>
                       <FontAwesomeIcon
                         icon={faStar}
@@ -183,11 +178,11 @@ export const Produtos = ({ produto }) => {
                   )}
                 </div>
                 <div className="produtos__totalRating">
-                  <i>{totalRating()} avaliações</i>
+                  <i>{`${totalStars.current}`} avaliações</i>
                 </div>
               </div>
               <NavLink
-                to={`/Produto/${produto.id}/${produto.name}`}
+                to={`/Produto/${produto.product_id}/${produto.name}`}
                 onClick={() => {
                   window.scrollTo({
                     top: 0,
@@ -201,7 +196,7 @@ export const Produtos = ({ produto }) => {
           </div>
         </>
       )}
-      {produto.inStock && (
+      {produto.in_stock && (
         <div className="produtos">
           <div className="produtos__top">
             <FontAwesomeIcon
@@ -214,7 +209,7 @@ export const Produtos = ({ produto }) => {
               style={{ color: `${favoriteHeart}`, transition: "all 0.3s" }}
             />
             <NavLink
-              to={`/Produto/${produto.id}/${produto.name}`}
+              to={`/Produto/${produto.product_id}/${produto.name}`}
               onClick={() => {
                 window.scrollTo({
                   top: 0,
@@ -223,13 +218,13 @@ export const Produtos = ({ produto }) => {
               }}
             >
               <div className="produtos__img">
-                <img src={produto.imgDirectory} alt={produto.name} />
+                <img src={produto.img_link} alt={produto.name} />
               </div>
             </NavLink>
           </div>
           <div className="produtos__bottom">
             <div className="produtos__info">
-              {produto.offer.isOffer && (
+              {produto.offer_percent > 0 && (
                 <>
                   <small>
                     <del>{formatPrice(produto.price)}</del>
@@ -237,7 +232,7 @@ export const Produtos = ({ produto }) => {
                   <br />
                   <b>
                     {formatPrice(
-                      produto.price - produto.price * produto.offer.percent
+                      produto.price - produto.price * produto.offer_percent
                     )}
                     <div
                       className="produtos__offer-div"
@@ -248,14 +243,14 @@ export const Produtos = ({ produto }) => {
                       }}
                     >
                       <i style={{ color: "white" }}>
-                        -{produto.offer.percent * 100}%
+                        -{produto.offer_percent * 100}%
                       </i>
                     </div>
                   </b>
                   <small>
                     3x
                     {`${formatPrice(
-                      (produto.price - produto.price * produto.offer.percent) /
+                      (produto.price - produto.price * produto.offer_percent) /
                         3
                     )}`}{" "}
                     sem juros
@@ -264,7 +259,7 @@ export const Produtos = ({ produto }) => {
                   <p className="produtos__trademark">{produto.trademark}</p>
                 </>
               )}
-              {!produto.offer.isOffer && (
+              {produto.offer_percent === 0 && (
                 <div className="produtos__info">
                   <b>{formatPrice(produto.price)}</b>
                   <small>
@@ -278,7 +273,7 @@ export const Produtos = ({ produto }) => {
             </div>
             <div className="produtos__rating">
               <div className="produtos__stars">
-                {numberOfStars === 1 && (
+                {numberOfStars.current === 1 && (
                   <>
                     <FontAwesomeIcon
                       icon={faStar}
@@ -291,7 +286,7 @@ export const Produtos = ({ produto }) => {
                     <FontAwesomeIcon icon={faStar} className="fiveStar" />
                   </>
                 )}
-                {numberOfStars === 2 && (
+                {numberOfStars.current === 2 && (
                   <>
                     <FontAwesomeIcon
                       icon={faStar}
@@ -308,7 +303,7 @@ export const Produtos = ({ produto }) => {
                     <FontAwesomeIcon icon={faStar} className="fiveStar" />
                   </>
                 )}
-                {numberOfStars === 3 && (
+                {numberOfStars.current === 3 && (
                   <>
                     <FontAwesomeIcon
                       icon={faStar}
@@ -329,7 +324,7 @@ export const Produtos = ({ produto }) => {
                     <FontAwesomeIcon icon={faStar} className="fiveStar" />
                   </>
                 )}
-                {numberOfStars === 4 && (
+                {numberOfStars.current === 4 && (
                   <>
                     <FontAwesomeIcon
                       icon={faStar}
@@ -354,7 +349,7 @@ export const Produtos = ({ produto }) => {
                     <FontAwesomeIcon icon={faStar} className="fiveStar" />
                   </>
                 )}
-                {numberOfStars === 5 && (
+                {numberOfStars.current === 5 && (
                   <>
                     <FontAwesomeIcon icon={faStar} style={{ color: "gold" }} />
                     <FontAwesomeIcon
@@ -381,12 +376,12 @@ export const Produtos = ({ produto }) => {
                 )}
               </div>
               <div className="produtos__totalRating">
-                <i>{totalRating()} avaliações</i>
+                <i>{`${totalStars.current}`} avaliações</i>
               </div>
             </div>
 
             <NavLink
-              to={`/Produto/${produto.id}/${produto.name}`}
+              to={`/Produto/${produto.product_id}/${produto.name}`}
               onClick={() => {
                 window.scrollTo({
                   top: 0,

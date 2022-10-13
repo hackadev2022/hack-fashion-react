@@ -21,33 +21,33 @@ export const Slider = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <NavLink to="/jeans/calça">
+          <NavLink to="/calça">
             <img src="img/roupas_sem_fundo/jeans1.png" alt="jeans" />
-            <i className="name">Jeans</i>
+            <i className="name">Calças</i>
           </NavLink>
         </SwiperSlide>
         <SwiperSlide>
           <NavLink to="/camiseta">
             <img src="img/roupas_sem_fundo/shirt1.png" alt="shirt" />
+            <i className="name">Camisetas</i>
+          </NavLink>
+        </SwiperSlide>
+        <SwiperSlide>
+          <NavLink to="/camisa">
+            <img src="img/roupas_sem_fundo/sweater1.png" alt="sweater" />
             <i className="name">Camisas</i>
           </NavLink>
         </SwiperSlide>
         <SwiperSlide>
-          <NavLink to="/moletom/camisa">
-            <img src="img/roupas_sem_fundo/sweater1.png" alt="sweater" />
-            <i className="name">Suéter</i>
-          </NavLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NavLink to="/moletom/calça">
+          <NavLink to="/moletom">
             <img src="img/roupas_sem_fundo/sweatpants1.png" alt="sweatpants" />
-            <i className="name">Calças Moletom</i>
+            <i className="name">Moletom</i>
           </NavLink>
         </SwiperSlide>
         <SwiperSlide>
-          <NavLink to="/moletom/jaqueta">
+          <NavLink to="/jaqueta">
             <img src="img/roupas_sem_fundo/sweatshirt1.png" alt="sweatshirt" />
-            <i className="name">Camisas Moletom</i>
+            <i className="name">Jaqueta</i>
           </NavLink>
         </SwiperSlide>
       </Swiper>

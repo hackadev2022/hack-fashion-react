@@ -6,15 +6,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
   faUser,
+  faUserCheck,
   faCartShopping,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./Header.css";
 
-export const Header = ({ setShowOffersOnly }) => {
+export const Header = ({ customerData }) => {
   let [menuWidth, setMenuWidth] = useState("0");
   let [search, setSearch] = useState("");
+  let [update, setUpdate] = useState(false);
 
   const searchId = document.getElementById("SearchEnter");
 
@@ -28,6 +30,7 @@ export const Header = ({ setShowOffersOnly }) => {
   document.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
       searchId.click();
+      setUpdate(!update);
     }
   });
 
@@ -54,14 +57,16 @@ export const Header = ({ setShowOffersOnly }) => {
           </div>
           <nav className="header__nav">
             <FontAwesomeIcon icon={faLocationDot} />
-            <NavLink
-              to="/Login"
-              className={({ isActive }) =>
-                isActive ? "activeUser" : "activeUser"
-              }
-            >
-              <FontAwesomeIcon icon={faUser} />
-            </NavLink>
+            {customerData[0].loged === true && (
+              <NavLink to="/userConfigs">
+                <FontAwesomeIcon icon={faUserCheck} />
+              </NavLink>
+            )}
+            {customerData[0].loged !== true && (
+              <NavLink to="/Login">
+                <FontAwesomeIcon icon={faUser} />
+              </NavLink>
+            )}
             <NavLink to="/Carrinho">
               <FontAwesomeIcon icon={faCartShopping} />
             </NavLink>

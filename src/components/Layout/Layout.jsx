@@ -1,23 +1,20 @@
-import { Outlet } from 'react-router-dom';
-import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
-import './Layout.css';
+import { Outlet } from "react-router-dom";
+import { Header } from "../Header/Header";
+import { Footer } from "../Footer/Footer";
+import "./Layout.css";
 
-const Layout = ({ children }) => {
-    return (
-        <>
-            {/* <Header searchFn={handleSearch} setShowOffersOnly={setShowOffersOnly} /> */}
+const Layout = ({ customerData }) => {
+  return (
+    <>
+      <Header customerData={customerData} />
 
-            <Header />
+      <div className="container page">
+        <Outlet />
+      </div>
 
-            <div className="container page">
-                <Outlet />
-            </div>
-
-            <Footer />
-        </>
-    )
-
-}
+      <Footer />
+    </>
+  );
+};
 
 export default Layout;
