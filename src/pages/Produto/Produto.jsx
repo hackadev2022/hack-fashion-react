@@ -5,8 +5,12 @@ import { useState, useEffect } from "react";
 
 export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
   const params = useParams();
-  const [product, setProduct] = useState([]);
   const itemId = params.itemID;
+  const [product, setProduct] = useState([
+    {
+      product_id: parseInt(itemId),
+    },
+  ]);
 
   useEffect(() => {
     fetch(`http://localhost/products/${itemId}`)

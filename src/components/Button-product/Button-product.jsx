@@ -9,7 +9,6 @@ export const ButtonProduct = ({
   produtosCarrinho,
   setProdutosCarrinho,
 }) => {
-  const [update, setUpdate] = useState(false);
   let productSizeP = useRef(0);
   let productSizeM = useRef(0);
   let productSizeG = useRef(0);
@@ -23,8 +22,6 @@ export const ButtonProduct = ({
         productSizeM.current = resultado[0].m;
         productSizeG.current = resultado[0].g;
         productSizeGG.current = resultado[0].gg;
-
-        setUpdate(!update);
       });
   }, [
     productSizeP,
@@ -32,7 +29,6 @@ export const ButtonProduct = ({
     productSizeG,
     productSizeGG,
     produto.product_id,
-    update,
   ]);
 
   const [prodCount, setProdCount] = useState(1);
@@ -61,6 +57,32 @@ export const ButtonProduct = ({
     trademark: produto.trademark,
   };
 
+  let [showQuantidadeP, setShowQuantidadeP] = useState(false);
+  let [showQuantidadeM, setShowQuantidadeM] = useState(false);
+  let [showQuantidadeG, setShowQuantidadeG] = useState(false);
+  let [showQuantidadeGG, setShowQuantidadeGG] = useState(false);
+
+  const handleQuantidadeP = () => {
+    if (prodCount + 1 <= productSizeP.current) {
+      setProdCount(prodCount + 1);
+    }
+  };
+  const handleQuantidadeM = () => {
+    if (prodCount + 1 <= productSizeM.current) {
+      setProdCount(prodCount + 1);
+    }
+  };
+  const handleQuantidadeG = () => {
+    if (prodCount + 1 <= productSizeG.current) {
+      setProdCount(prodCount + 1);
+    }
+  };
+  const handleQuantidadeGG = () => {
+    if (prodCount + 1 <= productSizeGG.current) {
+      setProdCount(prodCount + 1);
+    }
+  };
+
   return (
     <>
       <div className="input-size">
@@ -79,6 +101,11 @@ export const ButtonProduct = ({
               htmlFor="P"
               onClick={() => {
                 setTamanho("P");
+                setShowQuantidadeP(true);
+                setShowQuantidadeM(false);
+                setShowQuantidadeG(false);
+                setShowQuantidadeGG(false);
+                setProdCount(1);
               }}
             >
               P
@@ -100,6 +127,11 @@ export const ButtonProduct = ({
               htmlFor="M"
               onClick={() => {
                 setTamanho("M");
+                setShowQuantidadeP(false);
+                setShowQuantidadeM(true);
+                setShowQuantidadeG(false);
+                setShowQuantidadeGG(false);
+                setProdCount(1);
               }}
             >
               M
@@ -121,6 +153,11 @@ export const ButtonProduct = ({
               htmlFor="G"
               onClick={() => {
                 setTamanho("G");
+                setShowQuantidadeP(false);
+                setShowQuantidadeM(false);
+                setShowQuantidadeG(true);
+                setShowQuantidadeGG(false);
+                setProdCount(1);
               }}
             >
               G
@@ -142,6 +179,11 @@ export const ButtonProduct = ({
               htmlFor="GG"
               onClick={() => {
                 setTamanho("GG");
+                setShowQuantidadeP(false);
+                setShowQuantidadeM(false);
+                setShowQuantidadeG(false);
+                setShowQuantidadeGG(true);
+                setProdCount(1);
               }}
             >
               GG
@@ -151,29 +193,110 @@ export const ButtonProduct = ({
       </div>
 
       <div>
-        <p className="identifier">Quantidade:</p>
+        {showQuantidadeP && (
+          <>
+            <p className="identifier">Quantidade:</p>
+            <button
+              className="button-quantity"
+              onClick={() => {
+                setProdCount(Math.max(prodCount - 1, 1));
+              }}
+            >
+              {" "}
+              <i className="fa-solid fa-minus"></i>
+            </button>
 
-        <button
-          className="button-quantity"
-          onClick={() => {
-            setProdCount(Math.max(prodCount - 1, 1));
-          }}
-        >
-          {" "}
-          <i className="fa-solid fa-minus"></i>
-        </button>
+            <span className="button-number">{prodCount}</span>
 
-        <span className="button-number">{prodCount}</span>
+            <button
+              className="button-quantity"
+              onClick={() => {
+                handleQuantidadeP();
+              }}
+            >
+              {" "}
+              <i className="fa-solid fa-plus"></i>
+            </button>
+          </>
+        )}
+        {showQuantidadeM && (
+          <>
+            <p className="identifier">Quantidade:</p>
+            <button
+              className="button-quantity"
+              onClick={() => {
+                setProdCount(Math.max(prodCount - 1, 1));
+              }}
+            >
+              {" "}
+              <i className="fa-solid fa-minus"></i>
+            </button>
 
-        <button
-          className="button-quantity"
-          onClick={() => {
-            setProdCount(prodCount + 1);
-          }}
-        >
-          {" "}
-          <i className="fa-solid fa-plus"></i>
-        </button>
+            <span className="button-number">{prodCount}</span>
+
+            <button
+              className="button-quantity"
+              onClick={() => {
+                handleQuantidadeM();
+              }}
+            >
+              {" "}
+              <i className="fa-solid fa-plus"></i>
+            </button>
+          </>
+        )}
+        {showQuantidadeG && (
+          <>
+            <p className="identifier">Quantidade:</p>
+            <button
+              className="button-quantity"
+              onClick={() => {
+                setProdCount(Math.max(prodCount - 1, 1));
+              }}
+            >
+              {" "}
+              <i className="fa-solid fa-minus"></i>
+            </button>
+
+            <span className="button-number">{prodCount}</span>
+
+            <button
+              className="button-quantity"
+              onClick={() => {
+                handleQuantidadeG();
+              }}
+            >
+              {" "}
+              <i className="fa-solid fa-plus"></i>
+            </button>
+          </>
+        )}
+        {showQuantidadeGG && (
+          <>
+            <p className="identifier">Quantidade:</p>
+            <button
+              className="button-quantity"
+              onClick={() => {
+                setProdCount(Math.max(prodCount - 1, 1));
+              }}
+            >
+              {" "}
+              <i className="fa-solid fa-minus"></i>
+            </button>
+
+            <span className="button-number">{prodCount}</span>
+
+            <button
+              className="button-quantity"
+              onClick={() => {
+                handleQuantidadeGG();
+              }}
+            >
+              {" "}
+              <i className="fa-solid fa-plus"></i>
+            </button>
+          </>
+        )}
       </div>
 
       <div>
