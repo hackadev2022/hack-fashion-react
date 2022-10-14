@@ -2,12 +2,12 @@ import "./Checkout.css";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "../../components/Button/Button";
 import axios from "axios";
 import { useEffect } from "react";
 import Cards from './PaymentsCards/Cards'
-import axios from "axios"
+import Sucess from "./PaymentsCards/SucessPayment/Sucess";
 
 const Checkout = ({
   produtosCarrinho,
@@ -28,24 +28,20 @@ const Checkout = ({
     estado: "GO",
     cep: "75400000",
   });
-  const url = 'http://localhost:3000/sms';
-
-  console.log('produtos')
-  console.log(produtosCarrinho)
-
   const [ignore, setIgnore] = useState(true);
-
   const [pixValue, setPixValue] = useState()
 
   useEffect(() => {
 
     console.log(pixValue)
-
+    
   })
-
+  
   const valueLog = (event) => {
     setPixValue(event.target.value)
   }
+
+
 
   const handleMinusQuant = (key) => {
     if (produtosCarrinho[key].quantidade > 1) {
@@ -75,16 +71,6 @@ const Checkout = ({
       setIgnore(true);
     }
   };
-  const msgteste = 'deu certin.'
-
-  const hendleSubmitMsg = async () => {
-    try {      
-        await axios.post('http://localhost:80/sms', {msgteste})
-    } catch (error) {
-      console.log(error)      
-    }
-  }
-
 
   let subTotalPrice = 0;
   const subTotal = () => {
@@ -101,7 +87,6 @@ const Checkout = ({
     }
   };
   subTotal();
-
 
   const handleEditar = () => {
     setEndereco({
@@ -125,12 +110,16 @@ const Checkout = ({
     setShowEditEndereco(false);
   };
 
+  const log = () => {
+    console.log('teste')
+  }
+
   const formatPrice = (price) => {
     return price.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
     });
-  };  
+  };
 
   //puxar do banco o id_address
 
@@ -169,7 +158,6 @@ const Checkout = ({
             total_price: subTotalPrice,
           }) //criar order_details (product_id, pedido_id, quantity, size)
           .then(async (resultado) => {
-            console.log('linha 142')
             for (let i = 0; i < produtosCarrinho.length; i++) {
               await axios.post("http://localhost/orderDetails", {
                 product_id: produtosCarrinho[i].product_id,
@@ -177,11 +165,10 @@ const Checkout = ({
                 quantity: produtosCarrinho[i].quantidade,
                 size: produtosCarrinho[i].tamanho,
               });
-              console.log('linha 150')
-              await axios.post('http://localhost:80/sms', {pedido_id: resultado.data[0].pedido_id, customer_id})
-              console.log('linha 152')
             }
+            await axios.post('http://localhost:80/sms', {pedido_id: resultado.data[0].pedido_id, customer_id})
           });
+
         localStorage.removeItem("produtosCarrinho");
         setProdutosCarrinho([]);
         setUpdate(!update);
@@ -192,6 +179,8 @@ const Checkout = ({
     }
   };
 
+  
+
   return (
     <>
       {loading === true && (
@@ -199,20 +188,20 @@ const Checkout = ({
           {(!isLoged ||
             isLoged === "wrongPassword" ||
             isLoged === "notFound") && (
-            <NavLink to="/Login">
-              <div
-                style={{
-                  width: "100vw",
-                  height: "60vh",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <h1>Faça o login para finalizar o pedido clicando aqui</h1>
-              </div>
-            </NavLink>
-          )}
+              <NavLink to="/Login">
+                <div
+                  style={{
+                    width: "100vw",
+                    height: "60vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <h1>Faça o login para finalizar o pedido clicando aqui</h1>
+                </div>
+              </NavLink>
+            )}
           {isLoged === true && (
             <section className="checkout" style={{ marginLeft: 5 + "px" }}>
               <div className="checkout__header">
@@ -315,11 +304,13 @@ const Checkout = ({
                                 {endereco.cep}
                               </li>
                             </ul>
-                            <Button
-                              txt={"Editar"}
-                              fn={handleEditar}
-                              classes={"checkout__endereco-button"}
-                            />
+                            <NavLink to="/userConfigs">
+                              <Button
+                                txt={"Editar"}
+                                // fn={handleEditar}
+                                classes={"checkout__endereco-button"}
+                              />
+                            </NavLink>
                           </>
                         )}
                         {showEditEndereco && (
@@ -420,91 +411,112 @@ const Checkout = ({
                             </div>
                           </div>
                         </div>
+
                         <div className="checkout__metodo-pagamento">
-                          <input type="radio" name="payment-method" id="pix" />
-                          <label htmlFor="pix">
-                            <div>
-                              <i className="fa-brands fa-pix"></i>
-                              PIX
-                            </div>
-                          </label>
-                        </div>
-                        <div className="checkout__metodo-pagamento">
-                          <input
-                            type="radio"
-                            checked
-                            name="payment-method"
-                            id="boleto"
-                            readOnly
+              <input type="radio" name="payment-method" id="pix"
+                value='Pix'
+                onChange={valueLog}
+                onClick={valueLog}
+              />
+              <label htmlFor="pix">
+                <div>
+                  <i className="fa-brands fa-pix"></i>
+                  PIX
+                </div>
+
+              </label>
+            </div>
+            <div className="checkout__metodo-pagamento">
+              <input type="radio" name="payment-method" id="boleto"
+                value='Boleto'
+                onChange={(e) => setPixValue(e.target.value)}
+                onClick={valueLog}
+              />
+              <label htmlFor="boleto">
+                <div>
+                  <i className="fa-solid fa-barcode"></i>
+                  Boleto
+                </div>
+              </label>
+            </div>
+            <div className="checkout__metodo-pagamento">
+              <input type="radio" name="payment-method" id="cartao-credito"
+                value='Cartão de crédito'
+                onChange={(e) => setPixValue(e.target.value)}
+                onClick={valueLog}
+              />
+              <label htmlFor="cartao-credito">
+                <div>
+                  <i className="fa-solid fa-credit-card"></i>
+                  Cartão de crédito
+                </div>
+              </label>
+            </div>
+
+                        {
+                          pixValue === 'Pix' && (
+                            < Cards styleCards={'CardPix'} text={<>
+                              <h3>Copie o codigo abaixo</h3>
+                              <br />
+                              <p className="txt-pix-code">#b3_?4?hV;nUx7VPDNz+b*EA!%Z$Kv7</p>
+
+                            </>
+                            } />
+                          )
+                        }
+
+                        {
+                          pixValue === 'Boleto' && (
+                            < Cards styleCards={'CardBoleto'} text={
+                              <button>Gerar Boleto</button>
+                            } />
+                          )
+                        }
+
+                        {
+                          pixValue === 'Cartão de crédito' && (
+                            < Cards styleCards={'CardCredit'} text={<>
+                              <label >Nome</label>
+                              <input type="text" />
+                              <br />
+                              <label >Numero cartão</label>
+                              <input type="number" />
+                              <br />
+                              <label >CVV</label>
+                              <input type="number" />
+
+                            </>} />
+                          )
+                        }
+                         <Button
+                          txt={"Finalizar Compra"}
+                          fn={finalizePurchase} 
                           />
-                          <label htmlFor="boleto">
-                            <div>
-                              <i className="fa-solid fa-barcode"></i>
-                              Boleto
-                            </div>
-                          </label>
-                        </div>
-                        <div className="checkout__metodo-pagamento">
-                          <input
-                            type="radio"
-                            name="payment-method"
-                            id="cartao-credito"
-                          />
-                          <label htmlFor="cartao-credito">
-                            <div>
-                              <i className="fa-solid fa-credit-card"></i>
-                              Cartão de crédito
-                            </div>
-                          </label>
-                        </div>
-
-
-          {
-            pixValue === 'Pix' && (
-              < Cards styleCards={'CardPix'} text={<>
-                <h3>Copie o codigo abaixo</h3>
-                <br />
-                <p className="txt-pix-code">#b3_?4?hV;nUx7VPDNz+b*EA!%Z$Kv7</p>
-
+                        
+                      </div>
+                    </div>
+                  </div>
                 </>
-              } />
-            )
-          }
-
-          {
-            pixValue === 'Boleto' && (
-              < Cards styleCards={'CardBoleto'} text={
-              <button>Gerar Boleto</button>
-            } />
-            )
-          }
-
-          {
-            pixValue === 'Cartão de crédito' && (
-              < Cards styleCards={'CardCredit'} text={<>
-              <label >Nome</label>
-              <input type="text" />
-                <br />
-              <label >Numero cartão</label>
-              <input type="number" />
-              <br />
-              <label >CVV</label>
-              <input type="number" />
-
-            </>} />
-            )
-          }
-            {/* <Button txt={"Finalizar Compra"} fn={hendleSubmitMsg}/> */}
-            <button onClick={() => {hendleSubmitMsg()}}>teste</button>
-          </div>
-
-
-
-
-        </div>
-      </div>
-    </section>
+              )}
+              {produtosCarrinho.length === 0 && (
+                <>
+                  <h1>Seu carrinho está vazio :/</h1>
+                  <NavLink to={"/"}>
+                    Veja nossos produtos ! <h3>Clique AQUI</h3>
+                  </NavLink>
+                </>
+              )}
+            </section>
+          )}
+        </>
+      )}
+      {loading === false && (
+        <>
+        <Sucess/>
+        </>
+      )}
+    </>
   );
 };
 
-export default Checkout
+export default Checkout;
