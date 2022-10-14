@@ -15,7 +15,7 @@ export const Produtos = ({ produto }) => {
   let totalStars = useRef(0);
 
   useEffect(() => {
-    fetch(`http://localhost/productStar/${produto.product_id}`)
+    fetch(`http://15.228.244.21:3000/productStar/${produto.product_id}`)
       .then((res) => res.json())
       .then((resultado) => {
         totalStars.current = resultado[0].totalStars;

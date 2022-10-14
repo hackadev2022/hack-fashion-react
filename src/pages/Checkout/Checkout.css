@@ -157,6 +157,102 @@
     margin-right: 10px;
 }
 
+.checkout__pagamento{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkout__pagamento .checkout__metodo-pagamento{
+    background-color: rgb(192, 182, 252);
+    width: 40vw;
+    justify-content: center;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.checkout__pagamento .checkout__metodo-pagamento:hover{
+    background-color: rgb(119, 0, 255);
+    color: white;
+}
+
+.CardPix{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    height: 20vw;
+    border-radius: 20px;
+    background-color: tan;
+    margin-bottom: 1%;
+    font-size: 1.3em;
+    transition: 0.3s ease-in ;
+    border: 1px solid black;
+    -webkit-box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+    -moz-box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+    box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+}
+
+.CardPix h3{
+    font-size: 1.2em;
+}
+
+.txt-pix-code{
+    border: 1px solid black;
+    padding: 3px;
+    font-size: 0.7em;
+}
+
+.CardCredit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 20px;
+    background-color: tan;
+    margin-bottom: 1%;
+    border: 1px solid black;
+    font-size: .8em;
+    transition: 0.3s ease-in ;
+    -webkit-box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+    -moz-box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+    box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+}
+
+.CardCredit input{
+    background-color: whitesmoke;
+    width: 20vw;
+    color: black;
+}
+
+.CardBoleto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    height: 20vw;
+    border-radius: 20px;
+    background-color: tan;
+    margin-bottom: 1%;
+    border: 1px solid black;
+    font-size: 1.3em;
+    transition: 0.3s ease-in ;
+    -webkit-box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+    -moz-box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+    box-shadow: 1px 1.5px 22.5px -3.5px #373737;
+}
+
+.CardBoleto button{
+    border: 1px solid black;
+    width: 20vw;
+    height: 5vh;
+    font-size: 1.2rem;
+}
+
 @media (min-width: 770px) {
     .checkout {
         margin-left: 10px;
@@ -167,5 +263,66 @@
     }
     .checkout__endereco li {
         justify-content: space-between;
+    }
+    
+    .checkout__pagamento .checkout__metodo-pagamento{
+        background-color: rgb(192, 182, 252);
+        width: 30vw;
+        justify-content: center;
+        border-radius: 20px;
+        border: 1px solid black;
+        transition: 0.3s ease-in ;
+    }
+    
+    .checkout__pagamento .checkout__metodo-pagamento:hover{
+        background-color: rgb(119, 0, 255);
+        color: white;
+    }
+
+    .CardBoleto{
+        width: 50vw;
+        transition: 0.3s ease-in ;
+    }
+
+    .CardBoleto button{
+        font-size: .9em;
+    }
+
+    .CardCredit{
+        width: 40vw;
+        height: 20vw;
+        font-size: 1.2em;
+        transition: 0.3s ease-in ;
+    }
+
+}
+
+@media (max-width: 509px){
+
+    .CardPix{
+        width: 50vw;
+        font-size: 90%
+    }
+
+    .txt-pix-code{
+        border: 1px solid black;
+        padding: 3px;
+        font-size:50%;
+    }
+
+}
+
+@media (max-width: 280px){
+    .CardPix{
+        width: 80vw;
+    }
+
+    .CardCredit{
+        width: 60vw;
+        height: 60vw;
+    }
+
+    .CardCredit input{
+        width: 30vw;
     }
 }

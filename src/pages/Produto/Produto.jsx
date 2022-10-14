@@ -13,7 +13,7 @@ export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
   ]);
 
   useEffect(() => {
-    fetch(`http://localhost/products/${itemId}`)
+    fetch(`http://15.228.244.21:3000/products/${itemId}`)
       .then((res) => res.json())
       .then((resultado) => {
         setProduct(resultado);

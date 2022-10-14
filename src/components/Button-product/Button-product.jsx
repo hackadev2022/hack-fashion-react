@@ -15,7 +15,7 @@ export const ButtonProduct = ({
   let productSizeGG = useRef(0);
 
   useEffect(() => {
-    fetch(`http://localhost/productSize/${produto.product_id}`)
+    fetch(`http://15.228.244.21:3000/productSize/${produto.product_id}`)
       .then((res) => res.json())
       .then((resultado) => {
         productSizeP.current = resultado[0].p;

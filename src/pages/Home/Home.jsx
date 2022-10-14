@@ -8,7 +8,7 @@ export const Home = () => {
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/products")
+    fetch("http://15.228.244.21:3000/products")
       .then((res) => res.json())
       .then((resultado) => {
         setProdutos(resultado);

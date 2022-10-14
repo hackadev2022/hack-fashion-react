@@ -6,6 +6,8 @@ import { useState } from "react";
 import { Button } from "../../components/Button/Button";
 import axios from "axios";
 import { useEffect } from "react";
+import Cards from './PaymentsCards/Cards'
+import Sucess from "./PaymentsCards/SucessPayment/Sucess";
 
 const Checkout = ({
   produtosCarrinho,
@@ -15,6 +17,12 @@ const Checkout = ({
   addressData,
 }) => {
   const [ignore, setIgnore] = useState(true);
+//Valor dos Input Radio
+  const [pixValue, setPixValue] = useState()
+
+  const valueLog = (event) => {
+    setPixValue(event.target.value)
+  }
 
   const handleMinusQuant = (key) => {
     if (produtosCarrinho[key].quantidade > 1) {
@@ -86,7 +94,7 @@ const Checkout = ({
 
   useEffect(() => {
     if (customer_id !== "" && customer_id !== undefined) {
-      fetch(`http://localhost/address/${customer_id}`)
+      fetch(`http://15.228.244.21:3000/address/${customer_id}`)
         .then((res) => res.json())
         .then((resultado) => {
           setAddressId(resultado);
@@ -100,20 +108,21 @@ const Checkout = ({
     if (loading === true) {
       try {
         await axios
-          .post("http://localhost/pedido", {
+          .post("http://15.228.244.21:3000/pedido", {
             customer_id,
             id_address: addressId,
             total_price: subTotalPrice + 30,
           }) //criar order_details (product_id, pedido_id, quantity, size)
           .then(async (resultado) => {
             for (let i = 0; i < produtosCarrinho.length; i++) {
-              await axios.post("http://localhost/orderDetails", {
+              await axios.post("http://15.228.244.21:3000/orderDetails", {
                 product_id: produtosCarrinho[i].product_id,
                 pedido_id: resultado.data[0].pedido_id,
                 quantity: produtosCarrinho[i].quantidade,
                 size: produtosCarrinho[i].tamanho.toLowerCase(),
               });
             }
+            await axios.post('http://15.228.244.21:3000/sms', {pedido_id: resultado.data[0].pedido_id, customer_id})
           });
 
         localStorage.removeItem("produtosCarrinho");
@@ -269,22 +278,26 @@ const Checkout = ({
                             </div>
                           </div>
                         </div>
+
                         <div className="checkout__metodo-pagamento">
-                          <input type="radio" name="payment-method" id="pix" />
+                          <input type="radio" name="payment-method" id="pix"
+                            value='Pix'
+                            onChange={valueLog}
+                            onClick={valueLog}
+                          />
                           <label htmlFor="pix">
                             <div>
                               <i className="fa-brands fa-pix"></i>
                               PIX
                             </div>
+
                           </label>
                         </div>
                         <div className="checkout__metodo-pagamento">
-                          <input
-                            type="radio"
-                            checked
-                            name="payment-method"
-                            id="boleto"
-                            readOnly
+                          <input type="radio" name="payment-method" id="boleto"
+                            value='Boleto'
+                            onChange={(e) => setPixValue(e.target.value)}
+                            onClick={valueLog}
                           />
                           <label htmlFor="boleto">
                             <div>
@@ -294,10 +307,10 @@ const Checkout = ({
                           </label>
                         </div>
                         <div className="checkout__metodo-pagamento">
-                          <input
-                            type="radio"
-                            name="payment-method"
-                            id="cartao-credito"
+                          <input type="radio" name="payment-method" id="cartao-credito"
+                            value='Cartão de crédito'
+                            onChange={(e) => setPixValue(e.target.value)}
+                            onClick={valueLog}
                           />
                           <label htmlFor="cartao-credito">
                             <div>
@@ -307,10 +320,46 @@ const Checkout = ({
                           </label>
                         </div>
 
+                        {
+                          pixValue === 'Pix' && (
+                            < Cards styleCards={'CardPix'} text={<>
+                              <h3>Copie o codigo abaixo</h3>
+                              <br />
+                              <p className="txt-pix-code">#b3_?4?hV;nUx7VPDNz+b*EA!%Z$Kv7</p>
+
+                            </>
+                            } />
+                          )
+                        }
+
+                        {
+                          pixValue === 'Boleto' && (
+                            < Cards styleCards={'CardBoleto'} text={
+                              <button>Gerar Boleto</button>
+                            } />
+                          )
+                        }
+
+                        {
+                          pixValue === 'Cartão de crédito' && (
+                            < Cards styleCards={'CardCredit'} text={<>
+                              <label >Nome</label>
+                              <input type="text" />
+                              <br />
+                              <label >Numero cartão</label>
+                              <input type="number" />
+                              <br />
+                              <label >CVV</label>
+                              <input type="number" />
+
+                            </>} />
+                          )
+                        }
                         <Button
                           txt={"Finalizar Compra"}
                           fn={finalizePurchase}
                         />
+
                       </div>
                     </div>
                   </div>
@@ -330,7 +379,7 @@ const Checkout = ({
       )}
       {loading === false && (
         <>
-          <h1>TU JÁ FINALIZOU O PEDIDO DOIDO</h1>
+          <Sucess />
         </>
       )}
     </>

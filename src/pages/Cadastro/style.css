@@ -6,6 +6,7 @@
 
 .style-login-btn{
   background-color: rgb(8, 6, 122);
+  color: white;
 }
 
 #name{
@@ -19,6 +20,12 @@
 .cadastro-container{
   font-size: 1.2em;
 }
+
+/* .text-conta{
+  width: 35vw;
+  display: flex;
+  justify-content: space-between;
+} */
 
 .cadastro-container .area-cadastro input{
   width: 100%;
@@ -40,9 +47,15 @@
   border: 1px solid black;
 }
 
-.area-cadastro{
-  margin-bottom:4%;
-  height: 100%;
+.cadastro-container .area-cadastro, .area-cadastro-endereco{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.cadastro-container .area-cadastro{
+  height: 70vh;
 }
 
 ::placeholder{
