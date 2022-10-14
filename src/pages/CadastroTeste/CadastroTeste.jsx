@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./CadastroTeste.css";
 import axios from "axios";
 
-export const CadastroTeste = () => {
+export const CadastroTeste = ({url}) => {
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
@@ -29,13 +29,13 @@ export const CadastroTeste = () => {
       alert("CAMPO(S) OBROGATÓRIO(S) NÃO PREENCHIDO(S)");
     } else {
       try {
-        const customer_id = await axios.post("http://localhost/customerteste", {
+        const customer_id = await axios.post(`${url}/customerteste`, {
           name,
           email,
           password,
           phone: `(${ddd})${phone}`,
         });
-        await axios.post("http://localhost/address", {
+        await axios.post(`${url}/address`, {
           customer_id: customer_id.data[0].customer_id,
           address,
           uf,

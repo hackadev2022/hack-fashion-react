@@ -9,6 +9,7 @@ export const UserConfigs = ({
   setCustomerData,
   addressData,
   setAddressData,
+  url
 }) => {
   let [name, setName] = useState();
   let [email, setEmail] = useState();
@@ -50,7 +51,7 @@ export const UserConfigs = ({
       alert("necessário preencher pelo menos 1 campo para realizar alteração");
     } else {
       try {
-        await axios.put("http://localhost/customer", {
+        await axios.put(`${url}/customer`, {
           customer_id: customerData[0].customer_id,
           name,
           email,
@@ -77,7 +78,7 @@ export const UserConfigs = ({
       alert("necessário preencher pelo menos 1 campo para realizar alteração");
     } else {
       try {
-        await axios.put("http://localhost/address", {
+        await axios.put(`${url}/address`, {
           customer_id: customerData[0].customer_id,
           address,
           uf,

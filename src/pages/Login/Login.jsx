@@ -8,6 +8,7 @@ export default function Login({
   customerData,
   setCustomerData,
   setAddressData,
+  url
 }) {
   let [loginEmail, setLoginEmail] = useState("");
   let [loginPassword, setLoginPassword] = useState("");
@@ -15,7 +16,7 @@ export default function Login({
 
   const login = async () => {
     try {
-      const resultadoLogin = await axios.post("http://localhost/login", {
+      const resultadoLogin = await axios.post(`${url}/login`, {
         loginEmail,
         loginPassword,
       });
@@ -23,7 +24,7 @@ export default function Login({
       setCustomerData(resultadoLogin.data);
       localStorage.setItem("customerData", JSON.stringify(resultadoLogin.data));
 
-      let resultadoAddress = await axios.post("http://localhost/addressData", {
+      let resultadoAddress = await axios.post(`${url}/addressData`, {
         customer_id: resultadoLogin.data[0].customer_id,
       });
       setAddressData(resultadoAddress.data);

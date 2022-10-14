@@ -14,6 +14,7 @@ import Layout from "./components/Layout/Layout";
 
 function App() {
   let [produtosCarrinho, setProdutosCarrinho] = useState([]);
+  let url = 'http://15.228.244.21:3000'
 
   useEffect(() => {
     if (localStorage.customerData) {
@@ -49,13 +50,14 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout customerData={customerData} />}>
-          <Route index element={<Home />}></Route>
-          <Route path="/:type" element={<ProdutosPage />}></Route>
-          <Route path="/:type/:type2" element={<ProdutosPage />}></Route>
+          <Route index element={<Home url={url} />}></Route>
+          <Route path="/:type" element={<ProdutosPage  url={url} />}></Route>
+          <Route path="/:type/:type2" element={<ProdutosPage  url={url} />}></Route>
           <Route
             path="/Login"
             element={
               <Login
+                url={url}
                 customerData={customerData}
                 setCustomerData={setCustomerData}
                 setAddressData={setAddressData}
@@ -66,6 +68,7 @@ function App() {
             path="/userConfigs"
             element={
               <UserConfigs
+                url={url}
                 customerData={customerData}
                 setCustomerData={setCustomerData}
                 addressData={addressData}
@@ -73,12 +76,13 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/Cadastro" element={<Cadastro />}></Route>
-          <Route path="/CadastroTeste" element={<CadastroTeste />}></Route>
+          {/* <Route path="/Cadastro" element={<Cadastro  url={url} />}></Route> */}
+          <Route path="/Cadastro" element={<CadastroTeste  url={url} />}></Route>
           <Route
             path="/Produto/:itemID/:nome"
             element={
               <Produto
+                url={url}
                 produtosCarrinho={produtosCarrinho}
                 setProdutosCarrinho={setProdutosCarrinho}
               />
@@ -93,6 +97,7 @@ function App() {
             path="/Checkout"
             element={
               <Checkout
+                url={url}
                 produtosCarrinho={produtosCarrinho}
                 isLoged={customerData[0].loged}
                 customerData={customerData}

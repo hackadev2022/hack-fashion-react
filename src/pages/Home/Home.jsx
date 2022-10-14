@@ -4,11 +4,11 @@ import { Slider } from "../../components/Slider/Slider";
 import { Produtos } from "../../components/Produtos/Produtos";
 import { useState, useEffect } from "react";
 
-export const Home = () => {
+export const Home = ({url}) => {
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
-    fetch("http://15.228.244.21:3000/products")
+    fetch(`${url}/products`)
       .then((res) => res.json())
       .then((resultado) => {
         setProdutos(resultado);

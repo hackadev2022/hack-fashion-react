@@ -3,13 +3,13 @@ import { Produtos } from "../../components/Produtos/Produtos";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-export const ProdutosPage = () => {
+export const ProdutosPage = ({url}) => {
   const params = useParams();
 
   const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost/productsFilter/${params.type}`)
+    fetch(`${url}/productsFilter/${params.type}`)
       .then((res) => res.json())
       .then((resultado) => {
         setProdutos(resultado);

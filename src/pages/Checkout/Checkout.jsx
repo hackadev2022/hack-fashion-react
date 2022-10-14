@@ -15,6 +15,7 @@ const Checkout = ({
   customerData,
   setProdutosCarrinho,
   addressData,
+  url
 }) => {
   const [ignore, setIgnore] = useState(true);
 //Valor dos Input Radio
@@ -94,7 +95,7 @@ const Checkout = ({
 
   useEffect(() => {
     if (customer_id !== "" && customer_id !== undefined) {
-      fetch(`http://15.228.244.21:3000/address/${customer_id}`)
+      fetch(`${url}/address/${customer_id}`)
         .then((res) => res.json())
         .then((resultado) => {
           setAddressId(resultado);
@@ -108,21 +109,21 @@ const Checkout = ({
     if (loading === true) {
       try {
         await axios
-          .post("http://15.228.244.21:3000/pedido", {
+          .post(`${url}/pedido`, {
             customer_id,
             id_address: addressId,
             total_price: subTotalPrice + 30,
           }) //criar order_details (product_id, pedido_id, quantity, size)
           .then(async (resultado) => {
             for (let i = 0; i < produtosCarrinho.length; i++) {
-              await axios.post("http://15.228.244.21:3000/orderDetails", {
+              await axios.post(`${url}/orderDetails`, {
                 product_id: produtosCarrinho[i].product_id,
                 pedido_id: resultado.data[0].pedido_id,
                 quantity: produtosCarrinho[i].quantidade,
                 size: produtosCarrinho[i].tamanho.toLowerCase(),
               });
             }
-            await axios.post('http://15.228.244.21:3000/sms', {pedido_id: resultado.data[0].pedido_id, customer_id})
+            await axios.post(`${url}/sms`, {pedido_id: resultado.data[0].pedido_id, customer_id})
           });
 
         localStorage.removeItem("produtosCarrinho");

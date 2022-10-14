@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { ButtonProduct } from "../../components/Button-product/Button-product";
 import { useState, useEffect } from "react";
 
-export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
+export const Produto = ({ produtosCarrinho, setProdutosCarrinho, url }) => {
   const params = useParams();
   const itemId = params.itemID;
   const [product, setProduct] = useState([
@@ -13,7 +13,7 @@ export const Produto = ({ produtosCarrinho, setProdutosCarrinho }) => {
   ]);
 
   useEffect(() => {
-    fetch(`http://15.228.244.21:3000/products/${itemId}`)
+    fetch(`${url}/products/${itemId}`)
       .then((res) => res.json())
       .then((resultado) => {
         setProduct(resultado);
