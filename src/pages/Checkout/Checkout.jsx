@@ -114,6 +114,10 @@ const Checkout = ({
                 size: produtosCarrinho[i].tamanho.toLowerCase(),
               });
             }
+            await axios.post("http://localhost/sms", {
+              pedido_id: resultado.data[0].pedido_id,
+              customer_id: customerData[0].customer_id,
+            });
           });
 
         localStorage.removeItem("produtosCarrinho");
