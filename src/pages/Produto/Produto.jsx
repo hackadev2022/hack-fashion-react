@@ -88,6 +88,7 @@ export const Produto = ({ produtosCarrinho, setProdutosCarrinho, url }) => {
                 produto={product[0]}
                 produtosCarrinho={produtosCarrinho}
                 setProdutosCarrinho={setProdutosCarrinho}
+                url={url}
               />
             </div>
           </section>

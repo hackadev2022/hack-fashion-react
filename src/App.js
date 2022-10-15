@@ -14,7 +14,8 @@ import Layout from "./components/Layout/Layout";
 
 function App() {
   let [produtosCarrinho, setProdutosCarrinho] = useState([]);
-  let url = 'http://15.228.244.21:3000'
+  // let url = 'http://15.228.244.21:3000'
+  let url = "http://localhost";
 
   useEffect(() => {
     if (localStorage.customerData) {
@@ -51,8 +52,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout customerData={customerData} />}>
           <Route index element={<Home url={url} />}></Route>
-          <Route path="/:type" element={<ProdutosPage  url={url} />}></Route>
-          <Route path="/:type/:type2" element={<ProdutosPage  url={url} />}></Route>
+          <Route path="/:type" element={<ProdutosPage url={url} />}></Route>
+          <Route
+            path="/:type/:type2"
+            element={<ProdutosPage url={url} />}
+          ></Route>
           <Route
             path="/Login"
             element={
@@ -77,7 +81,7 @@ function App() {
             }
           ></Route>
           {/* <Route path="/Cadastro" element={<Cadastro  url={url} />}></Route> */}
-          <Route path="/Cadastro" element={<CadastroTeste  url={url} />}></Route>
+          <Route path="/Cadastro" element={<CadastroTeste url={url} />}></Route>
           <Route
             path="/Produto/:itemID/:nome"
             element={

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./CadastroTeste.css";
 import axios from "axios";
 
-export const CadastroTeste = ({url}) => {
+export const CadastroTeste = ({ url }) => {
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
@@ -52,7 +52,7 @@ export const CadastroTeste = ({url}) => {
 
   return (
     <section>
-      <h1>Cadastro Teste</h1>
+      <h1>Cadastro</h1>
       <br />
       Nome *:
       <input

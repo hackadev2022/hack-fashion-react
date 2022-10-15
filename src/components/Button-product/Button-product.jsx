@@ -8,6 +8,7 @@ export const ButtonProduct = ({
   produto,
   produtosCarrinho,
   setProdutosCarrinho,
+  url,
 }) => {
   let productSizeP = useRef(0);
   let productSizeM = useRef(0);
@@ -15,7 +16,7 @@ export const ButtonProduct = ({
   let productSizeGG = useRef(0);
 
   useEffect(() => {
-    fetch(`http://15.228.244.21:3000/productSize/${produto.product_id}`)
+    fetch(`${url}/productSize/${produto.product_id}`)
       .then((res) => res.json())
       .then((resultado) => {
         productSizeP.current = resultado[0].p;
